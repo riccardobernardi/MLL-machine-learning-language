@@ -6,7 +6,9 @@ mll : ( model | macro | parmac | dag | comment )*
 
 model : [mt] ID COLON ID [e*] [WITH comp*] (PLUS (ID [e*] [WITH comp*]) )*
         
-macro : ID EQC (_msid | _mse)
+macro : ID EQC (_msid | _mse | dotname)
+        
+dotname.3 : ID DO ID (DO ID)* 
 
 _msid.2 : ID [e*] [WITH comp*] (PLUS (ID [e*] [WITH comp*]) )*
 

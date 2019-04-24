@@ -569,3 +569,63 @@ class TestMLL(TestCase):
         self.mll.start()
         print(self.mll.get_string())
         # self.mll.execute()
+
+    def test_imports(self):
+        inc = """
+        conv2d := Conv2D
+        seq := Sequential
+        relu := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d3233 := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d3211 := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d4833 := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6433 := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6411 := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6417 := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6471 := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        m2d3311 := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        c2d9633 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d9611 := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d19233 := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d38433 := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d38411 := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        dense := keras.layers.Dense
+        densem := dense 384
+
+        # Input layer
+
+        x : Input with shape = (32,32,3)
+
+        # Layer stem di entrata dell input
+
+        m :
+            | c2d3233 + c2d3233 + c2d6433
+            
+        x : m x
+
+        stem :
+            | m2d3311
+            | c2d9633
+            | concat
+            | c2d6411 + c2d9633
+            | c2d6411 + c2d6471 + c2d6417 + c2d9633
+            | concat
+            | c2d19233
+            | m2d3311
+            | concat
+            | relu + densem
+            
+        x : stem x
+            
+        """
+
+        self.mll = MLL(inc)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+
+        print(type(self.mll.last_model()))

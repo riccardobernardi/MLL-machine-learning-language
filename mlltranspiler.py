@@ -138,7 +138,7 @@ class MLL:
                 if istok(t[i]) and clean_tok(t[i].value) == "+" and opened:
                     t.insert(i, Token("P", "))\n"))
                     opened = False
-                    i+=1
+                    i += 1
                 if istok(t[i]) and clean_tok(t[i].value)== "+":
                     t.pop(i)
                     t.insert(i,Token("ID",self.current_keras))
@@ -153,7 +153,6 @@ class MLL:
         return t
 
     def put_macros(self,t: list) -> list:
-
 
         for i in range(0, len(t)):
 
@@ -212,8 +211,6 @@ class MLL:
 
             t = self.format_parens(t)
 
-
-
         return t
 
     def format_parens(self,t: list) -> list:
@@ -249,8 +246,6 @@ class MLL:
         return arr
 
     def dag(self,t:list) -> list:
-        #devo avere in input un array che contiene il dag
-        #devo tornare in output un array che è una funzione che riceve in input x e torna una x modificata
 
         t = self.put_macros(t)
         t = clean_arr(t)
@@ -282,6 +277,9 @@ class MLL:
             if istok(i) and clean_tok(i.value)=="concat":
                 concat_in_array = True
 
+        concatenated = False
+        model_x = "x"
+
         i = 0
         while True:
             if i == len(t):
@@ -290,32 +288,19 @@ class MLL:
                 t = self.put_macros(t)
 
                 if istok(t[i]) and clean_tok(t[i].value) == "concat":
-                    #pass
-                    #prima di tutto elimina i due precedenti token creati quando è stata trovata
-                    # la pipe precedente questa concat e poi fai quel che devi fare
-                    #stampa(t)
-                    #assert(1==2)
-                    #bisogna togliere il token avanti e indietro e poi aggungere il la concatenazione
-                    # dei layer precedenti
-                    #pass
 
                     names.insert(0,models[0])
                     models.pop(0)
                     to_concat_and_free = to_concat_and_free[:len(to_concat_and_free)-1]
 
-                    #m = t[i - 1]
-                    #t.pop(i - 1)
-
                     t.pop(i)
                     t.pop(i)
                     t.pop(i - 1)
 
-                    #m = t[i - 1]
-                    #t.pop(i - 1)
-
                     if len(to_concat_and_free) >1:
 
                         t.insert(i,Token("CONCAT",models[0] + " = concatenate(["))
+                        model_x = models[0]
 
                         s = ""
 
@@ -331,8 +316,6 @@ class MLL:
 
                         to_concat_and_free = []
 
-                        #t.insert(i+3,m)
-
                         models.insert(0, names.pop(0))
                         to_concat_and_free += [models[0]]
 
@@ -341,15 +324,13 @@ class MLL:
                         t.insert(i + 4, Token("ASSIGN", models[0] + "=("))
                         t.insert(i + 6, Token("P", "("))
 
-                        dont_apply_function = True
-
                         t.pop(i-1)
+
+                        concatenated = True
 
                     else:
 
                         to_concat_and_free = []
-
-                        # t.insert(i+3,m)
 
                         models.insert(0, names.pop(0))
 
@@ -358,12 +339,7 @@ class MLL:
                         t.insert(i + 1, Token("ASSIGN", models[0] + "=("))
                         t.insert(i + 3, Token("P", "("))
 
-                        dont_apply_function = True
-
                         t.pop(i - 1)
-
-
-                    #i+=2
 
                 if istok(t[i]) and (clean_tok(t[i].value) == "+" or clean_tok(t[i].value) == "|") and first:
                     if clean_tok(t[i].value) == "|":
@@ -374,7 +350,11 @@ class MLL:
                         first = False
                     t.pop(i)
 
-                    t.insert(i,Token("MODEL","))(x)"))
+                    if concatenated == False:
+                        t.insert(i,Token("MODEL","))("+ model_x +")"))
+                    else:
+                        t.insert(i,Token("MODEL","))("+model_x+")"))
+                        concatenated = False
 
                     t.insert(i + 1, Token("TAB", "\n\t"))
 
@@ -449,31 +429,31 @@ class MLL:
 
         elif isinstance(t, Tree):
 
-            if t.data != "dag":
-                if t.data == "macro":
-                    #list_types(t.children)
-                    #assert(1==2)
-                    return self.macro_operations(t.children)
+            if t.data == "dotname":
+                return Token("ID",scrivi(t.children))
 
-                if t.data == "comment":
-                    return clean_tabs(t)
-
-                if t.data == "model":
-
-                    if isTree(t.children[0]) and t.children[0].data == "mt" and (clean_tok(t.children[0].children[0].value.lower()) == "regressor" or clean_tok(t.children[0].children[0].value.lower()) == "classifier"):
-                        self.model_type[clean_tok(t.children[1].value)] = clean_tok(t.children[0].children[0].value.lower())
-                        #salvo l' informazione del fatto che un modello è regressor o classifier e poi elimino questa info per retrocompatibility
-                        t.children = t.children[1:]
-
-                    t.children = self.format_keras(t.children)
-
-                if t.data == "parmac":
-                    return self.save_parmac(t.children)
-
-                return Tree(t.data, self.transform(t.children))
-            else:
-
+            if t.data == "dag":
                 return Tree(t.data, self.dag(t.children))
+
+            if t.data == "macro":
+                return self.macro_operations(t.children)
+
+            if t.data == "comment":
+                return clean_tabs(t)
+
+            if t.data == "model":
+
+                if isTree(t.children[0]) and t.children[0].data == "mt" and (clean_tok(t.children[0].children[0].value.lower()) == "regressor" or clean_tok(t.children[0].children[0].value.lower()) == "classifier"):
+                    self.model_type[clean_tok(t.children[1].value)] = clean_tok(t.children[0].children[0].value.lower())
+                    #salvo l' informazione del fatto che un modello è regressor o classifier e poi elimino questa info per retrocompatibility
+                    t.children = t.children[1:]
+
+                t.children = self.format_keras(t.children)
+
+            if t.data == "parmac":
+                return self.save_parmac(t.children)
+
+            return Tree(t.data, self.transform(t.children))
 
         elif isinstance(t, list):
 
@@ -506,11 +486,11 @@ class MLL:
 
         tree = parser.parse(program)
 
-        #pydot__tree_to_png(tree, "tree-before.png")
+        pydot__tree_to_png(tree, "tree-before.png")
 
         n = Tree(tree.data, self.transform(tree.children))
 
-        #pydot__tree_to_png(n, "tree-after.png")
+        pydot__tree_to_png(n, "tree-after.png")
 
         s = get_imports() + scrivi(n)
 
