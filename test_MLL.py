@@ -1,0 +1,571 @@
+from unittest import TestCase
+
+from sklearn import model_selection
+
+from mlltranspiler import MLL
+
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+
+import warnings
+warnings.filterwarnings("ignore")
+
+import numpy as np
+import keras
+from keras.optimizers import SGD
+
+
+def get_data():
+    iris_dataset = pd.read_csv("iris.csv")
+    train, test = iris_dataset.iloc[:, 0:4], iris_dataset.iloc[:, 4]
+
+    encoder_object = LabelEncoder()
+    test = encoder_object.fit_transform(test)
+
+    return train, test
+
+
+class TestMLL(TestCase):
+
+    def test_new_only_stem(self):
+        inc = """
+        conv2d := Conv2D
+        seq := Sequential
+        relu := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d3233 := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d3211 := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d4833 := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6433 := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6411 := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6417 := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6471 := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        m2d3311 := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        c2d9633 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d9611 := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d19233 := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d38433 := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d38411 := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+
+        # Input layer
+
+        x : Input with shape = (32,32,3)
+
+        # Layer stem di entrata dell input
+        
+        x :
+            | c2d3233 + c2d3233 + c2d6433
+
+        stem :
+            | m2d3311
+            | c2d9633
+            | concat
+            | c2d6411 + c2d9633
+            | c2d6411 + c2d6471 + c2d6417 + c2d9633
+            | concat
+            | c2d19233
+            | m2d3311
+            | concat
+            | relu
+
+        """
+
+        self.mll = MLL(inc)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+
+    def test_only_stem(self):
+        inc = """
+        conv2d := Conv2D
+        seq := Sequential
+        relu := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d3233 := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d3211 := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d4833 := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6433 := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6411 := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6417 := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6471 := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        m2d3311 := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        c2d9633 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d9611 := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d19233 := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d38433 := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d38411 := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+
+        # Input layer
+
+        x : Input with shape = (32,32,3)
+
+        # Layer stem di entrata dell input
+
+        stem1 :
+            | c2d3233 + c2d3233 + c2d6433
+
+        x : stem1 x
+
+        stem2 :
+            | m2d3311
+            | c2d9633
+
+        x : stem2 x
+
+        stem3 :
+            | c2d6411 + c2d9633
+            | c2d6411 + c2d6471 + c2d6417 + c2d9633
+
+        x : stem3 x
+
+        stem4 :
+            | c2d19233
+            | m2d3311
+
+        x : stem4 x
+
+        stem5 :
+            | relu
+
+        x : stem5 x
+        
+        """
+
+        self.mll = MLL(inc)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+
+    def test_half_complete_inception_more_complex(self):
+        inc = """
+        conv2d := Conv2D
+        seq := Sequential
+        relu := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d3233 := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d3211 := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d4833 := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6433 := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6411 := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6417 := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6471 := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        m2d3311 := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        c2d9633 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d9611 := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d19233 := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d38433 := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d38411 := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        
+        # Input layer
+        
+        x : Input with shape = (32,32,3)
+        
+        # Layer stem di entrata dell input
+        
+        stem1 :
+            | c2d3233 + c2d3233 + c2d6433
+        
+        x : stem1 x
+        
+        stem2 :
+            | m2d3311
+            | c2d9633
+            
+        x : stem2 x
+        
+        stem3 :
+            | c2d6411 + c2d9633
+            | c2d6411 + c2d6471 + c2d6417 + c2d9633
+            
+        x : stem3 x
+        
+        stem4 :
+            | c2d19233
+            | m2d3311
+            
+        x : stem4 x
+        
+        stem5 : 
+            | relu
+            
+        x : stem5 x
+        
+        # layer A
+        
+        incA1 :
+            | c2d3211
+            | c2d3211 + c2d3233
+            | c2d3211 + c2d4833 + c2d6433
+            
+        x : incA1 x
+        
+        shortcut : x
+        
+        incA2 :
+            | c2d38411
+            | shortcut
+            
+        x : incA2 x
+        
+        incA3 : 
+            | relu
+            
+        x : incA3 x
+        
+        
+        # nn funziona dobbiamo poter fare dag all interno di altri dag
+        # la merge sum non e permessa      
+        # i border sono messi sbagliati nelle macro          
+        
+
+        """
+
+        self.mll = MLL(inc)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+
+    def test_half_complete_inception(self):
+        inc = """
+        c2d32 := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        re := Activation 'relu'
+
+        inception_stem : 
+                        | c2d32 
+                        | c2d32 
+                        | c2d32
+
+        x : Input with shape=(32,32,3)
+
+        x : inception_stem x
+        
+        finish_inception :
+                        | AveragePooling2D with pool_size=(4, 4) strides=(1, 1) border_mode='valid' dim_ordering='tf' + Dropout 0.5 + Flatten
+        
+        model : finish_inception x
+        """
+
+        self.mll = MLL(inc)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+
+    def test_inception_final(self):
+        # x = AveragePooling2D(pool_size=(4, 4), strides=(1, 1), border_mode='valid', dim_ordering='tf')(x)
+        # x = Dropout(0.5)(x)
+        # x = Flatten()(x)
+
+        inc = """
+        finish_inception :
+                        | AveragePooling2D with pool_size=(4, 4) strides=(1, 1) border_mode='valid' dim_ordering='tf' + Dropout 0.5 + Flatten
+        """
+
+        self.mll = MLL(inc)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+
+    def test_inception_dag_more_complex(self):
+        inception_layer = """
+        seq := Sequential
+        c2d32 := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        m2d := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
+        re := Activation 'relu'
+
+        inception_stem  :
+                        | c2d32 
+                        | c2d32 
+                        | c2d32
+
+        x : Input with shape=(32,32,3)
+
+        model : inception_stem x
+        model : inception_stem model
+        model : inception_stem model
+        
+        model : 
+                | model 
+                | c2d32
+        """
+        self.mll = MLL(inception_layer)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+
+    def test_inception_dag_complex(self):
+        inception_layer = """
+        seq := Sequential
+        c2d32 := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        m2d := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
+        re := Activation 'relu'
+
+        inception_stem  :
+                        |c2d32 
+                        | c2d32 
+                        | c2d32
+        
+        x : Input with shape=(32,32,3)
+        
+        model : inception_stem x
+        """
+        self.mll = MLL(inception_layer)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+
+    def test_inception_dag(self):
+        inception_layer = """
+        c2d32 := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        m2d := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
+        re := Activation 'relu'
+
+        inception_stem  :
+                        | c2d32 
+                        | c2d32 + c2d32 
+                        | c2d32 + c2d32 + c2d32 
+                        | m2d
+        """
+        self.mll = MLL(inception_layer)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+
+    def test_inception(self):
+        inception_uncomm = """
+        conv2d := Conv2D
+        seq := Sequential
+        re := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d32 := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d48 := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d64 := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+        m2d := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        c2d96 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d192 := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d384 := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+
+        stem : seq + InputLayer (100, 100, 3) + c2d32 + c2d32 + c2d64
+
+        biforcazione1 : stem + m2d
+        biforcazione2 : stem + c2d96
+
+        stem : Concatenate biforcazione1 biforcazione2
+
+        biforcazione1 : stem + c2d64 + c2d96
+        biforcazione2 : stem + c2d64 + c2d64 + c2d64 + c2d96
+
+        stem : concatenate biforcazione1 biforcazione2
+
+        biforcazione1 : stem + c2d192
+        biforcazione2 : stem + m2d
+
+        stem : concatenate biforcazione1 biforcazione2
+
+        stem : stem + re
+
+        biforcazione1 : stem + c2d32
+        biforcazione2 : stem + c2d32 + c2d32
+        biforcazione3 : stem + c2d32 + c2d48 + c2d64
+
+        A : concatenate biforcazione1 biforcazione2 biforcazione3
+
+        A : A + c2d384
+        A : concatenate A stem
+        A : A + re
+
+        m2d := MaxPooling2D 3, 3 with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
+        c2d384 := Conv2D 384 3 3 with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d256 := Conv2D 384 1 1 with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+        c2d3822 := Conv2D 384 1 1 with subsample=(2,2) init='he_normal' border_mode='same' dim_ordering='tf' + re
+
+        biforcazione1 : A + m2d
+        biforcazione2 : A + c2d384
+        biforcazione3 : A + c2d256 + c2d256 + c2d3822
+
+        redA : concatenate biforcazione1 biforcazione2 biforcazione3 
+
+        """
+        self.mll = MLL(inception_uncomm)
+        self.mll.start()
+        print(self.mll.get_string())
+        #self.mll.execute()
+
+    def test_sk_1(self):
+        skmodel4 = """
+
+        criterion have 'gini' or 'entropy'
+
+        rf_clf  : @RandomForestClassifier 10 entropy
+        knn_clf : @KNeighborsClassifier 2
+        svc_clf : @SVC with C=10000.0
+        rg_clf  : @RidgeClassifier 0.1
+        dt_clf  : @DecisionTreeClassifier gini
+        lr      : @LogisticRegression
+        classifier sclf : @StackingClassifier with classifiers = [ rf_clf, dt_clf, knn_clf, svc_clf, rg_clf ] meta_classifier = lr
+
+        """
+
+        self.mll = MLL(skmodel4)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+        sclf = self.mll.last_model()
+
+        train, test = get_data()
+
+        sclf.fit(train, test)
+
+        scores = model_selection.cross_val_score(sclf, train, test, cv=3, scoring='accuracy')
+        print(scores.mean(), scores.std())
+
+    def test_simple_net(self):
+
+        simple_net = """
+        params_conv2d := (3, 3) with padding='same'
+        conv2d := Conv2D
+        seq := Sequential
+        relu := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+        ANN := seq
+
+        padding have 'same' or 'valid'
+
+        criterion have 'gini' or 'entropy'
+
+        classifier rf_clf  : @RandomForestClassifier 10 entropy
+        knn_clf : @KNeighborsClassifier 2
+        svc_clf : @SVC with C=10000.0
+        rg_clf  : @RidgeClassifier 0.1
+        dt_clf  : @DecisionTreeClassifier gini
+        lr      : @LogisticRegression
+        sclf : @StackingClassifier with classifiers = [ rf_clf, dt_clf, knn_clf, svc_clf, rg_clf ] meta_classifier = lr
+
+        net : ANN 
+        + Conv2D 32 (3, 3) with input_shape=(100, 100, 3)
+        + relu
+        + flatten
+        + Dense 256
+        + relu
+        + Dropout 0.5
+        + Dense 10 with activation='softmax'
+        """
+
+        self.mll = MLL(simple_net)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+        net = self.mll.last_model()
+
+        # Generate dummy data
+        x_train = np.random.random((100, 100, 100, 3))
+        y_train = keras.utils.to_categorical(np.random.randint(10, size=(100, 1)), num_classes=10)
+        x_test = np.random.random((20, 100, 100, 3))
+        y_test = keras.utils.to_categorical(np.random.randint(10, size=(20, 1)), num_classes=10)
+
+        sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+        net.compile(loss='categorical_crossentropy', optimizer=sgd)
+
+        net.fit(x_train, y_train, batch_size=32, epochs=10)
+        score = net.evaluate(x_test, y_test, batch_size=32)
+
+        print(net.summary())
+
+
+    def test_mll_empty(self):
+        MLL("")
+
+
+    def test_inception_commented(self):
+        inception = """
+        conv2d := Conv2D
+        seq := Sequential
+        re := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d32 := Conv2D 32 3 3 with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d48 := Conv2D 48 3 3 with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d64 := Conv2D 64 3 3 with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+        m2d := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        c2d96 := Conv2D 96 3 3 with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d192 := Conv2D 192 3 3 with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d384 := Conv2D 384 3 3 with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+
+
+        #layer di input riceve in input x
+        
+        stem : x + c2d32 + c2d32 + c2d64
+
+        biforcazione1 : stem + m2d
+        biforcazione2 : stem + c2d96
+
+        stem : concatenate biforcazione1 biforcazione2
+
+        biforcazione1 : stem + c2d64 + c2d96
+        biforcazione2 : stem + c2d64 + c2d64 + c2d64 + c2d96
+
+        stem : concatenate biforcazione1 biforcazione2
+
+        biforcazione1 : stem + c2d192
+        biforcazione2 : stem + m2d
+
+        stem : concatenate biforcazione1 biforcazione2
+
+        stem : stem + re
+
+        #layer A riceve in input x
+
+        biforcazione1 : x + c2d32
+        biforcazione2 : x + c2d32 + c2d32
+        biforcazione3 : x + c2d32 + c2d48 + c2d64
+
+        A : concatenate biforcazione1 biforcazione2 biforcazione3
+
+        A : A + c2d384
+        A : concatenate A x
+        A : A + re
+
+        #layer redA riceve in input x
+
+        m2d := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
+        c2d384 := Conv2D 384 3 3 with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d256 := Conv2D 384 1 1 with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+        c2d3822 := Conv2D 384 1 1 with subsample=(2,2) init='he_normal' border_mode='same' dim_ordering='tf' + re
+
+        biforcazione1 : x + m2d
+        biforcazione2 : x + c2d384
+        biforcazione3 : x + c2d256 + c2d256 + c2d28422
+
+        redA : concatenate biforcazione1 biforcazione2 biforcazione3 
+
+        #layer B riceve in input x
+
+        #da finire
+
+        """
+
+        self.mll = MLL(inception)
+        self.mll.start()
+        print(self.mll.get_string())
+        # self.mll.execute()
