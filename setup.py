@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="MLL-machine-learning-language",
+    name="mll",
     version="0.0.1",
     author="Bernardi Riccardo",
     author_email="riccardo.bernardi@rocketmail.com",

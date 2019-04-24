@@ -2,3 +2,5 @@ venv
 *.csv
 *.png
 *.pyc
+dist
+mll.egg-info/
