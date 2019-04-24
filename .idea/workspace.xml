@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -191,7 +191,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -203,6 +202,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -410,16 +410,16 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.test_inception_out" />
+      <item itemvalue="Python.inception-resnet-v2" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.test_inception_out" />
       <item itemvalue="Python.test_liste" />
       <item itemvalue="Python.test_net" />
-      <item itemvalue="Python.inception-resnet-v2" />
-      <item itemvalue="Python tests.Unittests for test_MLL.TestTransform.test_inception_dag" />
       <item itemvalue="Python tests.Unittests for test_MLL.TestMLL" />
-      <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_only_stem" />
-      <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_new_only_stem" />
       <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_imports" />
+      <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_new_only_stem" />
+      <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_only_stem" />
+      <item itemvalue="Python tests.Unittests for test_MLL.TestTransform.test_inception_dag" />
     </list>
     <recent_temporary>
       <list>
@@ -517,7 +517,10 @@
       <workItem from="1556090274837" duration="7303000" />
       <workItem from="1556100545738" duration="2000" />
       <workItem from="1556105081019" duration="4555000" />
-      <workItem from="1556113945040" duration="702000" />
+      <workItem from="1556113945040" duration="809000" />
+      <workItem from="1556115978351" duration="2000" />
+      <workItem from="1556116501006" duration="110000" />
+      <workItem from="1556116804559" duration="64000" />
     </task>
     <servers />
   </component>
@@ -554,7 +557,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="244741000" />
+    <option name="totallyTimeSpent" value="245024000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -568,7 +571,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.16801292" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.17528272" />
       <window_info id="Structure" order="1" sideWeight="0.5068493" side_tool="true" weight="0.17285945" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
