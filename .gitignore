@@ -1,4 +1,2 @@
 venv
-venv/
-.venv/
-.venv
+.idea
