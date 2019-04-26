@@ -1,7 +1,6 @@
-from sklearn import model_selection
 #from tensorflow.python.estimator import keras
 
-from mlltranspiler import MLL
+from mll.mlltranspiler import MLL
 
 
 # import warnings

@@ -2,9 +2,9 @@ from lark import Lark, Token
 from lark.tree import Tree, pydot__tree_to_png
 from termcolor import cprint
 
-from new_grammar import get_new_grammar
-from utils import scrivi, get_imports, istok, clean_tok, plus_in_array, clean_deep, clean_arr, escape, \
-    get_keras_layers, uncomma, isTree, presentation, clean_tabs, stampa
+from mll.new_grammar import get_new_grammar
+from mll.utils import scrivi, get_imports, istok, clean_tok, plus_in_array, clean_deep, clean_arr, escape, \
+    get_keras_layers, uncomma, isTree, presentation, clean_tabs
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -287,6 +287,11 @@ class MLL:
             else:
                 t = self.put_macros(t)
 
+                if istok(t[i]) and clean_tok(t[i].value) == "assign" and False:
+                    s = clean_tok(t[i+1].value)
+                    t.pop(i+1)
+                    t.insert(i+1,Token("ASSIGN","models['"+s+"]"))
+
                 if istok(t[i]) and clean_tok(t[i].value) == "concat":
 
                     names.insert(0,models[0])
@@ -395,6 +400,7 @@ class MLL:
                     s += [i]
 
             t.append(Token("CONCAT", "x = concatenate(["))
+            models.insert(0,"x")
             t.append( [Token("MODELS", i) for i in s ])
             t.append( Token("PP","])\n\t") )
 

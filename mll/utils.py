@@ -53,6 +53,9 @@ from keras.layers import concatenate
 from keras.layers import InputLayer
 from keras.layers import AveragePooling2D
 
+def assign (x):
+    return x
+
 """
 
 def get_imports() -> str:
