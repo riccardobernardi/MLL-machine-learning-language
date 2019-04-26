@@ -279,6 +279,7 @@ class MLL:
 
         concatenated = False
         model_x = "x"
+        skip = False
 
         i = 0
         while True:
@@ -287,10 +288,11 @@ class MLL:
             else:
                 t = self.put_macros(t)
 
-                if istok(t[i]) and clean_tok(t[i].value) == "assign" and False:
-                    s = clean_tok(t[i+1].value)
-                    t.pop(i+1)
-                    t.insert(i+1,Token("ASSIGN","models['"+s+"]"))
+                if istok(t[i]) and clean_tok(t[i].value) == "assign":
+                    s = clean_tok(t[i+2].children[0].value)
+                    t.pop(i+2)
+                    t.insert(i+2,Token("ASSIGN","models['"+s+"']"))
+                    skip = True
 
                 if istok(t[i]) and clean_tok(t[i].value) == "concat":
 
@@ -355,11 +357,15 @@ class MLL:
                         first = False
                     t.pop(i)
 
-                    if concatenated == False:
-                        t.insert(i,Token("MODEL","))("+ model_x +")"))
+                    if not skip:
+                        if concatenated == False:
+                            t.insert(i,Token("MODEL","))("+ model_x +")"))
+                        else:
+                            t.insert(i,Token("MODEL","))("+model_x+")"))
+                            concatenated = False
                     else:
-                        t.insert(i,Token("MODEL","))("+model_x+")"))
-                        concatenated = False
+                        t.insert(i, Token("PP", "))"))
+                        skip = False
 
                     t.insert(i + 1, Token("TAB", "\n\t"))
 
