@@ -293,6 +293,41 @@
 #     to_concat_and_free = []
 #     write_concat = True
 
-
+# print(t.value)
+#
+# # i = 0
+# # while True:
+# #     if i == len(t):
+# #         break
+# #     else:
+# #         # if istok(t[i]) and t[i].type == "ID" and i + 1 < len(t) and (( isTree(t[i + 1]) and
+# #         #         t[i + 1].data == "e") or ( istok(t[i+1]) and t[i + 1].type == "ID") ):
+# #         #     # allora questo token è un identificatore di classe keras o sklearn o mlextend
+# #         #     if clean_tok(t[i].value) in self.possible_imports:
+# #         #         self.actual_imports += "from keras.layers import " + clean_tok(t[i].value) + "\n"
+# #         #     else:
+# #         #         print("WARNING: import " + clean_tok(t[i].value) + " is not possible")
+# #         #
+# #         # else:
+# #         if istok(t[i]):
+# #             comp = "from keras.layers import " + clean_tok(t[i].value) + "\n"
+# #             print("-------------------------------")
+# #             print(comp)
+# #             print("-------------------------------")
+# #             if comp not in self.actual_imports_set and clean_tok(t[i].value) in get_keras_layers():
+# #                 self.actual_imports += comp
+# #                 self.actual_imports_set.add(comp)
+# #
+# #
+# #         i += 1
+#
+# if istok(t):
+#     comp = "from keras.layers import " + clean_tok(t.value) + "\n"
+#     print("-------------------------------")
+#     print(comp)
+#     print("-------------------------------")
+#     if comp not in self.actual_imports_set and clean_tok(t.value) in get_keras_layers():
+#         self.actual_imports += comp
+#         self.actual_imports_set.add(comp)
 
 

@@ -376,7 +376,7 @@ class TestMLL(TestCase):
         biforcazione1 : stem + m2d
         biforcazione2 : stem + c2d96
 
-        stem : Concatenate biforcazione1 biforcazione2
+        stem : concatenate biforcazione1 biforcazione2
 
         biforcazione1 : stem + c2d64 + c2d96
         biforcazione2 : stem + c2d64 + c2d64 + c2d64 + c2d96
@@ -655,8 +655,10 @@ class TestMLL(TestCase):
         c2d3233s := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
         c2d3211v := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
         c2d3211s := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
-        c2d4833v := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
-        c2d4833s := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d4833v := Conv2D 48 (3, 3) with subsample=(3,3) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d4833s := Conv2D 48 (3, 3) with subsample=(3,3) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d4811v := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d4811s := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
         c2d6433v := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
         c2d6433s := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
         c2d6411v := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
@@ -713,8 +715,10 @@ class TestMLL(TestCase):
         c2d3233s := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
         c2d3211v := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
         c2d3211s := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
-        c2d4833v := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
-        c2d4833s := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d4833v := Conv2D 48 (3, 3) with subsample=(3,3) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d4833s := Conv2D 48 (3, 3) with subsample=(3,3) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d4811v := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d4811s := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
         c2d6433v := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
         c2d6433s := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
         c2d6411v := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
@@ -752,10 +756,8 @@ class TestMLL(TestCase):
 
         self.mll = MLL(inc)
         self.mll.start()
-        #print(self.mll.get_string())
+        print(self.mll.get_string())
         self.mll.execute()
-
-        print(self.mll.get_imports())
 
     def test_simpler_auto_import(self):
         skmodel4 = """
@@ -774,7 +776,7 @@ class TestMLL(TestCase):
 
         self.mll = MLL(skmodel4)
         self.mll.start()
-        #print(self.mll.get_string())
+        print(self.mll.get_string())
         self.mll.execute()
         sclf = self.mll.last_model()
 
@@ -783,5 +785,4 @@ class TestMLL(TestCase):
         sclf.fit(train, test)
 
         scores = model_selection.cross_val_score(sclf, train, test, cv=3, scoring='accuracy')
-        #print(scores.mean(), scores.std())
-        print(self.mll.get_imports())
+        print(scores.mean(), scores.std())

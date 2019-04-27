@@ -1,5 +1,6 @@
 from keras import layers
 from lark import Tree, Token
+import sklearn.linear_model
 
 #stampa un albero a schermo, non scrive su stringhe
 def stampa(t : object) -> None:
@@ -138,6 +139,20 @@ def escape(m:str, t:object) -> object:
 
 
 def get_keras_layers()-> set :
+    arr = []
+    keras_layers = set()
+
+    for k in layers.__dict__.keys():
+        if "__" not in k and k != "K":
+            arr += [k]
+
+    for i in arr:
+        keras_layers.add(str(i))
+
+    return keras_layers
+
+
+def get_sklearn_models()-> set :
     arr = []
     keras_layers = set()
 

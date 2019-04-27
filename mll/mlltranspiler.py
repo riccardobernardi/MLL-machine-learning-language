@@ -21,6 +21,7 @@ class MLL:
         self.current_keras = None
         self.possible_imports = get_keras_layers() #sarà un set di stringhe
         self.actual_imports = ""
+        self.actual_imports_set = set()
         self.model_type = {} #model_name : regressor|classifier
 
         self.program = program
@@ -67,21 +68,20 @@ class MLL:
 
         return Token("DELETED", "#macro: " + scrivi(t).replace("\n", "") + "\n")
 
-    def recon_class_ids(self, t: list) -> None:
-        i = 0
-        while True:
-            if i == len(t):
-                break
-            else:
-                if istok(t[i]) and t[i].type == "ID" and i + 1 < len(t) and isTree(t[i + 1]) and (
-                        t[i + 1].data == "e" or t[i + 1].data == "ID"):
-                    # allora questo token è un identificatore di classe keras o sklearn o mlextend
-                    if clean_tok(t[i].value) in self.possible_imports:
-                        self.actual_imports += "from keras.layers import " + clean_tok(t[i].value) + "\n"
-                    else:
-                        print("WARNING: import " + clean_tok(t[i].value) + " is not possible")
-
-                i += 1
+    def recon_class_ids(self, t:list) -> None:
+        if isinstance(t, Token):
+            if t.type == "ID":
+                comp = "from keras.layers import " + clean_tok(t.value) + "\n"
+                if comp not in self.actual_imports_set and clean_tok(t.value) in get_keras_layers():
+                    self.actual_imports += comp
+                    self.actual_imports_set.add(comp)
+        elif isinstance(t, Tree):
+            self.recon_class_ids(t.children)
+        elif isinstance(t, list):
+            for i in t:
+                self.recon_class_ids(i)
+        else:
+            raise Exception("Non esiste questo caso nella fun clean_deep")
 
     def format_commas(self,t: list) -> list:
 
@@ -460,6 +460,8 @@ class MLL:
                     #salvo l' informazione del fatto che un modello è regressor o classifier e poi elimino questa info per retrocompatibility
                     t.children = t.children[1:]
 
+                self.recon_class_ids(t.children)
+
                 t.children = self.format_keras(t.children)
 
             if t.data == "parmac":
@@ -486,7 +488,7 @@ class MLL:
             t = self.concat_array(t)
 
             #######AUTO_IMPORTS attivare qui sotto
-            self.recon_class_ids(t)
+            #self.recon_class_ids(t)
 
             return [self.transform(m) for m in t]
         else:
@@ -501,13 +503,14 @@ class MLL:
         #pydot__tree_to_png(tree, "tree-before.png")
 
         n = Tree(tree.data, self.transform(tree.children))
+        self.recon_class_ids(n)
 
         #pydot__tree_to_png(n, "tree-after.png")
 
-        s = get_imports() + scrivi(n)
+        #s = get_imports() + scrivi(n)
 
         #######AUTO_IMPORTS attivare qui sotto
-        #s = self.actual_imports + scrivi(n)
+        s = self.actual_imports + scrivi(n)
 
         return s
 
@@ -519,9 +522,11 @@ class MLL:
 
     def execute(self):
         #######AUTO_IMPORTS attivare qui sotto
-        print(self.actual_imports)
         s = self.get_string()
         exec(s,{"models":self.models})
+
+        print("###############import trovati:")
+        print(self.actual_imports)
 
     def get_imports(self):
         print(self.actual_imports)
