@@ -698,3 +698,90 @@ class TestMLL(TestCase):
         self.mll.execute()
 
         print(type(self.mll.last_model()))
+
+    def test_auto_import(self):
+        inc = """
+        conv2d := Conv2D
+        seq := Sequential
+        relu := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d3233v := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d3233s := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d3211v := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d3211s := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d4833v := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d4833s := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6433v := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6433s := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6411v := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6411s := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6417v := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6417s := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6471v := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6471s := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        m2d3311v := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        m2d3311s := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='same' dim_ordering ='tf'
+        c2d9611v := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d9611s := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d9633v := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d9633s := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d19233v := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d19233s := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d38433v := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d38433s := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d38411v := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d38411s := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d38411sl := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear' 
+
+        # Input layer
+
+        x : Input with shape = (32,32,3)
+
+        stem :
+            | c2d3211s
+            | c2d3211s + c2d3211s
+            | c2d3211s + c2d4811s + c2d6411s
+            | concat
+            | c2d38411s
+
+        """
+
+        self.mll = MLL(inc)
+        self.mll.start()
+        #print(self.mll.get_string())
+        self.mll.execute()
+
+        print(self.mll.get_imports())
+
+    def test_simpler_auto_import(self):
+        skmodel4 = """
+
+        criterion have 'gini' or 'entropy'
+
+        rf_clf  : RandomForestClassifier 10 entropy
+        knn_clf : KNeighborsClassifier 2
+        svc_clf : SVC with C=10000.0
+        rg_clf  : RidgeClassifier 0.1
+        dt_clf  : DecisionTreeClassifier gini
+        lr      : LogisticRegression
+        classifier sclf : StackingClassifier with classifiers = [ rf_clf, dt_clf, knn_clf, svc_clf, rg_clf ] meta_classifier = lr
+
+        """
+
+        self.mll = MLL(skmodel4)
+        self.mll.start()
+        #print(self.mll.get_string())
+        self.mll.execute()
+        sclf = self.mll.last_model()
+
+        train, test = get_data()
+
+        sclf.fit(train, test)
+
+        scores = model_selection.cross_val_score(sclf, train, test, cv=3, scoring='accuracy')
+        #print(scores.mean(), scores.std())
+        print(self.mll.get_imports())

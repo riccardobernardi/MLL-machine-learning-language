@@ -486,7 +486,7 @@ class MLL:
             t = self.concat_array(t)
 
             #######AUTO_IMPORTS attivare qui sotto
-            #self.recon_class_ids(t)
+            self.recon_class_ids(t)
 
             return [self.transform(m) for m in t]
         else:
@@ -498,11 +498,11 @@ class MLL:
 
         tree = parser.parse(program)
 
-        pydot__tree_to_png(tree, "tree-before.png")
+        #pydot__tree_to_png(tree, "tree-before.png")
 
         n = Tree(tree.data, self.transform(tree.children))
 
-        pydot__tree_to_png(n, "tree-after.png")
+        #pydot__tree_to_png(n, "tree-after.png")
 
         s = get_imports() + scrivi(n)
 
@@ -519,6 +519,9 @@ class MLL:
 
     def execute(self):
         #######AUTO_IMPORTS attivare qui sotto
-        #print(self.actual_imports)
+        print(self.actual_imports)
         s = self.get_string()
         exec(s,{"models":self.models})
+
+    def get_imports(self):
+        print(self.actual_imports)
