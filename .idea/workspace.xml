@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/mll/new_grammar.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/new_grammar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mll/test_MLL.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/test_MLL.py" afterDir="false" />
-    </list>
+    <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -532,7 +529,7 @@
       <workItem from="1556441683199" duration="5289000" />
       <workItem from="1556453412252" duration="1155000" />
       <workItem from="1556455305728" duration="161000" />
-      <workItem from="1556464472438" duration="1300000" />
+      <workItem from="1556464472438" duration="1459000" />
     </task>
     <servers />
   </component>
@@ -569,7 +566,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="271627000" />
+    <option name="totallyTimeSpent" value="271786000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
