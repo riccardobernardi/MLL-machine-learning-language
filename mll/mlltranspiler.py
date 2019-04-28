@@ -4,7 +4,8 @@ from termcolor import cprint
 
 from mll.new_grammar import get_new_grammar
 from mll.utils import scrivi, get_imports, istok, clean_tok, plus_in_array, clean_deep, clean_arr, escape, \
-    get_keras_layers, uncomma, isTree, presentation, clean_tabs
+    get_keras_layers, uncomma, isTree, presentation, clean_tabs, get_sklearn_models, get_utils_functions, \
+    get_base_imports, get_mlxtend_models
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -19,7 +20,6 @@ class MLL:
         self.macros={}
         self.ordered_models = []
         self.current_keras = None
-        self.possible_imports = get_keras_layers() #sarà un set di stringhe
         self.actual_imports = ""
         self.actual_imports_set = set()
         self.model_type = {} #model_name : regressor|classifier
@@ -31,6 +31,21 @@ class MLL:
 
     def start(self):
         self.string = uncomma(self.transpile(self.program))
+
+    def is_in_possible_imports(self, tok:str) -> str :
+        for i in get_keras_layers().keys():
+            if tok in get_keras_layers()[i]:
+                return "from keras."+i + " import "+tok + "\n"
+
+        for i in get_sklearn_models().keys():
+            if tok in get_sklearn_models()[i]:
+                return "from sklearn."+i + " import "+tok + "\n"
+
+        for i in get_mlxtend_models().keys():
+            if tok in get_mlxtend_models()[i]:
+                return "from mlxtend."+i + " import "+tok + "\n"
+
+        return ""
 
     def concat_array(self,t: list) -> list:
         ok = False
@@ -71,10 +86,14 @@ class MLL:
     def recon_class_ids(self, t:list) -> None:
         if isinstance(t, Token):
             if t.type == "ID":
-                comp = "from keras.layers import " + clean_tok(t.value) + "\n"
-                if comp not in self.actual_imports_set and clean_tok(t.value) in get_keras_layers():
-                    self.actual_imports += comp
-                    self.actual_imports_set.add(comp)
+                if clean_tok(t.value) not in self.actual_imports_set and self.is_in_possible_imports(clean_tok(t.value)) != "":
+                    self.actual_imports += self.is_in_possible_imports(clean_tok(t.value))
+                    self.actual_imports_set.add(clean_tok(t.value))
+
+            if t.type == "CONCAT":
+                self.actual_imports += self.is_in_possible_imports(clean_tok("concatenate"))
+                self.actual_imports_set.add(clean_tok("concatenate"))
+
         elif isinstance(t, Tree):
             self.recon_class_ids(t.children)
         elif isinstance(t, list):
@@ -510,7 +529,7 @@ class MLL:
         #s = get_imports() + scrivi(n)
 
         #######AUTO_IMPORTS attivare qui sotto
-        s = self.actual_imports + scrivi(n)
+        s = get_base_imports() + self.actual_imports + get_utils_functions() + scrivi(n)
 
         return s
 
@@ -525,8 +544,8 @@ class MLL:
         s = self.get_string()
         exec(s,{"models":self.models})
 
-        print("###############import trovati:")
-        print(self.actual_imports)
+        # print("###############import trovati:")
+        # print(self.actual_imports)
 
     def get_imports(self):
         print(self.actual_imports)

@@ -1,6 +1,5 @@
 from keras import layers
 from lark import Tree, Token
-import sklearn.linear_model
 
 #stampa un albero a schermo, non scrive su stringhe
 def stampa(t : object) -> None:
@@ -54,10 +53,16 @@ from keras.layers import concatenate
 from keras.layers import InputLayer
 from keras.layers import AveragePooling2D
 
+"""
+
+utils_functions = """
 def assign (x):
     return x
 
 """
+
+def get_utils_functions() -> str:
+    return utils_functions
 
 def get_imports() -> str:
     return imports
@@ -137,31 +142,88 @@ def escape(m:str, t:object) -> object:
     else:
         raise Exception("Non esiste questo caso nella fun escape")
 
+def get_base_imports() -> str:
+    return """import keras
+import sklearn
+import mlxtend
+"""
 
-def get_keras_layers()-> set :
-    arr = []
-    keras_layers = set()
+from keras import models
 
+def get_keras_layers()-> dict :
+    keras_layers = {}
+
+    keras_layers["models"] = set()
+    for k in models.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["models"].add(k)
+
+    keras_layers["layers"] = set()
     for k in layers.__dict__.keys():
         if "__" not in k and k != "K":
-            arr += [k]
-
-    for i in arr:
-        keras_layers.add(str(i))
+            keras_layers["layers"].add(k)
 
     return keras_layers
 
 
-def get_sklearn_models()-> set :
-    arr = []
-    keras_layers = set()
+from sklearn import linear_model
+from sklearn import cluster
+from sklearn import ensemble
+from sklearn import neighbors
+from sklearn import svm
+from sklearn import tree
+#import sklearn.
 
-    for k in layers.__dict__.keys():
+def get_sklearn_models()-> dict :
+    keras_layers = {}
+
+    #keras_layers = {n*set()}
+
+    keras_layers["linear_model"] = set()
+    for k in linear_model.__dict__.keys():
         if "__" not in k and k != "K":
-            arr += [k]
+            keras_layers["linear_model"].add(k)
 
-    for i in arr:
-        keras_layers.add(str(i))
+    keras_layers["cluster"] = set()
+    for k in cluster.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["cluster"].add(k)
+
+    keras_layers["ensemble"] = set()
+    for k in ensemble.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["ensemble"].add(k)
+
+    keras_layers["neighbors"] = set()
+    for k in neighbors.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["neighbors"].add(k)
+
+    keras_layers["svm"] = set()
+    for k in svm.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["svm"].add(k)
+
+    keras_layers["tree"] = set()
+    for k in tree.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["tree"].add(k)
+
+    return keras_layers
+
+
+from mlxtend import classifier
+#import mlxtend.
+
+def get_mlxtend_models()-> dict :
+    keras_layers = {}
+
+    #keras_layers = {n*set()}
+
+    keras_layers["classifier"] = set()
+    for k in classifier.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["classifier"].add(k)
 
     return keras_layers
 
