@@ -641,7 +641,7 @@ class TestMLL(TestCase):
 
         print(type(self.mll.last_model()))
 
-    def test_dag_double_fork(self):
+    def test_dag_fork_sequential(self):
         inc = """
         conv2d := Conv2D
         seq := Sequential
@@ -786,3 +786,189 @@ class TestMLL(TestCase):
 
         scores = model_selection.cross_val_score(sclf, train, test, cv=3, scoring='accuracy')
         print(scores.mean(), scores.std())
+
+
+    def test_inception_mod_leave_one_out(self):
+        inception_uncomm = """
+        conv2d := Conv2D
+        seq := Sequential
+        re := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d32 := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d48 := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d64 := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+        m2d := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        c2d96 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d192 := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d384 := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+
+        stem : InputLayer (100, 100, 3) 
+        
+        stem : stem + c2d32 + c2d32 + c2d64
+
+        stem : 
+            | a -> | m2d
+            | b -> | c2d96
+            | c -> | m2d
+            | concat a b
+            
+        #non puo diventare x l ultima concat
+
+        """
+        self.mll = MLL(inception_uncomm)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+
+    def test_inception_mod_double_fork(self):
+        inception_uncomm = """
+        conv2d := Conv2D
+        seq := Sequential
+        re := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d32 := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d48 := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d64 := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+        m2d := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        c2d96 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d192 := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d384 := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+
+        stem : InputLayer (100, 100, 3) 
+
+        stem : stem + c2d32 + c2d32 + c2d64
+
+        stem : 
+            | a -> | m2d | c2d96 | concat
+            | b -> | m2d | c2d96 | concat
+            | concat a b
+
+        #le concat nested senza parametri producono le lettere prima della freccia
+        #l ultima concat con paramteri produce x
+
+        """
+        self.mll = MLL(inception_uncomm)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+
+    def test_inception_mod_leave_one_out_and_double_fork(self):
+        inception_uncomm = """
+        conv2d := Conv2D
+        seq := Sequential
+        re := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d32 := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d48 := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d64 := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+        m2d := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        c2d96 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d192 := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d384 := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+
+        stem : InputLayer (100, 100, 3) 
+
+        stem : stem + c2d32 + c2d32 + c2d64
+
+        stem : 
+            | right -> | m2d | c2d96 | concat
+            | left -> | m2d | c2d96 | concat
+            | loo -> | m2d + c2d96 + c2d96
+            | concat a b
+
+        #le concat nested senza parametri producono le lettere prima della freccia
+        #l ultima concat con paramteri produce x
+
+        """
+        self.mll = MLL(inception_uncomm)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+
+    def test_inception_commented_commas(self):
+        inception = """
+        conv2d := Conv2D
+        seq := Sequential
+        re := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d32 := Conv2D 32 3 3 with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d48 := Conv2D 48 3 3 with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d64 := Conv2D 64 3 3 with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+        m2d := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        c2d96 := Conv2D 96 3 3 with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d192 := Conv2D 192 3 3 with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d384 := Conv2D 384 3 3 with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+
+
+        #layer di input riceve in input x
+
+        stem : x + c2d32 + c2d32 + c2d64
+
+        biforcazione1 : stem + m2d
+        biforcazione2 : stem + c2d96
+
+        stem : concatenate biforcazione1 biforcazione2
+
+        biforcazione1 : stem + c2d64 + c2d96
+        biforcazione2 : stem + c2d64 + c2d64 + c2d64 + c2d96
+
+        stem : concatenate biforcazione1 biforcazione2
+
+        biforcazione1 : stem + c2d192
+        biforcazione2 : stem + m2d
+
+        stem : concatenate biforcazione1 biforcazione2
+
+        stem : stem + re
+
+        #layer A, riceve in input x
+
+        biforcazione1 : x + c2d32
+        biforcazione2 : x + c2d32 + c2d32
+        biforcazione3 : x + c2d32 + c2d48 + c2d64
+
+        A : concatenate biforcazione1 biforcazione2 biforcazione3
+
+        A : A + c2d384
+        A : concatenate A x
+        A : A + re
+
+        #layer redA, riceve in input x
+
+        m2d := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
+        c2d384 := Conv2D 384 3 3 with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d256 := Conv2D 384 1 1 with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+        c2d3822 := Conv2D 384 1 1 with subsample=(2,2) init='he_normal' border_mode='same' dim_ordering='tf' + re
+
+        biforcazione1 : x + m2d
+        biforcazione2 : x + c2d384
+        biforcazione3 : x + c2d256 + c2d256 + c2d28422
+
+        redA : concatenate biforcazione1 biforcazione2 biforcazione3 
+
+        #layer B, riceve in input x
+
+        #da finire
+
+        """
+
+        self.mll = MLL(inception)
+        self.mll.start()
+        print(self.mll.get_string())
+        # self.mll.execute()

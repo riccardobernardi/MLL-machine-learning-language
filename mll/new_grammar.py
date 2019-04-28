@@ -14,7 +14,7 @@ _msid.2 : ID [e*] [WITH comp*] (PLUS (ID [e*] [WITH comp*]) )*
 
 _mse : [e*] [WITH comp*] (PLUS (ID [e*] [WITH comp*]) )*
 
-dag : ID COLON ( (PI| EX) (ID AR ID | ID) [e*] [WITH comp*] (PLUS (ID [e*] [WITH comp*]) )* )+
+dag : ID COLON ( PI (ID AR | ID) [e*] [WITH comp*] [(PLUS (ID [e*] [WITH comp*]) )*] )+
 
 //[COLON ID [e*] [WITH comp*] (PLUS (ID [e*] [WITH comp*]) )*]
 
