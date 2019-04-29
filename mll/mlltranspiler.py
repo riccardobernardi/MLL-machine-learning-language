@@ -519,12 +519,12 @@ class MLL:
 
         tree = parser.parse(program)
 
-        #pydot__tree_to_png(tree, "tree-before.png")
+        pydot__tree_to_png(tree, "tree-before.png")
 
         n = Tree(tree.data, self.transform(tree.children))
         self.recon_class_ids(n)
 
-        #pydot__tree_to_png(n, "tree-after.png")
+        pydot__tree_to_png(n, "tree-after.png")
 
         #s = get_imports() + scrivi(n)
 

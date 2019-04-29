@@ -811,10 +811,10 @@ class TestMLL(TestCase):
         stem : stem + c2d32 + c2d32 + c2d64
 
         stem : 
-            | a -> | m2d
-            | b -> | c2d96
-            | c -> | m2d
-            | concat a b
+            | right -> | m2d
+            | left -> | c2d96
+            | loo -> | m2d
+            | concat right left
             
         #non puo diventare x l ultima concat
 
@@ -847,9 +847,9 @@ class TestMLL(TestCase):
         stem : stem + c2d32 + c2d32 + c2d64
 
         stem : 
-            | a -> | m2d | c2d96 | concat
-            | b -> | m2d | c2d96 | concat
-            | concat a b
+            | right -> | m2d | c2d96 | concat
+            | left -> | m2d | c2d96 | concat
+            | concat right left
 
         #le concat nested senza parametri producono le lettere prima della freccia
         #l ultima concat con paramteri produce x
@@ -972,3 +972,323 @@ class TestMLL(TestCase):
         self.mll.start()
         print(self.mll.get_string())
         # self.mll.execute()
+
+    def test_half_complete_inception_sum(self):
+        inc = """
+        conv2d := Conv2D
+        seq := Sequential
+        relu := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d3233v := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d3233s := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d3211v := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d3211s := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d4833v := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d4833s := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6433v := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6433s := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6411v := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6411s := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6417v := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6417s := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6471v := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6471s := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        m2d3311v := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        m2d3311s := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='same' dim_ordering ='tf'
+        c2d9611v := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d9611s := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d9633v := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d9633s := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d19233v := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d19233s := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d38433v := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d38433s := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d38411v := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d38411s := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+
+        # Input layer
+
+        x : Input with shape = (32,32,3)
+
+        # Layer stem di entrata dell input
+
+        stem1 :
+            | c2d3233v + c2d3233v + c2d6433s
+
+        x : stem1 x
+
+        stem2 :
+            | m2d3311v
+            | c2d9633v
+
+        x : stem2 x
+
+        stem3 :
+            | c2d6411s + c2d9633v
+            | c2d6411s + c2d6471s + c2d6417s + c2d9633v
+
+        x : stem3 x
+
+        stem4 :
+            | c2d19233v
+            | m2d3311v
+
+        x : stem4 x
+
+        stem5 : 
+            | relu
+
+        x : stem5 x
+
+        # layer A
+
+        shortcut : assign x
+
+        incA1 :
+            | c2d3211s
+            | c2d3211s + c2d3233s
+            | c2d3211s + c2d4833s + c2d6433s
+
+        x : incA1 x
+
+        incA2 :
+            | c2d38411s
+            | assign shortcut
+            | sum
+            
+        #bisogna definire sum
+
+        x : incA2 x
+        
+        # la parte del concat o sum non e presente nei precedenti tests
+        # dovremmo fare una versione di questo test piu corto
+
+        incA3 : 
+            | relu
+
+        x : incA3 x
+
+
+        # nn funziona dobbiamo poter fare dag all interno di altri dag
+        # la merge sum non e permessa
+
+        """
+
+        self.mll = MLL(inc)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+
+    def test_half_complete_inception_shortened(self):
+        inc = """
+        conv2d := Conv2D
+        seq := Sequential
+        relu := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d3233v := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d3233s := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d3211v := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d3211s := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d4833v := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d4833s := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6433v := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6433s := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6411v := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6411s := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6417v := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6417s := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6471v := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6471s := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        m2d3311v := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        m2d3311s := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='same' dim_ordering ='tf'
+        c2d9611v := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d9611s := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d9633v := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d9633s := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d19233v := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d19233s := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d38433v := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d38433s := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d38411v := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d38411s := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+
+        # Input layer
+
+        x : Input with shape = (32,32,3)
+
+        # Layer stem di entrata dell input
+
+        stem1 :
+            | c2d3233v + c2d3233v + c2d6433s
+
+        x : stem1 x
+
+        stem2 :
+            | m2d3311v
+            | c2d9633v
+            | concat
+            | c2d6411s + c2d9633v
+            | c2d6411s + c2d6471s + c2d6417s + c2d9633v
+            | concat
+            | c2d19233v
+            | m2d3311v
+            | concat
+
+        x : stem2 x
+
+        stem5 : 
+            | relu
+
+        x : stem5 x
+
+        # layer A
+
+        shortcut : assign x
+
+        incA1 :
+            | c2d3211s
+            | c2d3211s + c2d3233s
+            | c2d3211s + c2d4833s + c2d6433s
+            | concat
+            | c2d38411s
+            | assign shortcut
+            | sum
+
+        #l ultima concat qui sopra sarebbe una sum
+        #bisogna definire sum
+
+        x : incA1 x
+
+        # la parte del concat o sum non e presente nei precedenti tests
+        # dovremmo fare una versione di questo test piu corto
+
+        incA2 : 
+            | relu
+
+        x : incA2 x
+
+
+        # nn funziona dobbiamo poter fare dag all interno di altri dag
+        # la merge sum non e permessa
+
+        """
+
+        self.mll = MLL(inc)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+
+    def test_external_data(self):
+
+        ext = 384
+
+        inc = """
+        conv2d := Conv2D
+        seq := Sequential
+        relu := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d3233v := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d3233s := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d3211v := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d3211s := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d4833v := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d4833s := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6433v := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6433s := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6411v := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6411s := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6417v := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6417s := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6471v := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d6471s := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        m2d3311v := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        m2d3311s := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='same' dim_ordering ='tf'
+        c2d9611v := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d9611s := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d9633v := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d9633s := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d19233v := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d19233s := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d38433v := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d38433s := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d38411v := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d38411s := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d38411s_ext := Conv2D @ext (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+
+        # Input layer
+
+        x : Input with shape = (32,32,3)
+
+        # Layer stem di entrata dell input
+
+        stem1 :
+            | c2d3233v + c2d3233v + c2d6433s
+
+        x : stem1 x
+
+        stem2 :
+            | m2d3311v
+            | c2d9633v
+            | concat
+            | c2d6411s + c2d9633v
+            | c2d6411s + c2d6471s + c2d6417s + c2d9633v
+            | concat
+            | c2d19233v
+            | m2d3311v
+            | concat
+
+        x : stem2 x
+
+        stem5 : 
+            | relu
+
+        x : stem5 x
+
+        # layer A
+
+        shortcut : assign x
+
+        incA1 :
+            | c2d3211s
+            | c2d3211s + c2d3233s
+            | c2d3211s + c2d4833s + c2d6433s
+            |concat
+            | c2d38411s_ext
+            | assign shortcut
+            | concat
+
+        #l ultima concat qui sopra sarebbe una sum
+        #bisogna definire sum
+
+        x : incA1 x
+
+        # la parte del concat o sum non e presente nei precedenti tests
+        # dovremmo fare una versione di questo test piu corto
+
+        incA2 : 
+            | relu
+
+        x : incA2 x
+
+
+        # nn funziona dobbiamo poter fare dag all interno di altri dag
+        # la merge sum non e permessa
+
+        """
+
+        self.mll = MLL(inc)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
