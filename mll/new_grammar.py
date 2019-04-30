@@ -20,7 +20,7 @@ dag : ID COLON ( PI (ID AR | ID) [e*] [WITH comp*] [(PLUS (ID [e*] [WITH comp*])
 
 mt.2 : RR | CC //model type
 
-comment : HASH ID*
+comment : HASH (FF | CO | " ")* WSP
 
 //macro per i parametri
 parmac.2 : ID HAVE n (OR n)*
@@ -36,6 +36,10 @@ e   : j
     | NUMBER
     | n
     | e CO
+    | fapp
+    
+    
+fapp.2 : ["@"] FF LP e* RP
 
 //tolto perchè sennò veniva piallato il @ext con le parentesi successive come applicazione di metodo
 //invece che come variabile e tupla    
@@ -59,7 +63,7 @@ EX : "!" WS
 
 DAG : "DAG" WS
 
-HASH : "#" WS
+HASH : WS "#" " "*
 
 RR : ("REGRESSOR" | "regressor") WS
 
@@ -103,11 +107,15 @@ XID : "@" W ( INTEGER | W )* WS
 
 IID : WS W ( INTEGER | W )* WS
 
+FF : W ( INTEGER | W )*
+
 COLON   : ":" WS
 
 W   : ("a".."z" | "A".."Z" | "_" )+
 
 WS : (" " | "\\n" | "\\t" | "\\r")*
+
+WSP : (" " | "\\n" | "\\t" | "\\r")+
 
 INTEGER  :   ("0".."9")+
 

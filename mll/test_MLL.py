@@ -1320,3 +1320,42 @@ class TestMLL(TestCase):
         self.mll.start()
         print(self.mll.get_string())
         self.mll.execute()
+
+    def test_func_app(self):
+        ext = 384
+
+        f = lambda x:x
+
+        inc = """
+        conv2d := Conv2D
+
+        c2d38411s_ext := Conv2D @ext (1, 1) @f(x) with subsample=(1,1)
+
+        x : Input with shape = (32,32,3)
+
+        shortcut : assign x
+
+        incA1 :
+            | c2d38411s_ext
+            | assign shortcut
+            | concat
+
+        x : incA1 x
+
+        """
+
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        print(self.mll.import_from_glob)
+        self.mll.execute()
+
+    def test_wrong_type(self):
+        ext = 384
+
+        inc = {}
+
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()

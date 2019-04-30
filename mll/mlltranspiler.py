@@ -85,7 +85,7 @@ class MLL:
 
         return Token("DELETED", "#macro: " + scrivi(t).replace("\n", "") + "\n")
 
-    def recon_class_ids(self, t:list) -> None:
+    def recon_class_ids(self, t:object) -> None:
         if isinstance(t, Token):
             if t.type == "ID":
                 if clean_tok(t.value) not in self.actual_imports_set and self.is_in_possible_imports(clean_tok(t.value)) != "":
@@ -96,7 +96,7 @@ class MLL:
                 self.actual_imports += self.is_in_possible_imports(clean_tok("concatenate"))
                 self.actual_imports_set.add(clean_tok("concatenate"))
 
-            if t.type == "ID" and "@" in t.value:
+            if (t.type == "ID" or t.type == "FF") and "@" in t.value:
                 locals().update(self.loc)
                 try:
                     self.import_from_glob[str(clean_tok(t.value)).replace("@","")] = locals()[
@@ -474,6 +474,13 @@ class MLL:
 
         elif isinstance(t, Tree):
 
+            # if t.data == "comment":
+            #     return Token("comment", scrivi(t.children).replace("\n","").replace("\t","").replace("\r",""))
+
+            if t.data == "fapp":
+                self.recon_class_ids(t.children)
+                return Token("fapp", scrivi(t.children))
+
             if t.data == "dotname":
                 return Token("ID",scrivi(t.children))
 
@@ -534,12 +541,12 @@ class MLL:
 
         tree = parser.parse(program)
 
-        pydot__tree_to_png(tree, "tree-before.png")
+        # pydot__tree_to_png(tree, "tree-before.png")
 
         n = Tree(tree.data, self.transform(tree.children))
         self.recon_class_ids(n)
 
-        pydot__tree_to_png(n, "tree-after.png")
+        # pydot__tree_to_png(n, "tree-after.png")
 
         s = get_base_imports() + self.actual_imports + get_utils_functions() + scrivi(n)
 
