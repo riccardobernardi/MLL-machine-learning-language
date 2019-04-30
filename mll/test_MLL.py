@@ -1288,7 +1288,7 @@ class TestMLL(TestCase):
 
         """
 
-        self.mll = MLL(inc)
+        self.mll = MLL(inc,locals())
         self.mll.start()
         print(self.mll.get_string())
         self.mll.execute()

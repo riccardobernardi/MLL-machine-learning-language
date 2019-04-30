@@ -280,3 +280,16 @@ def list_types(t:list) -> None:
 
 def clean_tabs(t:list) -> list:
     return Token("COMMENT",scrivi(t).replace("\t","").replace("\n","")+"\n")
+
+
+def remove_AT(t):
+    if isinstance(t, Token):
+        t.value = t.value.replace("@","")
+        return t
+    elif isinstance(t, Tree):
+        return Tree(t.data,remove_AT(t.children))
+    elif isinstance(t, type([])):
+        return [remove_AT(i) for i in t]
+
+    else:
+        raise Exception("Non esiste questo caso nella fun escape")

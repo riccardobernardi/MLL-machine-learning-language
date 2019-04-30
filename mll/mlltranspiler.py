@@ -3,9 +3,9 @@ from lark.tree import Tree, pydot__tree_to_png
 from termcolor import cprint
 
 from mll.new_grammar import get_new_grammar
-from mll.utils import scrivi, get_imports, istok, clean_tok, plus_in_array, clean_deep, clean_arr, escape, \
+from mll.utils import scrivi, istok, clean_tok, plus_in_array, clean_deep, clean_arr, escape, \
     get_keras_layers, uncomma, isTree, presentation, clean_tabs, get_sklearn_models, get_utils_functions, \
-    get_base_imports, get_mlxtend_models
+    get_base_imports, get_mlxtend_models, remove_AT
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -13,8 +13,9 @@ warnings.filterwarnings("ignore")
 
 class MLL:
 
-    def __init__(self,program: str) -> None:
+    def __init__(self,program: str,loc = {}) -> None:
         presentation()
+        self.loc = loc
         self.param_values = {}
         self.models = {}
         self.macros={}
@@ -23,6 +24,7 @@ class MLL:
         self.actual_imports = ""
         self.actual_imports_set = set()
         self.model_type = {} #model_name : regressor|classifier
+        self.import_from_glob = {}
 
         self.program = program
 
@@ -93,6 +95,18 @@ class MLL:
             if t.type == "CONCAT":
                 self.actual_imports += self.is_in_possible_imports(clean_tok("concatenate"))
                 self.actual_imports_set.add(clean_tok("concatenate"))
+
+            if t.type == "ID" and "@" in t.value:
+                locals().update(self.loc)
+                try:
+                    self.import_from_glob[str(clean_tok(t.value)).replace("@","")] = locals()[
+                        str(clean_tok(t.value)).replace("@","")]
+                except:
+                    try:
+                        self.import_from_glob[str(clean_tok(t.value)).replace("@", "")] = globals()[
+                            str(clean_tok(t.value)).replace("@", "")]
+                    except:
+                        print("la variabile "+ str(clean_tok(t.value)).replace("@", "") +" non è disponibile")
 
         elif isinstance(t, Tree):
             self.recon_class_ids(t.children)
@@ -464,9 +478,13 @@ class MLL:
                 return Token("ID",scrivi(t.children))
 
             if t.data == "dag":
+                self.recon_class_ids(t.children)
+                t.children = remove_AT(t.children)
                 return Tree(t.data, self.dag(t.children))
 
             if t.data == "macro":
+                self.recon_class_ids(t.children)
+                t.children = remove_AT(t.children)
                 return self.macro_operations(t.children)
 
             if t.data == "comment":
@@ -489,6 +507,10 @@ class MLL:
             return Tree(t.data, self.transform(t.children))
 
         elif isinstance(t, list):
+
+            # for i in t:
+            #     if istok(i) and "@" in i.value:
+            #         list_types(t)
 
             for i in t:
                 if istok(i) and clean_tok(i.value) in self.param_values:
@@ -542,7 +564,9 @@ class MLL:
     def execute(self):
         #######AUTO_IMPORTS attivare qui sotto
         s = self.get_string()
-        exec(s,{"models":self.models})
+        glob = {"models":self.models}
+        glob.update(self.import_from_glob)
+        exec(s,glob)
 
         # print("###############import trovati:")
         # print(self.actual_imports)
