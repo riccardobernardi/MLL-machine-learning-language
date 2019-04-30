@@ -39,7 +39,7 @@ e   : j
     | fapp
     
     
-fapp.2 : ["@"] FF LP e* RP
+fapp.2 : FEXTNAME LP e* RP
 
 //tolto perchè sennò veniva piallato il @ext con le parentesi successive come applicazione di metodo
 //invece che come variabile e tupla    
@@ -54,6 +54,8 @@ n   : SQ W SQ
 //l   : e | e PI l
 
 //////////////LEXER TERMINALS
+
+FEXTNAME : ["@"] FF
 
 AR : "->" WS
 

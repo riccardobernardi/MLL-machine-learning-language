@@ -87,6 +87,7 @@ class MLL:
 
     def recon_class_ids(self, t:object) -> None:
         if isinstance(t, Token):
+            print(t+" "+t.type)
             if t.type == "ID":
                 if clean_tok(t.value) not in self.actual_imports_set and self.is_in_possible_imports(clean_tok(t.value)) != "":
                     self.actual_imports += self.is_in_possible_imports(clean_tok(t.value))
@@ -96,7 +97,7 @@ class MLL:
                 self.actual_imports += self.is_in_possible_imports(clean_tok("concatenate"))
                 self.actual_imports_set.add(clean_tok("concatenate"))
 
-            if (t.type == "ID" or t.type == "FF") and "@" in t.value:
+            if (t.type == "ID" or t.type == "FEXTNAME") and "@" in t.value:
                 locals().update(self.loc)
                 try:
                     self.import_from_glob[str(clean_tok(t.value)).replace("@","")] = locals()[
