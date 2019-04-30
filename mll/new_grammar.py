@@ -32,11 +32,14 @@ comp : ID EQ e
 e   : j
     | BL n COLON e (CO n COLON e )*  BR
     | ID
-    | ID LP (e)* RP
     | LP e* RP
     | NUMBER
     | n
     | e CO
+
+//tolto perchè sennò veniva piallato il @ext con le parentesi successive come applicazione di metodo
+//invece che come variabile e tupla    
+//| ID LP (e)* RP    
     
 //    | l
 

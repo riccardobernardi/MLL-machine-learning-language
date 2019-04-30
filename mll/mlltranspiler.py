@@ -508,10 +508,6 @@ class MLL:
 
         elif isinstance(t, list):
 
-            # for i in t:
-            #     if istok(i) and "@" in i.value:
-            #         list_types(t)
-
             for i in t:
                 if istok(i) and clean_tok(i.value) in self.param_values:
                     i.value = self.param_values[clean_tok(i.value)]
@@ -527,9 +523,6 @@ class MLL:
             t = self.format_commas(t)
 
             t = self.concat_array(t)
-
-            #######AUTO_IMPORTS attivare qui sotto
-            #self.recon_class_ids(t)
 
             return [self.transform(m) for m in t]
         else:
@@ -548,9 +541,6 @@ class MLL:
 
         pydot__tree_to_png(n, "tree-after.png")
 
-        #s = get_imports() + scrivi(n)
-
-        #######AUTO_IMPORTS attivare qui sotto
         s = get_base_imports() + self.actual_imports + get_utils_functions() + scrivi(n)
 
         return s
@@ -562,14 +552,10 @@ class MLL:
         return self.models[self.ordered_models[len(self.ordered_models)-1]]
 
     def execute(self):
-        #######AUTO_IMPORTS attivare qui sotto
         s = self.get_string()
         glob = {"models":self.models}
         glob.update(self.import_from_glob)
         exec(s,glob)
-
-        # print("###############import trovati:")
-        # print(self.actual_imports)
 
     def get_imports(self):
         print(self.actual_imports)
