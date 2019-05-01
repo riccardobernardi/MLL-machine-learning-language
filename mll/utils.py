@@ -1,8 +1,10 @@
 from keras import layers
 from lark import Tree, Token
 
-#stampa un albero a schermo, non scrive su stringhe
-def stampa(t : object) -> None:
+
+def stampa(t: object) -> None:
+    # stampa un albero a schermo, non scrive su stringhe
+
     if isinstance(t, Token):
         print(t.value,end='')
     elif isinstance(t, Tree):
@@ -14,8 +16,8 @@ def stampa(t : object) -> None:
         raise Exception("Non esiste questo caso nella fun stampa")
 
 
-# ritorna una stringa con l' albero dentro
 def scrivi(t : object) -> str:
+    # ritorna una stringa con l' albero dentro
     if isinstance(t, Token):
         return t
     elif isinstance(t, Tree):
@@ -64,18 +66,19 @@ def assign (x):
 def get_utils_functions() -> str:
     return utils_functions
 
+
 def get_imports() -> str:
     return imports
 
 
-def istok(i : object) -> Token :
+def istok(i : object) -> bool :
     if isinstance(i,Token):
         return True
     else:
         return False
 
 
-def clean_tok(value:str) -> str :
+def clean_tok(value: str) -> str :
     return value.replace(" ","").replace("\n","")
 
 

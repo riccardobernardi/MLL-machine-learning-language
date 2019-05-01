@@ -1,5 +1,6 @@
 from unittest import TestCase
 
+from lark import Tree
 from sklearn import model_selection
 
 from mll.mlltranspiler import MLL
@@ -8,6 +9,9 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 
 import warnings
+
+from mll.utils import list_types
+
 warnings.filterwarnings("ignore")
 
 import numpy as np
@@ -1361,3 +1365,202 @@ class TestMLL(TestCase):
         self.mll.start()
         print(self.mll.get_string())
         self.mll.execute()
+
+    def test_stampa(self):
+
+        ext = 384
+
+        f = lambda :(1,1)
+
+        #print(locals())
+
+        inc = """
+        conv2d := Conv2D
+
+        c2d38411s_ext := Conv2D @ext @f() with subsample=(1,1)
+
+        x : Input with shape = (32,32,3)
+
+        shortcut : assign x
+
+        incA1 :
+            | c2d38411s_ext
+            | assign shortcut
+            | concat
+
+        x : incA1 x
+
+        """
+
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        #print(self.mll.import_from_glob)
+        self.mll.execute()
+        self.mll.print_tree()
+
+    def test_image_tree_after(self):
+
+        ext = 384
+
+        f = lambda :(1,1)
+
+        #print(locals())
+
+        inc = """
+        conv2d := Conv2D
+
+        c2d38411s_ext := Conv2D @ext @f() with subsample=(1,1)
+
+        x : Input with shape = (32,32,3)
+
+        shortcut : assign x
+
+        incA1 :
+            | c2d38411s_ext
+            | assign shortcut
+            | concat
+
+        x : incA1 x
+
+        """
+
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        #print(self.mll.import_from_glob)
+        self.mll.execute()
+        self.mll.image_tree()
+
+    def test_image_tree_before(self):
+
+        ext = 384
+
+        f = lambda :(1,1)
+
+        #print(locals())
+
+        inc = """
+        conv2d := Conv2D
+
+        c2d38411s_ext := Conv2D @ext @f() with subsample=(1,1)
+
+        x : Input with shape = (32,32,3)
+
+        shortcut : assign x
+
+        incA1 :
+            | c2d38411s_ext
+            | assign shortcut
+            | concat
+
+        x : incA1 x
+
+        """
+
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        #print(self.mll.import_from_glob)
+        self.mll.execute()
+        print(self.mll.image_tree("before"))
+
+    def test_get_imports(self):
+
+        ext = 384
+
+        f = lambda :(1,1)
+
+        #print(locals())
+
+        inc = """
+        conv2d := Conv2D
+
+        c2d38411s_ext := Conv2D @ext @f() with subsample=(1,1)
+
+        x : Input with shape = (32,32,3)
+
+        shortcut : assign x
+
+        incA1 :
+            | c2d38411s_ext
+            | assign shortcut
+            | concat
+
+        x : incA1 x
+
+        """
+
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        #print(self.mll.import_from_glob)
+        self.mll.execute()
+        print(self.mll.get_imports())
+
+    def test_get_tree_before_and_list_types(self):
+
+        ext = 384
+
+        f = lambda :(1,1)
+
+        #print(locals())
+
+        inc = """
+        conv2d := Conv2D
+
+        c2d38411s_ext := Conv2D @ext @f() with subsample=(1,1)
+
+        x : Input with shape = (32,32,3)
+
+        shortcut : assign x
+
+        incA1 :
+            | c2d38411s_ext
+            | assign shortcut
+            | concat
+
+        x : incA1 x
+
+        """
+
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        #print(self.mll.import_from_glob)
+        self.mll.execute()
+        assert (isinstance(self.mll.get_tree_before(), Tree))
+        list_types(self.mll.get_tree_before().children)
+
+    def test_get_tree_after(self):
+
+        ext = 384
+
+        f = lambda :(1,1)
+
+        #print(locals())
+
+        inc = """
+        conv2d := Conv2D
+
+        c2d38411s_ext := Conv2D @ext @f() with subsample=(1,1)
+
+        x : Input with shape = (32,32,3)
+
+        shortcut : assign x
+
+        incA1 :
+            | c2d38411s_ext
+            | assign shortcut
+            | concat
+
+        x : incA1 x
+
+        """
+
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        #print(self.mll.import_from_glob)
+        self.mll.execute()
+        assert(isinstance(self.mll.get_tree_after(),Tree))

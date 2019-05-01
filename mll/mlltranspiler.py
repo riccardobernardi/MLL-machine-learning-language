@@ -5,7 +5,7 @@ from termcolor import cprint
 from mll.new_grammar import get_new_grammar
 from mll.utils import scrivi, istok, clean_tok, plus_in_array, clean_deep, clean_arr, escape, \
     get_keras_layers, uncomma, isTree, presentation, clean_tabs, get_sklearn_models, get_utils_functions, \
-    get_base_imports, get_mlxtend_models, remove_AT
+    get_base_imports, get_mlxtend_models, remove_AT, stampa
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -25,6 +25,8 @@ class MLL:
         self.actual_imports_set = set()
         self.model_type = {} #model_name : regressor|classifier
         self.import_from_glob = {}
+        self.after_tree = None
+        self.before_tree = None
 
         self.program = program
 
@@ -87,7 +89,6 @@ class MLL:
 
     def recon_class_ids(self, t:object) -> None:
         if isinstance(t, Token):
-            print(t+" "+t.type)
             if t.type == "ID":
                 if clean_tok(t.value) not in self.actual_imports_set and self.is_in_possible_imports(clean_tok(t.value)) != "":
                     self.actual_imports += self.is_in_possible_imports(clean_tok(t.value))
@@ -540,16 +541,12 @@ class MLL:
 
         parser = Lark(get_new_grammar(), start='mll')
 
-        tree = parser.parse(program)
+        self.before_tree = parser.parse(program)
 
-        # pydot__tree_to_png(tree, "tree-before.png")
+        self.after_tree = Tree(self.before_tree.data, self.transform(self.before_tree.children))
+        self.recon_class_ids(self.after_tree)
 
-        n = Tree(tree.data, self.transform(tree.children))
-        self.recon_class_ids(n)
-
-        # pydot__tree_to_png(n, "tree-after.png")
-
-        s = get_base_imports() + self.actual_imports + get_utils_functions() + scrivi(n)
+        s = get_base_imports() + self.actual_imports + get_utils_functions() + scrivi(self.after_tree)
 
         return s
 
@@ -567,3 +564,21 @@ class MLL:
 
     def get_imports(self):
         print(self.actual_imports)
+
+    def print_tree(self):
+        stampa(self.after_tree)
+
+    def image_tree(self, which="after"):
+        if which == "after":
+            pydot__tree_to_png(self.after_tree, "tree-after.png")
+        else:
+            if which == "before":
+                pydot__tree_to_png(self.after_tree, "tree-before.png")
+            else:
+                pydot__tree_to_png(self.after_tree, "tree-after.png")
+
+    def get_tree_before(self):
+        return self.before_tree
+
+    def get_tree_after(self):
+        return self.after_tree
