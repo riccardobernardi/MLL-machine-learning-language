@@ -315,6 +315,7 @@ class MLL:
         concatenated = False
         model_x = "x"
         skip = False
+        found_ar = None
 
         i = 0
         while True:
@@ -322,6 +323,28 @@ class MLL:
                 break
             else:
                 t = self.put_macros(t)
+
+                if istok(t[i]) and ("->" in clean_tok(t[i].value)):
+                    c = clean_tok(t[i-2].value)
+                    # models.insert(0, c.replace("->", ""))
+                    #names.insert(0, c.replace("->", ""))
+
+                    t.pop(i - 1)
+                    i-=1
+                    t.pop(i - 1)
+                    i -= 1
+                    t.pop(i)
+                    t.pop(i)
+
+                    #t[i-1] = Token("ASSIGN",c+"=(")
+
+                    t.insert(i+1,Token("P","("))
+
+
+                    #skip = True
+                    found_ar = c
+
+
 
                 if istok(t[i]) and clean_tok(t[i].value) == "assign":
                     s = clean_tok(t[i+2].children[0].value)
@@ -341,7 +364,12 @@ class MLL:
 
                     if len(to_concat_and_free) >1:
 
-                        t.insert(i,Token("CONCAT",models[0] + " = concatenate(["))
+                        if found_ar!=None:
+                            t.insert(i, Token("CONCAT", found_ar + " = concatenate(["))
+                        else:
+                            t.insert(i,Token("CONCAT",models[0] + " = concatenate(["))
+                            found_ar = None
+
                         model_x = models[0]
 
                         s = ""
