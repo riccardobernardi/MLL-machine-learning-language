@@ -504,10 +504,8 @@ class TestMLL(TestCase):
 
         print(net.summary())
 
-
     def test_mll_empty(self):
         MLL("")
-
 
     def test_inception_commented(self):
         inception = """
@@ -790,7 +788,6 @@ class TestMLL(TestCase):
 
         scores = model_selection.cross_val_score(sclf, train, test, cv=3, scoring='accuracy')
         print(scores.mean(), scores.std())
-
 
     def test_inception_mod_leave_one_out(self):
         inception_uncomm = """
