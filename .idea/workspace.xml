@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="" />
+    <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -574,14 +576,12 @@
       <workItem from="1556698870853" duration="1138000" />
       <workItem from="1556725670746" duration="4100000" />
       <workItem from="1556785053899" duration="279000" />
-      <workItem from="1556806860702" duration="306000" />
+      <workItem from="1556806860702" duration="307000" />
+      <workItem from="1556818478509" duration="403000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat - 2019.05.01 at 18h 51m 35s.xml">
-      <configuration name="Unittests for mll.test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_mll_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat - 2019.05.01 at 18h 52m 13s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat" configurationId="tests" />
     </history-entry>
@@ -609,9 +609,12 @@
     <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.02 at 16h 27m 03s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.02 at 19h 56m 24s.xml">
+      <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="299210000" />
+    <option name="totallyTimeSpent" value="299614000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -625,12 +628,12 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.13893376" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.14054927" />
       <window_info id="Structure" order="1" sideWeight="0.5068493" side_tool="true" weight="0.17285945" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
-      <window_info anchor="bottom" x="0" y="0" width="1280" height="800" id="Run" order="2" type="WINDOWED" visible="true" weight="0.60958904" />
+      <window_info anchor="bottom" x="0" y="0" width="1280" height="800" id="Run" maximized="true" order="2" type="WINDOWED" weight="0.60958904" />
       <window_info anchor="bottom" x="0" y="45" width="1280" height="362" id="Debug" order="3" weight="0.5205479" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -696,7 +699,7 @@
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_test_MLL_TestMLL_test_auto_import.coverage" NAME="Unittests for test_MLL.TestMLL.test_auto_import Coverage Results" MODIFIED="1556383171020" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mll" />
     <SUITE FILE_PATH="coverage/MLL_LARK$main.coverage" NAME="main Coverage Results" MODIFIED="1555745014260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_test_MLL_TestMLL_test_imports.coverage" NAME="Unittests for test_MLL.TestMLL.test_imports Coverage Results" MODIFIED="1556109189929" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL.coverage" NAME="Unittests for mll.test_MLL.TestMLL Coverage Results" MODIFIED="1556807141206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL.coverage" NAME="Unittests for mll.test_MLL.TestMLL Coverage Results" MODIFIED="1556819659583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$test_inception_out.coverage" NAME="test_inception_out Coverage Results" MODIFIED="1555769751286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL_test_external_data_simpler.coverage" NAME="Unittests for mll.test_MLL.TestMLL.test_external_data_simpler Coverage Results" MODIFIED="1556639013881" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL_test_func_app.coverage" NAME="Unittests for mll.test_MLL.TestMLL.test_func_app Coverage Results" MODIFIED="1556658401910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
