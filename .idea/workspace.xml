@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mll/test_MLL.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/test_MLL.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mll/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="255" column="18" selection-start-line="255" selection-start-column="18" selection-end-line="255" selection-end-column="18" />
+            <state relative-caret-position="3945">
+              <caret line="264" column="83" selection-start-line="264" selection-start-column="83" selection-end-line="264" selection-end-column="83" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -72,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mll/test_MLL.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4800">
-              <caret line="790" selection-start-line="790" selection-end-line="790" />
+            <state relative-caret-position="258">
+              <caret line="442" column="36" lean-forward="true" selection-start-line="442" selection-start-column="36" selection-end-line="442" selection-end-column="36" />
               <folding>
                 <element signature="e#366#580#0" />
                 <element signature="e#651#2957#0" />
@@ -87,9 +88,6 @@
                 <element signature="e#5474#9972#0" />
                 <element signature="e#10144#10847#0" />
                 <element signature="e#10150#10729#0" />
-                <element signature="e#10893#11367#0" />
-                <element signature="e#10893#10992#0" />
-                <element signature="e#11065#11249#0" />
                 <element signature="e#11424#12201#0" />
                 <element signature="e#11442#12072#0" />
                 <element signature="e#12253#12896#0" />
@@ -98,10 +96,19 @@
                 <element signature="e#12958#13394#0" />
                 <element signature="e#13563#16133#0" />
                 <element signature="e#13582#16002#0" />
-                <element signature="e#16168#16991#0" />
-                <element signature="e#16179#16628#0" />
                 <element signature="e#17033#18798#0" />
                 <element signature="e#17046#18014#0" />
+                <element signature="e#33232#34666#0" />
+                <element signature="e#34722#36228#0" />
+                <element signature="e#36302#37844#0" />
+                <element signature="e#37901#40581#0" />
+                <element signature="e#40639#45253#0" />
+                <element signature="e#45317#49932#0" />
+                <element signature="e#49977#54753#0" />
+                <element signature="e#54806#55265#0" />
+                <element signature="e#55304#55845#0" />
+                <element signature="e#55886#56041#0" />
+                <element signature="e#56079#56650#0" />
               </folding>
             </state>
           </provider>
@@ -385,22 +392,6 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for mll.test_MLL.TestMLL.test_external_data" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="MLL-LARK" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_pattern" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;mll.test_MLL.TestMLL.test_external_data&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="Unittests for mll.test_MLL.TestMLL.test_external_data_simpler" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="MLL-LARK" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -449,6 +440,21 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Unittests for test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="MLL-LARK" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mll" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.inception-resnet-v2" />
       <item itemvalue="Python.main" />
@@ -456,18 +462,18 @@
       <item itemvalue="Python.test_liste" />
       <item itemvalue="Python.test_net" />
       <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL" />
-      <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL.test_external_data" />
       <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL.test_external_data_simpler" />
       <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL.test_func_app" />
       <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat" />
+      <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL" />
+        <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat" />
         <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat" />
         <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL.test_func_app" />
         <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL.test_external_data_simpler" />
-        <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL.test_external_data" />
       </list>
     </recent_temporary>
   </component>
@@ -578,22 +584,12 @@
       <workItem from="1556785053899" duration="279000" />
       <workItem from="1556806860702" duration="307000" />
       <workItem from="1556818478509" duration="403000" />
+      <workItem from="1556871526081" duration="1570000" />
+      <workItem from="1556875927154" duration="570000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat - 2019.05.01 at 18h 52m 13s.xml">
-      <configuration name="Unittests for mll.test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat - 2019.05.01 at 18h 53m 13s.xml">
-      <configuration name="Unittests for mll.test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat - 2019.05.01 at 18h 53m 31s.xml">
-      <configuration name="Unittests for mll.test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat - 2019.05.01 at 18h 54m 16s.xml">
-      <configuration name="Unittests for mll.test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_mll_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat - 2019.05.01 at 18h 55m 31s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat" configurationId="tests" />
     </history-entry>
@@ -612,9 +608,21 @@
     <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.02 at 19h 56m 24s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.03 at 10h 32m 32s.xml">
+      <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat - 2019.05.03 at 11h 03m 33s.xml">
+      <configuration name="Unittests for test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat - 2019.05.03 at 11h 04m 14s.xml">
+      <configuration name="Unittests for test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.03 at 11h 33m 39s.xml">
+      <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="299614000" />
+    <option name="totallyTimeSpent" value="301754000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -627,20 +635,21 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.14054927" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.14378029" />
       <window_info id="Structure" order="1" sideWeight="0.5068493" side_tool="true" weight="0.17285945" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
-      <window_info anchor="bottom" x="0" y="0" width="1280" height="800" id="Run" maximized="true" order="2" type="WINDOWED" weight="0.60958904" />
+      <window_info anchor="bottom" x="0" y="22" width="1280" height="778" id="Run" maximized="true" order="2" type="WINDOWED" weight="0.60958904" />
       <window_info anchor="bottom" x="0" y="45" width="1280" height="362" id="Debug" order="3" weight="0.5205479" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32876712" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Tool Output" order="8" weight="0.32876712" />
-      <window_info active="true" anchor="bottom" x="0" y="22" width="1280" height="778" id="Terminal" maximized="true" order="9" sideWeight="0.49919224" visible="true" weight="0.23150685" />
+      <window_info anchor="bottom" x="0" y="22" width="1280" height="778" id="Terminal" maximized="true" order="9" sideWeight="0.49919224" visible="true" weight="0.23150685" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.38356164" />
       <window_info anchor="bottom" id="ANTLR Preview" order="11" weight="0.32876712" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32876712" />
@@ -699,7 +708,7 @@
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_test_MLL_TestMLL_test_auto_import.coverage" NAME="Unittests for test_MLL.TestMLL.test_auto_import Coverage Results" MODIFIED="1556383171020" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mll" />
     <SUITE FILE_PATH="coverage/MLL_LARK$main.coverage" NAME="main Coverage Results" MODIFIED="1555745014260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_test_MLL_TestMLL_test_imports.coverage" NAME="Unittests for test_MLL.TestMLL.test_imports Coverage Results" MODIFIED="1556109189929" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL.coverage" NAME="Unittests for mll.test_MLL.TestMLL Coverage Results" MODIFIED="1556819659583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL.coverage" NAME="Unittests for mll.test_MLL.TestMLL Coverage Results" MODIFIED="1556884603379" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$test_inception_out.coverage" NAME="test_inception_out Coverage Results" MODIFIED="1555769751286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL_test_external_data_simpler.coverage" NAME="Unittests for mll.test_MLL.TestMLL.test_external_data_simpler Coverage Results" MODIFIED="1556639013881" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL_test_func_app.coverage" NAME="Unittests for mll.test_MLL.TestMLL.test_func_app Coverage Results" MODIFIED="1556658401910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -709,6 +718,7 @@
     <SUITE FILE_PATH="coverage/MLL_LARK$test_liste.coverage" NAME="test_liste Coverage Results" MODIFIED="1555182238720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$inception_resnet_v2.coverage" NAME="inception-resnet-v2 Coverage Results" MODIFIED="1555505383561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat.coverage" NAME="Unittests for mll.test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat Coverage Results" MODIFIED="1556729776780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat.coverage" NAME="Unittests for test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat Coverage Results" MODIFIED="1556874249659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mll" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL_test_external_data.coverage" NAME="Unittests for mll.test_MLL.TestMLL.test_external_data Coverage Results" MODIFIED="1556638167321" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="debuggerHistoryManager">
@@ -939,8 +949,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mll/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="255" column="18" selection-start-line="255" selection-start-column="18" selection-end-line="255" selection-end-column="18" />
+        <state relative-caret-position="3945">
+          <caret line="264" column="83" selection-start-line="264" selection-start-column="83" selection-end-line="264" selection-end-column="83" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
@@ -985,8 +995,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mll/test_MLL.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4800">
-          <caret line="790" selection-start-line="790" selection-end-line="790" />
+        <state relative-caret-position="258">
+          <caret line="442" column="36" lean-forward="true" selection-start-line="442" selection-start-column="36" selection-end-line="442" selection-end-column="36" />
           <folding>
             <element signature="e#366#580#0" />
             <element signature="e#651#2957#0" />
@@ -997,9 +1007,6 @@
             <element signature="e#5474#9972#0" />
             <element signature="e#10144#10847#0" />
             <element signature="e#10150#10729#0" />
-            <element signature="e#10893#11367#0" />
-            <element signature="e#10893#10992#0" />
-            <element signature="e#11065#11249#0" />
             <element signature="e#11424#12201#0" />
             <element signature="e#11442#12072#0" />
             <element signature="e#12253#12896#0" />
@@ -1008,10 +1015,19 @@
             <element signature="e#12958#13394#0" />
             <element signature="e#13563#16133#0" />
             <element signature="e#13582#16002#0" />
-            <element signature="e#16168#16991#0" />
-            <element signature="e#16179#16628#0" />
             <element signature="e#17033#18798#0" />
             <element signature="e#17046#18014#0" />
+            <element signature="e#33232#34666#0" />
+            <element signature="e#34722#36228#0" />
+            <element signature="e#36302#37844#0" />
+            <element signature="e#37901#40581#0" />
+            <element signature="e#40639#45253#0" />
+            <element signature="e#45317#49932#0" />
+            <element signature="e#49977#54753#0" />
+            <element signature="e#54806#55265#0" />
+            <element signature="e#55304#55845#0" />
+            <element signature="e#55886#56041#0" />
+            <element signature="e#56079#56650#0" />
           </folding>
         </state>
       </provider>
