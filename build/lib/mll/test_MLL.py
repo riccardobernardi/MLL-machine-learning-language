@@ -504,10 +504,8 @@ class TestMLL(TestCase):
 
         print(net.summary())
 
-
     def test_mll_empty(self):
         MLL("")
-
 
     def test_inception_commented(self):
         inception = """
@@ -790,7 +788,6 @@ class TestMLL(TestCase):
 
         scores = model_selection.cross_val_score(sclf, train, test, cv=3, scoring='accuracy')
         print(scores.mean(), scores.std())
-
 
     def test_inception_mod_leave_one_out(self):
         inception_uncomm = """
@@ -1297,7 +1294,6 @@ class TestMLL(TestCase):
         print(self.mll.get_string())
         self.mll.execute()
 
-
     def test_external_data_simpler(self):
 
         ext = 384
@@ -1564,3 +1560,34 @@ class TestMLL(TestCase):
         #print(self.mll.import_from_glob)
         self.mll.execute()
         assert(isinstance(self.mll.get_tree_after(),Tree))
+
+    def test_inception_mod_double_fork_without_last_concat(self):
+        inception_uncomm = """
+        conv2d := Conv2D
+        seq := Sequential
+        re := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d32 := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d48 := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d64 := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+        m2d := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        c2d96 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d192 := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+        c2d384 := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
+
+        stem : 
+            | right -> | m2d | c2d96 | concat
+            | left -> | m2d | c2d96 | concat
+
+        #le concat nested senza parametri producono le lettere prima della freccia
+        #l ultima concat con paramteri produce x
+
+        """
+        self.mll = MLL(inception_uncomm)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
