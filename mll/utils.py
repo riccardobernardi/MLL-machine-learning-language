@@ -24,8 +24,16 @@ def scrivi(t : object) -> str:
         return scrivi(t.children)
     elif isinstance(t, type([])):
         s = ""
+        m = ""
+        com = True
         for i in t:
-            s += scrivi(i)
+            if istok(i) and com and "#" in i.value:
+                m = " "
+                com = False
+            else:
+                if istok(i):
+                    com = False
+            s += scrivi(i) + m
         return s
     else:
         raise Exception("Non esiste questo caso nella fun scrivi")
@@ -281,7 +289,7 @@ def list_types(t:list) -> None:
             print(str(n) + " " + str(type(i)))
 
 
-def clean_tabs(t:list) -> list:
+def clean_tabs(t:list) -> Token:
     return Token("COMMENT",scrivi(t).replace("\t","").replace("\n","")+"\n")
 
 

@@ -598,12 +598,12 @@ class MLL:
 
     def image_tree(self, which="after"):
         if which == "after":
-            pydot__tree_to_png(self.after_tree, "tree-after.png")
+            pydot__tree_to_png(self.after_tree, "../tree-after.png")
         else:
             if which == "before":
-                pydot__tree_to_png(self.after_tree, "tree-before.png")
+                pydot__tree_to_png(self.after_tree, "../tree-before.png")
             else:
-                pydot__tree_to_png(self.after_tree, "tree-after.png")
+                pydot__tree_to_png(self.after_tree, "../tree-after.png")
 
     def get_tree_before(self):
         return self.before_tree

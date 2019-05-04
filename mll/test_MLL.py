@@ -1293,6 +1293,7 @@ class TestMLL(TestCase):
         self.mll.start()
         print(self.mll.get_string())
         self.mll.execute()
+        #self.mll.image_tree("before")
 
     def test_external_data_simpler(self):
 
@@ -1571,13 +1572,8 @@ class TestMLL(TestCase):
         flatten := Flatten
         soft := Activation 'softmax'
 
-        c2d32 := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
-        c2d48 := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
-        c2d64 := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
         m2d := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
         c2d96 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
-        c2d192 := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
-        c2d384 := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
 
         stem : 
             | right -> | m2d | c2d96 | concat
@@ -1591,3 +1587,85 @@ class TestMLL(TestCase):
         self.mll.start()
         print(self.mll.get_string())
         self.mll.execute()
+
+    def test_image_for_thesis(self):
+        ext = 384
+
+        inc = """
+        conv2d := Conv2D
+        seq := Sequential
+        relu := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d3233v := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        c2d3233s := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        
+        c2d6433s := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6411s := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6417s := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        c2d6471s := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+        
+        m2d3311v := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        
+        c2d9633v := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+        
+        c2d19233s := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
+
+        # Input layer
+
+        x : Input with shape = (32,32,3)
+
+        # Layer stem di entrata dell input
+
+        stem1 :
+            | c2d3233v + c2d3233v + c2d6433s
+
+        x : stem1 x
+
+        stem2 :
+            | m2d3311v
+            | c2d9633v
+            | concat
+            | c2d6411s + c2d9633v
+            | c2d6411s + c2d6471s + c2d6417s + c2d9633v
+            | concat
+
+        x : stem2 x
+
+        """
+
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+        self.mll.image_tree("before")
+
+    def test_inception_mod_double_fork_without_last_concat_for_thesis(self):
+        inception_uncomm = """
+        conv2d := Conv2D
+        seq := Sequential
+        re := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        m2d := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        c2d96 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
+
+        stem : 
+            | right -> | m2d | c2d96 | concat
+            | left -> | m2d | c2d96 | concat
+
+        #le concat nested senza parametri producono le lettere prima della freccia
+        #l ultima concat con paramteri produce x
+
+        """
+        self.mll = MLL(inception_uncomm)
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+        self.mll.image_tree("before")
