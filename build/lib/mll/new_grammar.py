@@ -29,8 +29,7 @@ comp : ID EQ e
         | ID EQ LSP e [CO] (CO e)* RSP
         | ID EQ ID DO ID LSP e [COLON] (COLON e)* RSP
 
-e   : j
-    | BL n COLON e (CO n COLON e )*  BR
+e   : BL n COLON e (CO n COLON e )*  BR
     | ID
     | LP e* RP
     | NUMBER
@@ -47,7 +46,7 @@ fapp.2 : FEXTNAME LP e* RP
     
 //    | l
 
-j.2 : WITH e+
+// j.2 : WITH e+
 
 n   : SQ W SQ
 
