@@ -19,11 +19,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mll/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
+            <state relative-caret-position="435">
               <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -31,38 +28,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="311" column="31" lean-forward="true" selection-start-line="311" selection-start-column="31" selection-end-line="311" selection-end-column="31" />
+            <state relative-caret-position="4515">
+              <caret line="311" column="31" selection-start-line="311" selection-start-column="31" selection-end-line="311" selection-end-column="31" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
-                <element signature="e#541#1089#0" />
-                <element signature="e#1120#1171#0" />
-                <element signature="e#1236#1716#0" />
-                <element signature="e#1770#2514#0" />
-                <element signature="e#2575#2836#0" />
-                <element signature="e#2895#4362#0" />
-                <element signature="e#4418#5159#0" />
-                <element signature="e#5220#6617#0" />
-                <element signature="e#6670#7599#0" />
-                <element signature="e#7653#8533#0" />
-                <element signature="e#8589#9089#0" />
-                <element signature="e#9142#9544#0" />
-                <element signature="e#15966#18992#0" />
-                <element signature="e#19048#19409#0" />
-                <element signature="e#19452#19470#0" />
-                <element signature="e#19516#19583#0" />
-                <element signature="e#19616#19739#0" />
-                <element signature="e#19776#19802#0" />
-                <element signature="e#19838#19861#0" />
-                <element signature="e#19912#20214#0" />
-                <element signature="e#20255#20278#0" />
-                <element signature="e#20318#20340#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
@@ -71,56 +46,51 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mll/test_MLL.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1380">
-              <caret line="857" column="9" selection-start-line="857" selection-start-column="9" selection-end-line="857" selection-end-column="9" />
+            <state relative-caret-position="930">
+              <caret line="827" column="45" selection-start-line="827" selection-start-column="45" selection-end-line="827" selection-end-column="45" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
-                <element signature="e#366#580#0" />
-                <element signature="e#651#2957#0" />
-                <element signature="e#2997#5401#0" />
-                <element signature="e#3003#5283#0" />
-                <element signature="e#5468#10090#0" />
-                <element signature="e#5474#9972#0" />
-                <element signature="e#10144#10847#0" />
-                <element signature="e#10150#10729#0" />
-                <element signature="e#10893#11367#0" />
-                <element signature="e#11424#12201#0" />
-                <element signature="e#11442#12072#0" />
-                <element signature="e#12253#12896#0" />
-                <element signature="e#12271#12767#0" />
-                <element signature="e#12940#13523#0" />
-                <element signature="e#12958#13394#0" />
-                <element signature="e#13563#16133#0" />
-                <element signature="e#13582#16002#0" />
-                <element signature="e#16168#16991#0" />
-                <element signature="e#17033#18798#0" />
-                <element signature="e#18838#18845#0" />
-                <element signature="e#18895#21580#0" />
-                <element signature="e#21618#24106#0" />
-                <element signature="e#24156#28249#0" />
-                <element signature="e#28291#32308#0" />
-                <element signature="e#32358#33174#0" />
-                <element signature="e#33232#34666#0" />
-                <element signature="e#36302#37844#0" />
-                <element signature="e#37901#40581#0" />
-                <element signature="e#40639#45253#0" />
-                <element signature="e#45317#49932#0" />
-                <element signature="e#49977#54791#0" />
-                <element signature="e#54844#55303#0" />
-                <element signature="e#55342#55883#0" />
-                <element signature="e#55924#56079#0" />
-                <element signature="e#56117#56688#0" />
-                <element signature="e#56736#57307#0" />
-                <element signature="e#57356#57942#0" />
-                <element signature="e#57985#58564#0" />
-                <element signature="e#58626#59285#0" />
-                <element signature="e#59331#59931#0" />
-                <element signature="e#60007#60817#0" />
-                <element signature="e#60864#62767#0" />
-                <element signature="e#62854#63702#0" />
+                <element signature="e#384#598#0" />
+                <element signature="e#669#2975#0" />
+                <element signature="e#3015#5419#0" />
+                <element signature="e#5486#10108#0" />
+                <element signature="e#10162#10865#0" />
+                <element signature="e#10911#11385#0" />
+                <element signature="e#11442#12219#0" />
+                <element signature="e#12271#12914#0" />
+                <element signature="e#12958#13541#0" />
+                <element signature="e#13581#16151#0" />
+                <element signature="e#16186#17009#0" />
+                <element signature="e#17051#18816#0" />
+                <element signature="e#18856#18863#0" />
+                <element signature="e#18913#21598#0" />
+                <element signature="e#21636#24124#0" />
+                <element signature="e#24174#28267#0" />
+                <element signature="e#28309#32326#0" />
+                <element signature="e#32376#33192#0" />
+                <element signature="e#33250#34684#0" />
+                <element signature="e#34740#36321#0" />
+                <element signature="e#36395#37937#0" />
+                <element signature="e#37994#40674#0" />
+                <element signature="e#40732#45346#0" />
+                <element signature="e#45410#50025#0" />
+                <element signature="e#50070#54884#0" />
+                <element signature="e#54937#55396#0" />
+                <element signature="e#55435#55976#0" />
+                <element signature="e#56017#56172#0" />
+                <element signature="e#56210#56781#0" />
+                <element signature="e#56829#57400#0" />
+                <element signature="e#57449#58035#0" />
+                <element signature="e#58078#58657#0" />
+                <element signature="e#58719#59378#0" />
+                <element signature="e#59424#60024#0" />
+                <element signature="e#60100#60910#0" />
+                <element signature="e#60957#62860#0" />
+                <element signature="e#62947#63795#0" />
+                <element signature="e#63850#64052#0" />
               </folding>
             </state>
           </provider>
@@ -600,13 +570,11 @@
       <workItem from="1556969000779" duration="3275000" />
       <workItem from="1556978454990" duration="1056000" />
       <workItem from="1557048213306" duration="4795000" />
+      <workItem from="1557071949961" duration="516000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_MLL_TestMLL_test_keras_layer_import_lower - 2019.05.05 at 12h 39m 51s.xml">
-      <configuration name="Unittests for test_MLL.TestMLL.test_keras_layer_import_lower" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_test_MLL_TestMLL_test_keras_layer_import_lower - 2019.05.05 at 12h 40m 12s.xml">
       <configuration name="Unittests for test_MLL.TestMLL.test_keras_layer_import_lower" configurationId="tests" />
     </history-entry>
@@ -634,9 +602,12 @@
     <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.05 at 13h 09m 37s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.05 at 18h 05m 10s.xml">
+      <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="312435000" />
+    <option name="totallyTimeSpent" value="312951000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -649,13 +620,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.1558966" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.15831988" />
       <window_info id="Structure" order="1" sideWeight="0.5068493" side_tool="true" weight="0.17285945" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
-      <window_info anchor="bottom" x="0" y="22" width="1280" height="778" id="Run" maximized="true" order="2" type="WINDOWED" weight="0.60958904" />
+      <window_info anchor="bottom" x="0" y="22" width="1280" height="778" id="Run" maximized="true" order="2" type="WINDOWED" visible="true" weight="0.60958904" />
       <window_info anchor="bottom" x="0" y="45" width="1280" height="362" id="Debug" order="3" weight="0.5205479" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -723,7 +695,7 @@
     <SUITE FILE_PATH="coverage/MLL_LARK$main.coverage" NAME="main Coverage Results" MODIFIED="1555745014260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_test_MLL_TestMLL_test_imports.coverage" NAME="Unittests for test_MLL.TestMLL.test_imports Coverage Results" MODIFIED="1556109189929" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_test_MLL_TestMLL_test_external_data.coverage" NAME="Unittests for test_MLL.TestMLL.test_external_data Coverage Results" MODIFIED="1556975614117" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mll" />
-    <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL.coverage" NAME="Unittests for mll.test_MLL.TestMLL Coverage Results" MODIFIED="1557054494410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL.coverage" NAME="Unittests for mll.test_MLL.TestMLL Coverage Results" MODIFIED="1557072318058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$test_inception_out.coverage" NAME="test_inception_out Coverage Results" MODIFIED="1555769751286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat_for_thesis.coverage" NAME="Unittests for test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat_for_thesis Coverage Results" MODIFIED="1557052134564" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mll" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL_test_external_data_simpler.coverage" NAME="Unittests for mll.test_MLL.TestMLL.test_external_data_simpler Coverage Results" MODIFIED="1556639013881" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -972,95 +944,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mll/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
+        <state relative-caret-position="435">
           <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="311" column="31" lean-forward="true" selection-start-line="311" selection-start-column="31" selection-end-line="311" selection-end-column="31" />
+        <state relative-caret-position="4515">
+          <caret line="311" column="31" selection-start-line="311" selection-start-column="31" selection-end-line="311" selection-end-column="31" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
-            <element signature="e#541#1089#0" />
-            <element signature="e#1120#1171#0" />
-            <element signature="e#1236#1716#0" />
-            <element signature="e#1770#2514#0" />
-            <element signature="e#2575#2836#0" />
-            <element signature="e#2895#4362#0" />
-            <element signature="e#4418#5159#0" />
-            <element signature="e#5220#6617#0" />
-            <element signature="e#6670#7599#0" />
-            <element signature="e#7653#8533#0" />
-            <element signature="e#8589#9089#0" />
-            <element signature="e#9142#9544#0" />
-            <element signature="e#15966#18992#0" />
-            <element signature="e#19048#19409#0" />
-            <element signature="e#19452#19470#0" />
-            <element signature="e#19516#19583#0" />
-            <element signature="e#19616#19739#0" />
-            <element signature="e#19776#19802#0" />
-            <element signature="e#19838#19861#0" />
-            <element signature="e#19912#20214#0" />
-            <element signature="e#20255#20278#0" />
-            <element signature="e#20318#20340#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mll/test_MLL.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="857" column="9" selection-start-line="857" selection-start-column="9" selection-end-line="857" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-            <element signature="e#366#580#0" />
-            <element signature="e#651#2957#0" />
-            <element signature="e#2997#5401#0" />
-            <element signature="e#3003#5283#0" />
-            <element signature="e#5468#10090#0" />
-            <element signature="e#5474#9972#0" />
-            <element signature="e#10144#10847#0" />
-            <element signature="e#10150#10729#0" />
-            <element signature="e#10893#11367#0" />
-            <element signature="e#11424#12201#0" />
-            <element signature="e#11442#12072#0" />
-            <element signature="e#12253#12896#0" />
-            <element signature="e#12271#12767#0" />
-            <element signature="e#12940#13523#0" />
-            <element signature="e#12958#13394#0" />
-            <element signature="e#13563#16133#0" />
-            <element signature="e#13582#16002#0" />
-            <element signature="e#16168#16991#0" />
-            <element signature="e#17033#18798#0" />
-            <element signature="e#18838#18845#0" />
-            <element signature="e#18895#21580#0" />
-            <element signature="e#21618#24106#0" />
-            <element signature="e#24156#28249#0" />
-            <element signature="e#28291#32308#0" />
-            <element signature="e#32358#33174#0" />
-            <element signature="e#33232#34666#0" />
-            <element signature="e#36302#37844#0" />
-            <element signature="e#37901#40581#0" />
-            <element signature="e#40639#45253#0" />
-            <element signature="e#45317#49932#0" />
-            <element signature="e#49977#54791#0" />
-            <element signature="e#54844#55303#0" />
-            <element signature="e#55342#55883#0" />
-            <element signature="e#55924#56079#0" />
-            <element signature="e#56117#56688#0" />
-            <element signature="e#56736#57307#0" />
-            <element signature="e#57356#57942#0" />
-            <element signature="e#57985#58564#0" />
-            <element signature="e#58626#59285#0" />
-            <element signature="e#59331#59931#0" />
-            <element signature="e#60007#60817#0" />
-            <element signature="e#60864#62767#0" />
-            <element signature="e#62854#63702#0" />
           </folding>
         </state>
       </provider>
@@ -1069,6 +963,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mll/test_MLL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="930">
+          <caret line="827" column="45" selection-start-line="827" selection-start-column="45" selection-end-line="827" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#384#598#0" />
+            <element signature="e#669#2975#0" />
+            <element signature="e#3015#5419#0" />
+            <element signature="e#5486#10108#0" />
+            <element signature="e#10162#10865#0" />
+            <element signature="e#10911#11385#0" />
+            <element signature="e#11442#12219#0" />
+            <element signature="e#12271#12914#0" />
+            <element signature="e#12958#13541#0" />
+            <element signature="e#13581#16151#0" />
+            <element signature="e#16186#17009#0" />
+            <element signature="e#17051#18816#0" />
+            <element signature="e#18856#18863#0" />
+            <element signature="e#18913#21598#0" />
+            <element signature="e#21636#24124#0" />
+            <element signature="e#24174#28267#0" />
+            <element signature="e#28309#32326#0" />
+            <element signature="e#32376#33192#0" />
+            <element signature="e#33250#34684#0" />
+            <element signature="e#34740#36321#0" />
+            <element signature="e#36395#37937#0" />
+            <element signature="e#37994#40674#0" />
+            <element signature="e#40732#45346#0" />
+            <element signature="e#45410#50025#0" />
+            <element signature="e#50070#54884#0" />
+            <element signature="e#54937#55396#0" />
+            <element signature="e#55435#55976#0" />
+            <element signature="e#56017#56172#0" />
+            <element signature="e#56210#56781#0" />
+            <element signature="e#56829#57400#0" />
+            <element signature="e#57449#58035#0" />
+            <element signature="e#58078#58657#0" />
+            <element signature="e#58719#59378#0" />
+            <element signature="e#59424#60024#0" />
+            <element signature="e#60100#60910#0" />
+            <element signature="e#60957#62860#0" />
+            <element signature="e#62947#63795#0" />
+            <element signature="e#63850#64052#0" />
+          </folding>
         </state>
       </provider>
     </entry>
