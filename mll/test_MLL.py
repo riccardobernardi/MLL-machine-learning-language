@@ -843,14 +843,19 @@ class TestMLL(TestCase):
         c2d192 := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
         c2d384 := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
 
-        stem : InputLayer (100, 100, 3) 
-
-        stem : stem + c2d32 + c2d32 + c2d64
+        x : InputLayer (100, 100, 3) 
 
         stem : 
+            | x + c2d32 + c2d32 + c2d64
+            
+        x : stem x
+
+        stem2 : 
             | right -> | m2d | c2d96 | concat
             | left -> | m2d | c2d96 | concat
             | concat right left
+            
+        x : stem2 x
 
         #le concat nested senza parametri producono le lettere prima della freccia
         #l ultima concat con paramteri produce x
