@@ -10,7 +10,7 @@ from sklearn.preprocessing import LabelEncoder
 
 import warnings
 
-from mll.utils import list_types
+from mll.utils import list_types, get_keras_layers
 
 warnings.filterwarnings("ignore")
 
@@ -1669,3 +1669,14 @@ class TestMLL(TestCase):
         print(self.mll.get_string())
         self.mll.execute()
         self.mll.image_tree("before")
+
+    def test_keras_layer_import_lower(self):
+        print("sum" in keras.backend.__dict__.keys())
+
+        a = []
+
+        for i in keras.backend.__dict__.keys():
+            if str(i).islower() and "__" not in i:
+                a+=[i]
+
+        print(a)

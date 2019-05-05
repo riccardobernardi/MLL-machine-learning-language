@@ -1,3 +1,4 @@
+import keras
 from lark import Lark, Token
 from lark.tree import Tree, pydot__tree_to_png
 from termcolor import cprint
@@ -308,8 +309,17 @@ class MLL:
         first = True
         t.append(Token("PIPE","|"))
 
+        keras_meth = ["concat"]
+        for j in keras.layers.__dict__.keys():
+            if str(j).islower():
+                keras_meth += [j]
+
+        for j in keras.backend.__dict__.keys():
+            if str(j).islower():
+                keras_meth += [j]
+
         for i in t:
-            if istok(i) and clean_tok(i.value)=="concat":
+            if istok(i) and clean_tok(i.value) in keras_meth:
                 concat_in_array = True
 
         concatenated = False
@@ -352,7 +362,11 @@ class MLL:
                     t.insert(i+2,Token("ASSIGN","models['"+s+"']"))
                     skip = True
 
-                if istok(t[i]) and clean_tok(t[i].value) == "concat":
+                if istok(t[i]) and clean_tok(t[i].value) in keras_meth:
+
+                    value = str(clean_tok(t[i].value))
+                    if value == "concat":
+                        value="concatenate"
 
                     names.insert(0,models[0])
                     models.pop(0)
@@ -365,9 +379,9 @@ class MLL:
                     if len(to_concat_and_free) >1:
 
                         if found_ar!=None:
-                            t.insert(i, Token("CONCAT", found_ar + " = concatenate(["))
+                            t.insert(i, Token("CONCAT", found_ar + " =" + value + "(["))
                         else:
-                            t.insert(i,Token("CONCAT",models[0] + " = concatenate(["))
+                            t.insert(i,Token("CONCAT",models[0] + " =" + value + "(["))
                             found_ar = None
 
                         model_x = models[0]

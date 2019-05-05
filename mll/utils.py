@@ -1,4 +1,4 @@
-from keras import layers
+from keras import layers, backend
 from lark import Tree, Token
 
 
@@ -27,6 +27,8 @@ def scrivi(t : object) -> str:
         m = ""
         com = True
         for i in t:
+            if istok(i) and "\n" in i.value:
+                m=""
             if istok(i) and com and "#" in i.value:
                 m = " "
                 com = False
@@ -174,6 +176,11 @@ def get_keras_layers()-> dict :
         if "__" not in k and k != "K":
             keras_layers["layers"].add(k)
 
+    keras_layers["backend"] = set()
+    for k in backend.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["backend"].add(k)
+
     return keras_layers
 
 
@@ -301,6 +308,5 @@ def remove_AT(t):
         return Tree(t.data,remove_AT(t.children))
     elif isinstance(t, type([])):
         return [remove_AT(i) for i in t]
-
     else:
         raise Exception("Non esiste questo caso nella fun escape")
