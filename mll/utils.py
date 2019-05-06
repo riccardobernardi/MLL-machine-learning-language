@@ -258,17 +258,17 @@ def isTree(t : object) -> bool:
         return True
     return False
 
-def CyclerTemplate(c:list)->list:
-
-    i = 0
-    while True:
-        if i == len(c):
-            break
-        else:
-            print(c[i])
-            if i == 1:
-                c.insert(2, 10)
-            i += 1
+# def CyclerTemplate(c:list)->list:
+#
+#     i = 0
+#     while True:
+#         if i == len(c):
+#             break
+#         else:
+#             print(c[i])
+#             if i == 1:
+#                 c.insert(2, 10)
+#             i += 1
 
 
 def presentation():

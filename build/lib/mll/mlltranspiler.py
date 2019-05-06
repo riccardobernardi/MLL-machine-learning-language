@@ -6,7 +6,7 @@ from termcolor import cprint
 from mll.new_grammar import get_new_grammar
 from mll.utils import scrivi, istok, clean_tok, plus_in_array, clean_deep, clean_arr, escape, \
     get_keras_layers, uncomma, isTree, presentation, clean_tabs, get_sklearn_models, get_utils_functions, \
-    get_base_imports, get_mlxtend_models, remove_AT, stampa
+    get_base_imports, get_mlxtend_models, remove_AT, stampa, list_types
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -96,8 +96,8 @@ class MLL:
                     self.actual_imports_set.add(clean_tok(t.value))
 
             if t.type == "CONCAT":
-                self.actual_imports += self.is_in_possible_imports(clean_tok("concatenate"))
-                self.actual_imports_set.add(clean_tok("concatenate"))
+                self.actual_imports += self.is_in_possible_imports(clean_tok("merge"))
+                self.actual_imports_set.add(clean_tok("merge"))
 
             if (t.type == "ID" or t.type == "FEXTNAME") and "@" in t.value:
                 locals().update(self.loc)
@@ -309,12 +309,16 @@ class MLL:
         first = True
         t.append(Token("PIPE","|"))
 
-        keras_meth = ["concat"]
+        keras_meth = ['concat']
         for j in keras.layers.__dict__.keys():
             if str(j).islower():
                 keras_meth += [j]
 
         for j in keras.backend.__dict__.keys():
+            if str(j).islower():
+                keras_meth += [j]
+
+        for j in keras.layers.__dict__.keys():
             if str(j).islower():
                 keras_meth += [j]
 
@@ -326,6 +330,8 @@ class MLL:
         model_x = "x"
         skip = False
         found_ar = None
+        forks = []
+        return_me = None
 
         i = 0
         while True:
@@ -334,8 +340,12 @@ class MLL:
             else:
                 t = self.put_macros(t)
 
+                #list_types(t)
+
                 if istok(t[i]) and ("->" in clean_tok(t[i].value)):
                     c = clean_tok(t[i-2].value)
+                    forks +=[c]
+
                     # models.insert(0, c.replace("->", ""))
                     #names.insert(0, c.replace("->", ""))
 
@@ -354,7 +364,7 @@ class MLL:
                     #skip = True
                     found_ar = c
 
-
+                    model_x = "x"
 
                 if istok(t[i]) and clean_tok(t[i].value) == "assign":
                     s = clean_tok(t[i+2].children[0].value)
@@ -362,11 +372,78 @@ class MLL:
                     t.insert(i+2,Token("ASSIGN","models['"+s+"']"))
                     skip = True
 
+                a = 1
+
+                if i+a<len(t) and istok(t[i+a]) and clean_tok(t[i+a].value) in keras_meth:
+
+                    #list_types(t)
+
+                    cprint(clean_tok(t[i+a].value), "red")
+
+                    if i+a+3<len(t) and istok(t[i+a+3]) :
+                        cprint(clean_tok(t[i+a+3].value), "blue")
+
+                    if i+a+5<len(t) and istok(t[i+a+5]) :
+                        cprint(clean_tok(t[i+a+5].value), "blue")
+
+                if istok(t[i]) and clean_tok(t[i].value) in keras_meth and \
+                        i + 3 < len(t) and istok(t[i + 3]) and clean_tok(t[i + 3].value) in forks and i + 5 < len(
+                    t) and istok(t[i + 5]) and clean_tok(t[i + 5].value) in forks:
+
+                    cprint("sono dentro","red")
+
+                    model_sx = t[i + 3]
+                    model_dx = t[i + 5]
+
+                    t.pop(i + 2)
+                    t.pop(i + 2)
+                    t.pop(i + 2)
+                    t.pop(i + 2)
+
+
+                    value = str(clean_tok(t[i].value))
+
+                    names.insert(0, models[0])
+                    models.pop(0)
+
+                    t.pop(i)
+                    t.pop(i)
+                    t.pop(i - 1)
+
+                    if len(forks) > 1:
+
+                        if found_ar != None:
+                            t.insert(i, Token("CONCAT", forks[0] + " = merge (["))
+                        else:
+                            t.insert(i, Token("CONCAT", forks[0] + " = merge (["))
+                            found_ar = None
+
+                        return_me = forks[0]
+
+                        model_x = models[0]
+
+                        s = ""
+
+                        t.insert(i + 1, Token("MODELS", str(model_dx+ "," +model_sx)))
+                        t.insert(i + 2, Token("PP", "]," + str("'" + value + "'") + ")"))
+
+                        forks = []
+
+                        models.insert(0, names.pop(0))
+                        forks += [models[0]]
+
+                        t.insert(i + 3, Token("TAB", "\n\t"))
+
+                        t.insert(i + 4, Token("ASSIGN", models[0] + "=("))
+                        t.insert(i + 6, Token("P", "("))
+
+                        t.pop(i - 1)
+
+                        concatenated = True
+
                 if istok(t[i]) and clean_tok(t[i].value) in keras_meth:
 
                     value = str(clean_tok(t[i].value))
-                    if value == "concat":
-                        value="concatenate"
 
                     names.insert(0,models[0])
                     models.pop(0)
@@ -379,9 +456,9 @@ class MLL:
                     if len(to_concat_and_free) >1:
 
                         if found_ar!=None:
-                            t.insert(i, Token("CONCAT", found_ar + " =" + value + "(["))
+                            t.insert(i, Token("CONCAT", found_ar + " = merge (["))
                         else:
-                            t.insert(i,Token("CONCAT",models[0] + " =" + value + "(["))
+                            t.insert(i,Token("CONCAT",models[0] + " = merge (["))
                             found_ar = None
 
                         model_x = models[0]
@@ -396,7 +473,7 @@ class MLL:
                                 s += str(j)
 
                         t.insert(i+1, Token("MODELS", s))
-                        t.insert(i+2, Token("PP","])"))
+                        t.insert(i+2, Token("PP","],"+ str("'"+value+"'") +")"))
 
                         to_concat_and_free = []
 
@@ -482,16 +559,21 @@ class MLL:
                 else:
                     s += [i]
 
-            t.append(Token("CONCAT", "x = concatenate(["))
+            t.append(Token("CONCAT", "x = merge(["))
             models.insert(0,"x")
             t.append( [Token("MODELS", i) for i in s ])
-            t.append( Token("PP","])\n\t") )
+            t.append( Token("PP","],'concat')\n\t") )
 
-        t.append( Token("RETURN", "return " + models[0] + "\n\n"))
+        if return_me == None:
+            t.append( Token("RETURN", "return " + models[0] + "\n\n"))
+        else:
+            t.append(Token("RETURN", "return " + return_me + "\n\n"))
 
         t = self.format_commas(t)
 
         t = clean_deep(t)
+
+        #print(forks)
 
         return t
 
