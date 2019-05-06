@@ -409,7 +409,7 @@ class MLL:
                     if len(forks) > 1:
 
                         if found_ar != None:
-                            t.insert(i, Token("CONCAT", found_ar + " = merge (["))
+                            t.insert(i, Token("CONCAT", models[0] + " = merge (["))
                         else:
                             t.insert(i, Token("CONCAT", models[0] + " = merge (["))
                             found_ar = None
