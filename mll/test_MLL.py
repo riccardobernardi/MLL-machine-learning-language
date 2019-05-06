@@ -853,7 +853,7 @@ class TestMLL(TestCase):
         stem2 : 
             | right -> | m2d | c2d96 | concat
             | left -> | m2d | c2d96 | concat
-            | concat right left
+            | concat | right | left
             
         x : stem2 x
 
