@@ -810,13 +810,17 @@ class TestMLL(TestCase):
         x : Input with shape = (32,32,3)
         
         stem : 
-            | stem + c2d32 + c2d32 + c2d64
+            | c2d32 + c2d32 + c2d64
+            
+        x : stem x
 
-        stem : 
-            | right -> | m2d
-            | left -> | c2d96
+        stem2 : 
+            | right -> | c2d96 | m2d | concat
+            | left -> | c2d96 | m2d | concat
             | loo -> | m2d
-            | concat right left
+            | concat | right | left
+            
+        x : stem2 x
             
         #non puo diventare x l ultima concat
 
@@ -854,7 +858,7 @@ class TestMLL(TestCase):
         stem2 : 
             | right -> | m2d | c2d96 | concat
             | left -> | m2d | c2d96 | concat
-            | sum | right | left
+            | concat | right | left
             
         x : stem2 x
 
@@ -890,11 +894,15 @@ class TestMLL(TestCase):
         stem : 
             | c2d32 + c2d32 + c2d64
 
-        stem : 
+        x : stem x
+
+        stem2 : 
             | right -> | m2d | c2d96 | concat
             | left -> | m2d | c2d96 | concat
             | loo -> | m2d + c2d96 + c2d96
-            | concat a b
+            | concat | right | left
+
+        x : stem2 x
 
         #le concat nested senza parametri producono le lettere prima della freccia
         #l ultima concat con paramteri produce x

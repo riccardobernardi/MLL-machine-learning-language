@@ -331,6 +331,7 @@ class MLL:
         skip = False
         found_ar = None
         forks = []
+        return_me = None
 
         i = 0
         while True:
@@ -363,7 +364,7 @@ class MLL:
                     #skip = True
                     found_ar = c
 
-
+                    model_x = "x"
 
                 if istok(t[i]) and clean_tok(t[i].value) == "assign":
                     s = clean_tok(t[i+2].children[0].value)
@@ -391,6 +392,9 @@ class MLL:
 
                     cprint("sono dentro","red")
 
+                    model_sx = t[i + 3]
+                    model_dx = t[i + 5]
+
                     t.pop(i + 2)
                     t.pop(i + 2)
                     t.pop(i + 2)
@@ -409,23 +413,18 @@ class MLL:
                     if len(forks) > 1:
 
                         if found_ar != None:
-                            t.insert(i, Token("CONCAT", models[0] + " = merge (["))
+                            t.insert(i, Token("CONCAT", forks[0] + " = merge (["))
                         else:
-                            t.insert(i, Token("CONCAT", models[0] + " = merge (["))
+                            t.insert(i, Token("CONCAT", forks[0] + " = merge (["))
                             found_ar = None
+
+                        return_me = forks[0]
 
                         model_x = models[0]
 
                         s = ""
 
-                        for j in forks:
-                            if forks.index(j) < (len(forks) - 1):
-                                s += str(j)
-                                s += ","
-                            else:
-                                s += str(j)
-
-                        t.insert(i + 1, Token("MODELS", s))
+                        t.insert(i + 1, Token("MODELS", str(model_dx+ "," +model_sx)))
                         t.insert(i + 2, Token("PP", "]," + str("'" + value + "'") + ")"))
 
                         forks = []
@@ -565,7 +564,10 @@ class MLL:
             t.append( [Token("MODELS", i) for i in s ])
             t.append( Token("PP","],'concat')\n\t") )
 
-        t.append( Token("RETURN", "return " + models[0] + "\n\n"))
+        if return_me == None:
+            t.append( Token("RETURN", "return " + models[0] + "\n\n"))
+        else:
+            t.append(Token("RETURN", "return " + return_me + "\n\n"))
 
         t = self.format_commas(t)
 
