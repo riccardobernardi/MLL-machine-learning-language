@@ -346,9 +346,6 @@ class MLL:
                     c = clean_tok(t[i-2].value)
                     forks +=[c]
 
-                    # models.insert(0, c.replace("->", ""))
-                    #names.insert(0, c.replace("->", ""))
-
                     t.pop(i - 1)
                     i-=1
                     t.pop(i - 1)
@@ -356,12 +353,7 @@ class MLL:
                     t.pop(i)
                     t.pop(i)
 
-                    #t[i-1] = Token("ASSIGN",c+"=(")
-
                     t.insert(i+1,Token("P","("))
-
-
-                    #skip = True
                     found_ar = c
 
                     model_x = "x"
@@ -371,20 +363,6 @@ class MLL:
                     t.pop(i+2)
                     t.insert(i+2,Token("ASSIGN","models['"+s+"']"))
                     skip = True
-
-                a = 1
-
-                if i+a<len(t) and istok(t[i+a]) and clean_tok(t[i+a].value) in keras_meth:
-
-                    #list_types(t)
-
-                    cprint(clean_tok(t[i+a].value), "red")
-
-                    if i+a+3<len(t) and istok(t[i+a+3]) :
-                        cprint(clean_tok(t[i+a+3].value), "blue")
-
-                    if i+a+5<len(t) and istok(t[i+a+5]) :
-                        cprint(clean_tok(t[i+a+5].value), "blue")
 
                 if istok(t[i]) and clean_tok(t[i].value) in keras_meth and \
                         i + 3 < len(t) and istok(t[i + 3]) and clean_tok(t[i + 3].value) in forks and i + 5 < len(
@@ -411,12 +389,7 @@ class MLL:
                     t.pop(i - 1)
 
                     if len(forks) > 1:
-
-                        if found_ar != None:
-                            t.insert(i, Token("CONCAT", forks[0] + " = merge (["))
-                        else:
-                            t.insert(i, Token("CONCAT", forks[0] + " = merge (["))
-                            found_ar = None
+                        t.insert(i, Token("CONCAT", forks[0] + " = merge (["))
 
                         return_me = forks[0]
 
