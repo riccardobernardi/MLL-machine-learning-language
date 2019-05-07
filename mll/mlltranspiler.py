@@ -636,7 +636,16 @@ class MLL:
 
     def transpile(self,program: str) -> str:
 
+        # with open("grammar.lark", 'r') as file:
+        #     mll_grammar = file.read()
+
+        # print(mll_grammar)
+
         parser = Lark(get_new_grammar(), start='mll')
+        # with open('mll/grammar.lark','r') as ff:
+        #      mll_gram = ff.read()
+        # print("eccola:[" + mll_gram+"]")
+        # parser = Lark(mll_gram, start='mll')
 
         self.before_tree = parser.parse(program)
 

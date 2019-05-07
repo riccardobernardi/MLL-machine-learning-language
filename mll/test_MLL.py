@@ -61,10 +61,12 @@ class TestMLL(TestCase):
 
         # Layer stem di entrata dell input
         
-        x :
-            | c2d3233 + c2d3233 + c2d6433
-
         stem :
+            | c2d3233 + c2d3233 + c2d6433
+            
+        x : stem x
+
+        stem2 :
             | m2d3311
             | c2d9633
             | concat
@@ -75,6 +77,8 @@ class TestMLL(TestCase):
             | m2d3311
             | concat
             | relu
+            
+        x : stem2 x
 
         """
 

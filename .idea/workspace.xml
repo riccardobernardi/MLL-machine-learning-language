@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/grammar.lark" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mll/mlltranspiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/mlltranspiler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mll/test_MLL.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/test_MLL.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,19 +24,48 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mll/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2967">
-              <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
+            <state relative-caret-position="855">
+              <caret line="58" column="9" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9495">
+              <caret line="643" column="8" selection-start-line="643" selection-start-column="8" selection-end-line="643" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
+        <entry file="file://$PROJECT_DIR$/mll/test_MLL.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2607">
-              <caret line="475" column="36" lean-forward="true" selection-start-line="475" selection-start-column="36" selection-end-line="475" selection-end-column="36" />
+            <state relative-caret-position="346">
+              <caret line="813" column="8" lean-forward="true" selection-start-line="813" selection-start-column="8" selection-end-line="826" selection-end-column="19" />
               <folding>
-                <element signature="e#0#12#0" expanded="true" />
+                <element signature="e#0#29#0" expanded="true" />
+                <element signature="e#384#598#0" />
+                <element signature="e#669#3044#0" />
+                <element signature="e#3084#5488#0" />
+                <element signature="e#5555#10177#0" />
+                <element signature="e#10231#10934#0" />
+                <element signature="e#10980#11454#0" />
+                <element signature="e#11511#12288#0" />
+                <element signature="e#12340#12983#0" />
+                <element signature="e#13027#13610#0" />
+                <element signature="e#13650#16220#0" />
+                <element signature="e#16255#17078#0" />
+                <element signature="e#17120#18885#0" />
+                <element signature="e#18982#21667#0" />
+                <element signature="e#21705#24193#0" />
+                <element signature="e#24243#28336#0" />
+                <element signature="e#28378#32395#0" />
+                <element signature="e#32445#33261#0" />
               </folding>
             </state>
           </provider>
@@ -124,10 +156,12 @@
         <option value="$PROJECT_DIR$/upload.sh" />
         <option value="$PROJECT_DIR$/mll/new_grammar.py" />
         <option value="$PROJECT_DIR$/test_net.py" />
-        <option value="$PROJECT_DIR$/mll/test_MLL.py" />
         <option value="$PROJECT_DIR$/mll/utils.py" />
         <option value="$PROJECT_DIR$/setup.py" />
+        <option value="$PROJECT_DIR$/mll/mll_grammar.lark" />
+        <option value="$PROJECT_DIR$/mll/grammar.lark" />
         <option value="$PROJECT_DIR$/mll/mlltranspiler.py" />
+        <option value="$PROJECT_DIR$/mll/test_MLL.py" />
       </list>
     </option>
   </component>
@@ -172,12 +206,13 @@
     <option name="myUseBundledCoveragePy" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/mll" />
       <recent name="$PROJECT_DIR$/module" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -520,43 +555,47 @@
       <workItem from="1557113152605" duration="5159000" />
       <workItem from="1557125957943" duration="690000" />
       <workItem from="1557126861978" duration="4503000" />
+      <workItem from="1557148831229" duration="2083000" />
+      <workItem from="1557151357612" duration="1771000" />
+      <workItem from="1557163875239" duration="762000" />
+      <workItem from="1557217942675" duration="689000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 09h 51m 15s.xml">
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 16h 17m 00s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 09h 55m 38s.xml">
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 16h 17m 11s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 10h 00m 25s.xml">
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 16h 20m 26s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 10h 04m 22s.xml">
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 16h 20m 38s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 10h 04m 52s.xml">
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 16h 22m 58s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 10h 09m 54s.xml">
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 16h 26m 23s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 10h 12m 06s.xml">
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 16h 27m 10s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 10h 14m 56s.xml">
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 16h 29m 02s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 10h 24m 49s.xml">
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 16h 30m 00s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 10h 30m 41s.xml">
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.06 at 16h 31m 33s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="323614000" />
+    <option name="totallyTimeSpent" value="328919000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -569,8 +608,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.16558966" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.17528272" />
       <window_info id="Structure" order="1" sideWeight="0.5068493" side_tool="true" weight="0.17285945" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -582,7 +622,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32876712" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Tool Output" order="8" weight="0.32876712" />
-      <window_info anchor="bottom" x="0" y="22" width="1280" height="778" id="Terminal" maximized="true" order="9" sideWeight="0.49919224" visible="true" weight="0.14657535" />
+      <window_info anchor="bottom" x="0" y="22" width="1280" height="778" id="Terminal" maximized="true" order="9" sideWeight="0.49919224" weight="0.14657535" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.38356164" />
       <window_info anchor="bottom" id="ANTLR Preview" order="11" weight="0.32876712" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32876712" />
@@ -651,7 +691,7 @@
     <SUITE FILE_PATH="coverage/MLL_LARK$main.coverage" NAME="main Coverage Results" MODIFIED="1555745014260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_test_MLL_TestMLL_test_imports.coverage" NAME="Unittests for test_MLL.TestMLL.test_imports Coverage Results" MODIFIED="1556109189929" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_test_MLL_TestMLL_test_external_data.coverage" NAME="Unittests for test_MLL.TestMLL.test_external_data Coverage Results" MODIFIED="1556975614117" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mll" />
-    <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL.coverage" NAME="Unittests for mll.test_MLL.TestMLL Coverage Results" MODIFIED="1557131350047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL.coverage" NAME="Unittests for mll.test_MLL.TestMLL Coverage Results" MODIFIED="1557153005593" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$test_inception_out.coverage" NAME="test_inception_out Coverage Results" MODIFIED="1555769751286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat_for_thesis.coverage" NAME="Unittests for test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat_for_thesis Coverage Results" MODIFIED="1557052134564" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mll" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL_test_inception_mod_double_fork.coverage" NAME="Unittests for mll.test_MLL.TestMLL.test_inception_mod_double_fork Coverage Results" MODIFIED="1557118329325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -669,19 +709,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/lark/exceptions.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/lark/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="34" column="31" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/reading_tree.py" />
     <entry file="file://$PROJECT_DIR$/input.txt" />
     <entry file="file://$PROJECT_DIR$/codice_scartato.txt" />
@@ -888,59 +915,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mll/new_grammar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="48" column="3" selection-start-line="48" selection-start-column="3" selection-end-line="48" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mll/test_MLL.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="791" column="8" selection-start-line="791" selection-start-column="8" selection-end-line="791" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-            <element signature="e#384#598#0" />
-            <element signature="e#669#2975#0" />
-            <element signature="e#3015#5419#0" />
-            <element signature="e#5486#10108#0" />
-            <element signature="e#10162#10865#0" />
-            <element signature="e#10911#11385#0" />
-            <element signature="e#11442#12219#0" />
-            <element signature="e#12271#12914#0" />
-            <element signature="e#12958#13541#0" />
-            <element signature="e#13581#16151#0" />
-            <element signature="e#16186#17009#0" />
-            <element signature="e#17051#18816#0" />
-            <element signature="e#18856#18863#0" />
-            <element signature="e#18913#21598#0" />
-            <element signature="e#21636#24124#0" />
-            <element signature="e#24174#28267#0" />
-            <element signature="e#28309#32326#0" />
-            <element signature="e#32376#33192#0" />
-            <element signature="e#34740#36321#0" />
-            <element signature="e#37994#40674#0" />
-            <element signature="e#40732#45346#0" />
-            <element signature="e#45410#50025#0" />
-            <element signature="e#50070#54884#0" />
-            <element signature="e#54937#55396#0" />
-            <element signature="e#55435#55976#0" />
-            <element signature="e#56017#56172#0" />
-            <element signature="e#56210#56781#0" />
-            <element signature="e#56829#57400#0" />
-            <element signature="e#57449#58035#0" />
-            <element signature="e#58078#58657#0" />
-            <element signature="e#58719#59378#0" />
-            <element signature="e#59424#60024#0" />
-            <element signature="e#60100#60910#0" />
-            <element signature="e#60957#62860#0" />
-            <element signature="e#62947#63795#0" />
-            <element signature="e#63850#64052#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test_net.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="123">
@@ -951,19 +925,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/grammar.lark">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="653">
+          <caret line="127" selection-start-line="127" selection-end-line="128" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mll/iris.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mll/new_grammar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="132" selection-start-line="132" selection-end-line="139" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mll/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2967">
-          <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
+        <state relative-caret-position="855">
+          <caret line="58" column="9" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2607">
-          <caret line="475" column="36" lean-forward="true" selection-start-line="475" selection-start-column="36" selection-end-line="475" selection-end-column="36" />
+        <state relative-caret-position="9495">
+          <caret line="643" column="8" selection-start-line="643" selection-start-column="8" selection-end-line="643" selection-end-column="8" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mll/test_MLL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="813" column="8" lean-forward="true" selection-start-line="813" selection-start-column="8" selection-end-line="826" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#384#598#0" />
+            <element signature="e#669#3044#0" />
+            <element signature="e#3084#5488#0" />
+            <element signature="e#5555#10177#0" />
+            <element signature="e#10231#10934#0" />
+            <element signature="e#10980#11454#0" />
+            <element signature="e#11511#12288#0" />
+            <element signature="e#12340#12983#0" />
+            <element signature="e#13027#13610#0" />
+            <element signature="e#13650#16220#0" />
+            <element signature="e#16255#17078#0" />
+            <element signature="e#17120#18885#0" />
+            <element signature="e#18982#21667#0" />
+            <element signature="e#21705#24193#0" />
+            <element signature="e#24243#28336#0" />
+            <element signature="e#28378#32395#0" />
+            <element signature="e#32445#33261#0" />
           </folding>
         </state>
       </provider>
