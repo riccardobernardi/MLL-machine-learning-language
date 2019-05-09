@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/mll/mlltranspiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/mlltranspiler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mll/test_MLL.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/test_MLL.py" afterDir="false" />
-    </list>
+    <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -577,7 +574,7 @@
       <workItem from="1557151357612" duration="1771000" />
       <workItem from="1557163875239" duration="762000" />
       <workItem from="1557217942675" duration="887000" />
-      <workItem from="1557384681998" duration="1233000" />
+      <workItem from="1557384681998" duration="1362000" />
     </task>
     <servers />
   </component>
@@ -614,7 +611,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="330350000" />
+    <option name="totallyTimeSpent" value="330479000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -633,7 +630,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
-      <window_info active="true" anchor="bottom" x="0" y="22" width="1280" height="778" id="Run" maximized="true" order="2" type="WINDOWED" visible="true" weight="0.60958904" />
+      <window_info anchor="bottom" x="1" y="46" width="1280" height="702" id="Run" maximized="true" order="2" type="WINDOWED" weight="0.60958904" />
       <window_info anchor="bottom" x="0" y="45" width="1280" height="362" id="Debug" order="3" weight="0.5205479" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
