@@ -368,7 +368,7 @@ class MLL:
                         i + 3 < len(t) and istok(t[i + 3]) and clean_tok(t[i + 3].value) in forks and i + 5 < len(
                     t) and istok(t[i + 5]) and clean_tok(t[i + 5].value) in forks:
 
-                    cprint("sono dentro","red")
+                    # cprint("sono dentro","red")
 
                     model_sx = t[i + 3]
                     model_dx = t[i + 5]
