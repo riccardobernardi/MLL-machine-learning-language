@@ -1785,3 +1785,122 @@ class TestMLL(TestCase):
         print(self.mll.get_string())
         self.mll.execute()
         self.mll.image_tree("before")
+        
+    def test_entire_inception(self):
+        inc = """
+        conv2d := Conv2D
+        seq := Sequential
+        relu := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d323311v := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d323311s := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d321111v := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d321111s := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d483311v := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d483311s := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d643311v := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d643311s := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d641111v := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d641111s := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d641711v := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d641711s := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d647111v := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d647111s := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        m2d331111v := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        m2d331111s := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='same' dim_ordering ='tf'
+        c2d961111v := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d961111s := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d963311v := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d963311s := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d1923311v := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d1923311s := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d3843311v := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d3843311s := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d3841111v := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d3841111s := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        m2d3311v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
+        m2d3311s := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='same' dim_ordering ='tf'
+        c2d2561111s := Conv2D 256 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d2563311s := Conv2D 256 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d3843322v := Conv2D 384 (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
+
+
+        # Input layer
+
+        x : Input with shape = (32,32,3)
+
+        # Layer stem di entrata dell input
+
+        stem1 :
+            | c2d323311v + c2d323311v + c2d643311s
+
+        x : stem1 x
+
+        stem2 :
+            | m2d3311v
+            | c2d963311v
+            | concat
+            | c2d641111s + c2d963311v
+            | c2d641111s + c2d647111s + c2d641711s + c2d963311v
+            | concat
+            | c2d1923311v
+            | m2d331111v
+            | concat
+
+        x : stem2 x
+
+        stem5 : 
+            | relu
+
+        x : stem5 x
+
+        # layer A
+
+        shortcut : assign x
+
+        incA1 :
+            | c2d321111s
+            | c2d321111s + c2d323311s
+            | c2d321111s + c2d483311s + c2d643311s
+            | concat
+            | c2d3841111s
+            | assign shortcut
+            | concat
+
+        #l ultima concat qui sopra sarebbe una sum
+        #bisogna definire sum
+
+        x : incA1 x
+
+        # la parte del concat o sum non e presente nei precedenti tests
+        # dovremmo fare una versione di questo test piu corto
+
+        incA1_end : 
+            | relu
+
+        x : incA1_end x
+
+
+        # nn funziona dobbiamo poter fare dag all interno di altri dag
+        # la merge sum non e permessa
+        
+        incA1_red :
+            | m2d3322v
+            | c2d3843322v
+            | c2d2561111s + c2d2563311s + c2d3843322v
+            | concat
+            
+        x : incA1_red
+
+        """
+
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+        # self.mll.image_tree("before")

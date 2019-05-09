@@ -586,6 +586,12 @@ class MLL:
             if t.data == "dag":
                 self.recon_class_ids(t.children)
                 t.children = remove_AT(t.children)
+
+                for i in t.children:
+                    if istok(i) and clean_tok(i.value) in self.param_values:
+                        i.value = self.param_values[clean_tok(i.value)]
+                        i.type = "e"  # così gli viene messa correttamente la virgola
+
                 return Tree(t.data, self.dag(t.children))
 
             if t.data == "macro":
