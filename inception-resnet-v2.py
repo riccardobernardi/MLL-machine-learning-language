@@ -18,7 +18,8 @@ import tensorflow as tf
 from keras.datasets import cifar10
 from keras.layers import Dense, Dropout, Activation, Flatten, Lambda, BatchNormalization
 from keras.layers import Convolution2D, MaxPooling2D, AveragePooling2D
-from keras.engine import merge, Input, Model
+from keras.engine import Input, Model
+from keras.layers import merge
 from keras.optimizers import SGD
 from keras.callbacks import Callback, LearningRateScheduler, ModelCheckpoint, EarlyStopping
 from keras.preprocessing.image import ImageDataGenerator

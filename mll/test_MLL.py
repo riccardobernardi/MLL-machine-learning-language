@@ -1787,6 +1787,79 @@ class TestMLL(TestCase):
         self.mll.image_tree("before")
         
     def test_entire_inception(self):
+
+        import os
+
+        os.environ['KERAS_BACKEND'] = 'tensorflow'
+        os.environ['CUDA_HOME'] = '/usr/local/cuda-7.5'
+
+        # In[2]:
+
+        import numpy as np
+        import tensorflow as tf
+        from keras.datasets import cifar10
+        from keras.layers import Dense, Dropout, Activation, Flatten, Lambda, BatchNormalization
+        from keras.layers import Convolution2D, MaxPooling2D, AveragePooling2D
+        from keras.engine import Input, Model
+        from keras.layers import merge
+        from keras.optimizers import SGD
+        from keras.callbacks import Callback, LearningRateScheduler, ModelCheckpoint, EarlyStopping
+        from keras.preprocessing.image import ImageDataGenerator
+        from keras.utils import np_utils
+        import keras.backend as K
+        import json
+        import time
+
+        # In[3]:
+
+        nb_classes = 10
+
+        if K.image_dim_ordering() == 'th':
+            print("--th")
+        else:
+            print("--tf")
+
+        # the data, shuffled and split between train and test sets
+        (x_train, y_train), (x_test, y_test) = cifar10.load_data()
+
+        # reorder dimensions for tensorflow
+        x_train = np.transpose(x_train.astype('float32') / 255., (0, 2, 1, 3))
+        x_test = np.transpose(x_test.astype('float32') / 255., (0, 2, 1, 3))
+        print('x_train shape:', x_train.shape)
+        print(x_train.shape[0], 'train samples')
+        print(x_test.shape[0], 'test samples')
+
+        # convert class vectors to binary class matrices
+        y_train = np_utils.to_categorical(y_train)
+        y_test = np_utils.to_categorical(y_test)
+
+        # # inception-resnet-v2
+        #
+        # http://arxiv.org/pdf/1602.07261v1.pdf
+
+        # In[8]:
+
+        # we reduce # filters by factor of 8 compared to original inception-v4
+        nb_filters_reduction_factor = 8
+
+
+
+
+
+        img_rows, img_cols = 32, 32
+        img_channels = 3
+
+        inputs = Input(shape=(img_rows, img_cols, img_channels))
+
+
+
+
+
+
+
+
+
+
         inc = """
         conv2d := Conv2D
         seq := Sequential
@@ -1831,6 +1904,22 @@ class TestMLL(TestCase):
         
         c2d1923311v := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
         c2d1923311s := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d1921111s := Conv2D 192 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        
+        
+        c2d2241311s := Conv2D 224 (1, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        
+        
+        c2d2561111s := Conv2D 256 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d2563311s := Conv2D 256 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d2563111s := Conv2D 256 (3, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        
+        
+        c2d2883322v := Conv2D 288 (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d2883311s:= Conv2D 288 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        
+        
+        c2d3203322v := Conv2D 320 (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
         
         
         c2d3843311v := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
@@ -1838,25 +1927,25 @@ class TestMLL(TestCase):
         c2d3841111v := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
         c2d3841111slin := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
         
-        
-        m2d3311v := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
-        m2d3322s := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='same' dim_ordering ='tf'
-        
-        
-        c2d2561111s := Conv2D 256 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        c2d2563311s := Conv2D 256 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+                
         c2d3843322v := Conv2D 384 (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
-
-
-        c2d1921111s := Conv2D 192 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
         
         
         c2d11541111slin := Conv2D 1154 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
+        
+        
+        c2d20481111slin := Conv2D 2048 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
+        
+        
+        m2d3311v := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        m2d3322s := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='same' dim_ordering ='tf'
+        m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
+        m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 
+        
         # Input layer
 
-        x : Input with shape = (32,32,3)
+        x : assign @inputs
 
         # Layer stem di entrata dell input
 
@@ -1899,13 +1988,13 @@ class TestMLL(TestCase):
 
         x : incA x
 
-        incA1_red :
+        incA_red :
             | m2d3322v
             | c2d3843322v
             | c2d2561111s + c2d2563311s + c2d3843322v
             | concat
             
-        x : incA1_red x
+        x : incA_red x
         
         #layer B
         
@@ -1920,6 +2009,27 @@ class TestMLL(TestCase):
             | relu
             
         x : incB x
+        
+        incB_red :
+            | m2d3322v
+            | c2d2561111s + c2d2883322v
+            | c2d2561111s + c2d2883322v
+            | c2d2561111s + c2d2883311s + c2d3203322v
+            | concat
+            
+        x : incB_red x
+        
+        shortcut : assign x
+
+        incC : 
+            | c2d1921111s
+            | c2d1921111s + c2d2241311s + c2d2563111s
+            | concat
+            | c2d20481111slin
+            | sum
+            | relu
+            
+        x : incC x
 
         """
 
@@ -1927,4 +2037,74 @@ class TestMLL(TestCase):
         self.mll.start()
         print(self.mll.get_string())
         self.mll.execute()
-        # self.mll.image_tree("before")
+        x = self.mll.last_model()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        x = AveragePooling2D(pool_size=(4, 4), strides=(1, 1), border_mode='valid', dim_ordering='tf')(x)
+        x = Dropout(0.5)(x)
+        x = Flatten()(x)
+
+        predictions = Dense(nb_classes, activation='softmax')(x)
+
+        model = Model(input=inputs, output=predictions)
+
+        # In[10]:
+
+        model.summary()
+
+        # In[11]:
+
+        model.compile(optimizer='adam',
+                      loss='categorical_crossentropy',
+                      metrics=['accuracy'])
+
+        # In[12]:
+
+        batch_size = 128
+        nb_epoch = 10
+        data_augmentation = False
+
+        # Model saving callback
+        # checkpointer = ModelCheckpoint(filepath='stochastic_depth_cifar10.hdf5', verbose=1, save_best_only=True)
+
+        if not data_augmentation:
+            print('Not using data augmentation.')
+            history = model.fit(x_train, y_train,
+                                batch_size=batch_size, nb_epoch=nb_epoch, verbose=1,
+                                validation_data=(x_test, y_test), shuffle=True,
+                                callbacks=[])
+        else:
+            print('Using real-time data augmentation.')
+
+            # realtime data augmentation
+            datagen_train = ImageDataGenerator(
+                featurewise_center=False,
+                samplewise_center=False,
+                featurewise_std_normalization=False,
+                samplewise_std_normalization=False,
+                zca_whitening=False,
+                rotation_range=0,
+                width_shift_range=0.125,
+                height_shift_range=0.125,
+                horizontal_flip=True,
+                vertical_flip=False)
+            datagen_train.fit(x_train)
+
+            # fit the model on the batches generated by datagen.flow()
+            history = model.fit_generator(datagen_train.flow(x_train, y_train, batch_size=batch_size, shuffle=True),
+                                          samples_per_epoch=x_train.shape[0],
+                                          nb_epoch=nb_epoch, verbose=1,
+                                          validation_data=(x_test, y_test),
+                                          callbacks=[])
