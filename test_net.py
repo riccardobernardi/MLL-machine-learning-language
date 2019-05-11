@@ -58,7 +58,7 @@ def assign (x):
 #macro: Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
 #macro: Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
 #macro: Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-#macro: MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
+#macro: MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
 #macro: MaxPooling2D (3, 3) with strides=(2, 2) border_mode='same' dim_ordering ='tf'
 #macro: Conv2D 256 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
 #macro: Conv2D 256 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
@@ -77,7 +77,7 @@ def stem1(x):
 models['x']=stem1(models['x'])
 
 def stem2(x):
-	a=(MaxPooling2D((3,3),strides=(2,2),border_mode='valid',dim_ordering='tf'))(x)
+	a=(MaxPooling2D((3,3),strides=(1,1),border_mode='valid',dim_ordering='tf'))(x)
 	b=(Conv2D(96,(3,3),subsample=(1,1),init='he_normal',border_mode='valid',dim_ordering='tf',activation='relu'))(x)
 	b=merge([a,b],'concat')
 	c=(Conv2D(64,(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(b)

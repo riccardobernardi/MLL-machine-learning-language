@@ -1800,8 +1800,12 @@ class TestMLL(TestCase):
         c2d323311s := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
         c2d321111v := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
         c2d321111s := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        
+        
         c2d483311v := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
         c2d483311s := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        
+        
         c2d643311v := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
         c2d643311s := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
         c2d641111v := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
@@ -1810,25 +1814,45 @@ class TestMLL(TestCase):
         c2d641711s := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
         c2d647111v := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
         c2d647111s := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        m2d331111v := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
-        m2d331111s := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='same' dim_ordering ='tf'
+        
+        
         c2d961111v := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
         c2d961111s := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
         c2d963311v := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
         c2d963311s := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        
+        
+        c2d1281111s := Conv2D 128 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        
+        
+        c2d1601711s := Conv2D 160 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d1607111s := Conv2D 160 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        
+        
         c2d1923311v := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
         c2d1923311s := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        
+        
         c2d3843311v := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
         c2d3843311s := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
         c2d3841111v := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        c2d3841111s := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        m2d3311v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
-        m2d3311s := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='same' dim_ordering ='tf'
+        c2d3841111slin := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
+        
+        
+        m2d3311v := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        m2d3322s := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='same' dim_ordering ='tf'
+        
+        
         c2d2561111s := Conv2D 256 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
         c2d2563311s := Conv2D 256 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
         c2d3843322v := Conv2D 384 (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
         m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 
+
+        c2d1921111s := Conv2D 192 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        
+        
+        c2d11541111slin := Conv2D 1154 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
 
         # Input layer
 
@@ -1849,7 +1873,7 @@ class TestMLL(TestCase):
             | c2d641111s + c2d647111s + c2d641711s + c2d963311v
             | concat
             | c2d1923311v
-            | m2d331111v
+            | m2d3311v
             | concat
 
         x : stem2 x
@@ -1863,39 +1887,39 @@ class TestMLL(TestCase):
 
         shortcut : assign x
 
-        incA1 :
+        incA :
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
             | concat
-            | c2d3841111s
+            | c2d3841111slin
             | assign shortcut
             | concat
-
-        #l ultima concat qui sopra sarebbe una sum
-        #bisogna definire sum
-
-        x : incA1 x
-
-        # la parte del concat o sum non e presente nei precedenti tests
-        # dovremmo fare una versione di questo test piu corto
-
-        incA1_end : 
             | relu
 
-        x : incA1_end x
+        x : incA x
 
-
-        # nn funziona dobbiamo poter fare dag all interno di altri dag
-        # la merge sum non e permessa
-        
         incA1_red :
             | m2d3322v
             | c2d3843322v
             | c2d2561111s + c2d2563311s + c2d3843322v
             | concat
             
-        x : incA1_red
+        x : incA1_red x
+        
+        #layer B
+        
+        shortcut : assign x
+        
+        incB : 
+            | c2d1921111s
+            | c2d1281111s + c2d1601711s + c2d1607111s
+            | concat
+            | c2d11541111slin
+            | sum
+            | relu
+            
+        x : incB x
 
         """
 
