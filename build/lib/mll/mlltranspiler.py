@@ -346,9 +346,6 @@ class MLL:
                     c = clean_tok(t[i-2].value)
                     forks +=[c]
 
-                    # models.insert(0, c.replace("->", ""))
-                    #names.insert(0, c.replace("->", ""))
-
                     t.pop(i - 1)
                     i-=1
                     t.pop(i - 1)
@@ -356,12 +353,7 @@ class MLL:
                     t.pop(i)
                     t.pop(i)
 
-                    #t[i-1] = Token("ASSIGN",c+"=(")
-
                     t.insert(i+1,Token("P","("))
-
-
-                    #skip = True
                     found_ar = c
 
                     model_x = "x"
@@ -372,25 +364,11 @@ class MLL:
                     t.insert(i+2,Token("ASSIGN","models['"+s+"']"))
                     skip = True
 
-                a = 1
-
-                if i+a<len(t) and istok(t[i+a]) and clean_tok(t[i+a].value) in keras_meth:
-
-                    #list_types(t)
-
-                    cprint(clean_tok(t[i+a].value), "red")
-
-                    if i+a+3<len(t) and istok(t[i+a+3]) :
-                        cprint(clean_tok(t[i+a+3].value), "blue")
-
-                    if i+a+5<len(t) and istok(t[i+a+5]) :
-                        cprint(clean_tok(t[i+a+5].value), "blue")
-
                 if istok(t[i]) and clean_tok(t[i].value) in keras_meth and \
                         i + 3 < len(t) and istok(t[i + 3]) and clean_tok(t[i + 3].value) in forks and i + 5 < len(
                     t) and istok(t[i + 5]) and clean_tok(t[i + 5].value) in forks:
 
-                    cprint("sono dentro","red")
+                    # cprint("sono dentro","red")
 
                     model_sx = t[i + 3]
                     model_dx = t[i + 5]
@@ -411,12 +389,7 @@ class MLL:
                     t.pop(i - 1)
 
                     if len(forks) > 1:
-
-                        if found_ar != None:
-                            t.insert(i, Token("CONCAT", forks[0] + " = merge (["))
-                        else:
-                            t.insert(i, Token("CONCAT", forks[0] + " = merge (["))
-                            found_ar = None
+                        t.insert(i, Token("CONCAT", forks[0] + " = merge (["))
 
                         return_me = forks[0]
 
@@ -613,6 +586,12 @@ class MLL:
             if t.data == "dag":
                 self.recon_class_ids(t.children)
                 t.children = remove_AT(t.children)
+
+                for i in t.children:
+                    if istok(i) and clean_tok(i.value) in self.param_values:
+                        i.value = self.param_values[clean_tok(i.value)]
+                        i.type = "e"  # così gli viene messa correttamente la virgola
+
                 return Tree(t.data, self.dag(t.children))
 
             if t.data == "macro":
@@ -663,7 +642,16 @@ class MLL:
 
     def transpile(self,program: str) -> str:
 
+        # with open("grammar.lark", 'r') as file:
+        #     mll_grammar = file.read()
+
+        # print(mll_grammar)
+
         parser = Lark(get_new_grammar(), start='mll')
+        # with open('mll/grammar.lark','r') as ff:
+        #      mll_gram = ff.read()
+        # print("eccola:[" + mll_gram+"]")
+        # parser = Lark(mll_gram, start='mll')
 
         self.before_tree = parser.parse(program)
 
