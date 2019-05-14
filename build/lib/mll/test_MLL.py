@@ -1785,8 +1785,8 @@ class TestMLL(TestCase):
         print(self.mll.get_string())
         self.mll.execute()
         self.mll.image_tree("before")
-        
-    def test_entire_inception(self):
+
+    def test_entire_inception_with_function_bigger(self):
 
         import os
 
@@ -1842,23 +1842,15 @@ class TestMLL(TestCase):
         # we reduce # filters by factor of 8 compared to original inception-v4
         nb_filters_reduction_factor = 8
 
-
-
-
-
         img_rows, img_cols = 32, 32
         img_channels = 3
 
         inputs = Input(shape=(img_rows, img_cols, img_channels))
 
+        def fant(x):
+            return x // nb_filters_reduction_factor
 
-
-
-
-
-
-
-
+        m = 4
 
         inc = """
         conv2d := Conv2D
@@ -1869,80 +1861,81 @@ class TestMLL(TestCase):
         flatten := Flatten
         soft := Activation 'softmax'
 
-        c2d323311v := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        c2d323311s := Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        c2d321111v := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        c2d321111s := Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        
-        
-        c2d483311v := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        c2d483311s := Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        
-        
-        c2d643311v := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        c2d643311s := Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        c2d641111v := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        c2d641111s := Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        c2d641711v := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        c2d641711s := Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        c2d647111v := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        c2d647111s := Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        
-        
-        c2d961111v := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        c2d961111s := Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        c2d963311v := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        c2d963311s := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        
-        
-        c2d1281111s := Conv2D 128 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        
-        
-        c2d1601711s := Conv2D 160 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        c2d1607111s := Conv2D 160 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        
-        
-        c2d1923311v := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        c2d1923311s := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        c2d1921111s := Conv2D 192 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        
-        
-        c2d2241311s := Conv2D 224 (1, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        
-        
-        c2d2561111s := Conv2D 256 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        c2d2563311s := Conv2D 256 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        c2d2563111s := Conv2D 256 (3, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        
-        
-        c2d2883322v := Conv2D 288 (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        c2d2883311s:= Conv2D 288 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        
-        
-        c2d3203322v := Conv2D 320 (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        
-        
-        c2d3843311v := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        c2d3843311s := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-        c2d3841111v := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        c2d3841111slin := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
-        
-                
-        c2d3843322v := Conv2D 384 (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-        
-        
-        c2d11541111slin := Conv2D 1154 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
-        
-        
-        c2d20481111slin := Conv2D 2048 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
-        
-        
+        c2d323311v := Conv2D @fant(32) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d323311s := Conv2D @fant(32) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d321111v := Conv2D @fant(32) (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d321111s := Conv2D @fant(32) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d483311v := Conv2D @fant(48) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d483311s := Conv2D @fant(48) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d643311v := Conv2D @fant(64) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d643311s := Conv2D @fant(64) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d641111v := Conv2D @fant(64) (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d641111s := Conv2D @fant(64) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d641711v := Conv2D @fant(64) (1, 7) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d641711s := Conv2D @fant(64) (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d647111v := Conv2D @fant(64) (7, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d647111s := Conv2D @fant(64) (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d961111v := Conv2D @fant(96) (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d961111s := Conv2D @fant(96) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d963311v := Conv2D @fant(96) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d963311s := Conv2D @fant(96) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d1281111s := Conv2D @fant(128) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d1601711s := Conv2D @fant(160) (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d1607111s := Conv2D @fant(160) (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d1923311v := Conv2D @fant(192) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d1923311s := Conv2D @fant(192) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d1921111s := Conv2D @fant(192) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d1927111s := Conv2D @fant(192) (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d2241311s := Conv2D @fant(224) (1, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d2561111s := Conv2D @fant(256) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d2563311s := Conv2D @fant(256) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d2563111s := Conv2D @fant(256) (3, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d2883322v := Conv2D @fant(288) (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d2883311s:= Conv2D @fant(288) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d3203322v := Conv2D @fant(320) (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+
+
+        c2d3843311v := Conv2D @fant(384) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d3843311s := Conv2D @fant(384) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d3841111v := Conv2D @fant(384) (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d3841111slin := Conv2D @fant(384) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
+
+
+        c2d3843322v := Conv2D @fant(384) (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+
+
+        c2d11541111slin := Conv2D @fant(1154) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
+
+
+        c2d20481111slin := Conv2D @fant(2048) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
+
+
         m2d3311v := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
         m2d3322s := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='same' dim_ordering ='tf'
         m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
         m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 
-        
+
         # Input layer
 
         x : assign @inputs
@@ -1964,13 +1957,9 @@ class TestMLL(TestCase):
             | c2d1923311v
             | m2d3311v
             | concat
-
-        x : stem2 x
-
-        stem5 : 
             | relu
 
-        x : stem5 x
+        x : stem2 x
 
         # layer A
 
@@ -1981,9 +1970,9 @@ class TestMLL(TestCase):
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
             | concat
-            | c2d3841111slin
             | assign shortcut
-            | concat
+            | c2d3841111slin
+            | sum
             | relu
 
         x : incA x
@@ -1993,42 +1982,44 @@ class TestMLL(TestCase):
             | c2d3843322v
             | c2d2561111s + c2d2563311s + c2d3843322v
             | concat
-            
+
         x : incA_red x
-        
+
         #layer B
-        
+
         shortcut : assign x
-        
+
         incB : 
             | c2d1921111s
-            | c2d1281111s + c2d1601711s + c2d1607111s
+            | c2d1281111s + c2d1601711s + c2d1927111s
             | concat
+            | assign shortcut
             | c2d11541111slin
             | sum
             | relu
-            
+
         x : incB x
-        
+
         incB_red :
             | m2d3322v
             | c2d2561111s + c2d2883322v
             | c2d2561111s + c2d2883322v
             | c2d2561111s + c2d2883311s + c2d3203322v
             | concat
-            
+
         x : incB_red x
-        
+
         shortcut : assign x
 
         incC : 
             | c2d1921111s
             | c2d1921111s + c2d2241311s + c2d2563111s
             | concat
+            | assign shortcut
             | c2d20481111slin
             | sum
             | relu
-            
+
         x : incC x
 
         """
@@ -2038,19 +2029,6 @@ class TestMLL(TestCase):
         print(self.mll.get_string())
         self.mll.execute()
         x = self.mll.last_model()
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         x = AveragePooling2D(pool_size=(4, 4), strides=(1, 1), border_mode='valid', dim_ordering='tf')(x)
         x = Dropout(0.5)(x)
@@ -2063,6 +2041,10 @@ class TestMLL(TestCase):
         # In[10]:
 
         model.summary()
+
+        with open('my-inception-report.txt', 'w') as fh:
+            # Pass the file handle in as a lambda function to make it callable
+            model.summary(print_fn=lambda x: fh.write(x + '\n'))
 
         # In[11]:
 

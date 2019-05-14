@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inception-resnet-v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/inception-resnet-v2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mll/test_MLL.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/test_MLL.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_net.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_net.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,101 +18,83 @@
     <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Desktop" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1772">
-                  <caret line="102" column="41" selection-start-line="102" selection-start-column="41" selection-end-line="102" selection-end-column="41" />
-                  <folding>
-                    <element signature="e#0#12#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/mll/test_MLL.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="4144">
-                  <caret line="2373" selection-start-line="2373" selection-end-line="2414" selection-end-column="55" />
-                  <folding>
-                    <element signature="e#0#29#0" expanded="true" />
-                    <element signature="e#384#598#0" />
-                    <element signature="e#669#3044#0" />
-                    <element signature="e#3084#5488#0" />
-                    <element signature="e#5555#10177#0" />
-                    <element signature="e#10231#10934#0" />
-                    <element signature="e#10980#11454#0" />
-                    <element signature="e#11511#12288#0" />
-                    <element signature="e#12340#12983#0" />
-                    <element signature="e#13027#13610#0" />
-                    <element signature="e#13650#16220#0" />
-                    <element signature="e#16255#17078#0" />
-                    <element signature="e#17120#18885#0" />
-                    <element signature="e#18925#18932#0" />
-                    <element signature="e#18982#21667#0" />
-                    <element signature="e#21705#24193#0" />
-                    <element signature="e#24243#28336#0" />
-                    <element signature="e#28378#32395#0" />
-                    <element signature="e#32445#33261#0" />
-                    <element signature="e#33319#34863#0" />
-                    <element signature="e#34919#36503#0" />
-                    <element signature="e#36577#38180#0" />
-                    <element signature="e#38254#39852#0" />
-                    <element signature="e#39909#42589#0" />
-                    <element signature="e#42647#47261#0" />
-                    <element signature="e#47325#51940#0" />
-                    <element signature="e#51985#56799#0" />
-                    <element signature="e#56852#57311#0" />
-                    <element signature="e#57350#57891#0" />
-                    <element signature="e#57932#58087#0" />
-                    <element signature="e#58125#58696#0" />
-                    <element signature="e#58744#59315#0" />
-                    <element signature="e#59364#59950#0" />
-                    <element signature="e#59993#60572#0" />
-                    <element signature="e#60634#61293#0" />
-                    <element signature="e#61339#61939#0" />
-                    <element signature="e#62015#62825#0" />
-                    <element signature="e#62872#64775#0" />
-                    <element signature="e#64862#65710#0" />
-                    <element signature="e#65765#65967#0" />
-                    <element signature="e#66028#66621#0" />
-                    <element signature="e#66675#67200#0" />
-                    <element signature="e#67256#79403#0" />
-                    <element signature="e#91677#103808#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/test_net.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="406">
-                  <caret line="187" column="27" lean-forward="true" selection-start-line="187" selection-end-line="188" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/inception-resnet-v2.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="346">
-                  <caret line="125" column="27" lean-forward="true" selection-start-line="125" selection-end-line="126" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1772">
+              <caret line="102" column="41" selection-start-line="102" selection-start-column="41" selection-end-line="102" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mll/test_MLL.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="530">
+              <caret line="1744" column="44" selection-start-line="1744" selection-start-column="44" selection-end-line="1744" selection-end-column="44" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+                <element signature="e#384#598#0" />
+                <element signature="e#669#3044#0" />
+                <element signature="e#3084#5488#0" />
+                <element signature="e#5555#10177#0" />
+                <element signature="e#10231#10934#0" />
+                <element signature="e#10980#11454#0" />
+                <element signature="e#11511#12288#0" />
+                <element signature="e#12340#12983#0" />
+                <element signature="e#13027#13610#0" />
+                <element signature="e#13650#16220#0" />
+                <element signature="e#16255#17078#0" />
+                <element signature="e#17120#18885#0" />
+                <element signature="e#18925#18932#0" />
+                <element signature="e#18982#21667#0" />
+                <element signature="e#21705#24193#0" />
+                <element signature="e#24243#28336#0" />
+                <element signature="e#28378#32395#0" />
+                <element signature="e#32445#33261#0" />
+                <element signature="e#33319#34863#0" />
+                <element signature="e#34919#36503#0" />
+                <element signature="e#36577#38180#0" />
+                <element signature="e#38254#39852#0" />
+                <element signature="e#39909#42589#0" />
+                <element signature="e#42647#47261#0" />
+                <element signature="e#47325#51940#0" />
+                <element signature="e#51985#56799#0" />
+                <element signature="e#56852#57311#0" />
+                <element signature="e#57350#57891#0" />
+                <element signature="e#57932#58087#0" />
+                <element signature="e#58125#58696#0" />
+                <element signature="e#58744#59315#0" />
+                <element signature="e#59364#59950#0" />
+                <element signature="e#59993#60572#0" />
+                <element signature="e#60634#61293#0" />
+                <element signature="e#61339#61939#0" />
+                <element signature="e#62015#62825#0" />
+                <element signature="e#62872#64775#0" />
+                <element signature="e#64862#65710#0" />
+                <element signature="e#65765#65967#0" />
+                <element signature="e#66028#66621#0" />
+                <element signature="e#66675#67200#0" />
+                <element signature="e#79472#91604#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_net.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="406">
+              <caret line="187" column="27" lean-forward="true" selection-start-line="187" selection-end-line="188" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -633,7 +612,7 @@
       <workItem from="1557649446921" duration="2983000" />
       <workItem from="1557776365669" duration="1138000" />
       <workItem from="1557818015368" duration="668000" />
-      <workItem from="1557844726413" duration="2972000" />
+      <workItem from="1557844726413" duration="3249000" />
     </task>
     <servers />
   </component>
@@ -670,7 +649,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="351607000" />
+    <option name="totallyTimeSpent" value="351884000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -683,6 +662,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.20516963" />
       <window_info id="Structure" order="1" sideWeight="0.5068493" side_tool="true" weight="0.17285945" />
@@ -1042,15 +1022,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/inception-resnet-v2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
+        <state relative-caret-position="-2125">
           <caret line="125" column="27" lean-forward="true" selection-start-line="125" selection-end-line="126" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mll/test_MLL.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4144">
-          <caret line="2373" selection-start-line="2373" selection-end-line="2414" selection-end-column="55" />
+        <state relative-caret-position="530">
+          <caret line="1744" column="44" selection-start-line="1744" selection-start-column="44" selection-end-line="1744" selection-end-column="44" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
             <element signature="e#384#598#0" />
@@ -1094,8 +1074,7 @@
             <element signature="e#65765#65967#0" />
             <element signature="e#66028#66621#0" />
             <element signature="e#66675#67200#0" />
-            <element signature="e#67256#79403#0" />
-            <element signature="e#91677#103808#0" />
+            <element signature="e#79472#91604#0" />
           </folding>
         </state>
       </provider>
