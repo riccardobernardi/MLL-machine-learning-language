@@ -2090,3 +2090,308 @@ class TestMLL(TestCase):
                                           nb_epoch=nb_epoch, verbose=1,
                                           validation_data=(x_test, y_test),
                                           callbacks=[])
+
+    def test_entire_inception_with_function_bigger_aug(self):
+
+        import os
+
+        os.environ['KERAS_BACKEND'] = 'tensorflow'
+        os.environ['CUDA_HOME'] = '/usr/local/cuda-7.5'
+
+        # In[2]:
+
+        import numpy as np
+        import tensorflow as tf
+        from keras.datasets import cifar10
+        from keras.layers import Dense, Dropout, Activation, Flatten, Lambda, BatchNormalization
+        from keras.layers import Convolution2D, MaxPooling2D, AveragePooling2D
+        from keras.engine import Input, Model
+        from keras.layers import merge
+        from keras.optimizers import SGD
+        from keras.callbacks import Callback, LearningRateScheduler, ModelCheckpoint, EarlyStopping
+        from keras.preprocessing.image import ImageDataGenerator
+        from keras.utils import np_utils
+        import keras.backend as K
+        import json
+        import time
+
+        # In[3]:
+
+        nb_classes = 10
+
+        if K.image_dim_ordering() == 'th':
+            print("--th")
+        else:
+            print("--tf")
+
+        # the data, shuffled and split between train and test sets
+        (x_train, y_train), (x_test, y_test) = cifar10.load_data()
+
+        # reorder dimensions for tensorflow
+        x_train = np.transpose(x_train.astype('float32') / 255., (0, 2, 1, 3))
+        x_test = np.transpose(x_test.astype('float32') / 255., (0, 2, 1, 3))
+        print('x_train shape:', x_train.shape)
+        print(x_train.shape[0], 'train samples')
+        print(x_test.shape[0], 'test samples')
+
+        # convert class vectors to binary class matrices
+        y_train = np_utils.to_categorical(y_train)
+        y_test = np_utils.to_categorical(y_test)
+
+        # # inception-resnet-v2
+        #
+        # http://arxiv.org/pdf/1602.07261v1.pdf
+
+        # In[8]:
+
+        # we reduce # filters by factor of 8 compared to original inception-v4
+        nb_filters_reduction_factor = 8
+
+        img_rows, img_cols = 32, 32
+        img_channels = 3
+
+        inputs = Input(shape=(img_rows, img_cols, img_channels))
+
+        def fant(x):
+            return x // nb_filters_reduction_factor
+
+        m = 4
+
+        inc = """
+        conv2d := Conv2D
+        seq := Sequential
+        relu := Activation 'relu'
+        drop := Dropout
+        dense := Dense
+        flatten := Flatten
+        soft := Activation 'softmax'
+
+        c2d323311v := Conv2D @fant(32) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d323311s := Conv2D @fant(32) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d321111v := Conv2D @fant(32) (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d321111s := Conv2D @fant(32) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d483311v := Conv2D @fant(48) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d483311s := Conv2D @fant(48) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d643311v := Conv2D @fant(64) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d643311s := Conv2D @fant(64) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d641111v := Conv2D @fant(64) (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d641111s := Conv2D @fant(64) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d641711v := Conv2D @fant(64) (1, 7) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d641711s := Conv2D @fant(64) (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d647111v := Conv2D @fant(64) (7, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d647111s := Conv2D @fant(64) (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d961111v := Conv2D @fant(96) (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d961111s := Conv2D @fant(96) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d963311v := Conv2D @fant(96) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d963311s := Conv2D @fant(96) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d1281111s := Conv2D @fant(128) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d1601711s := Conv2D @fant(160) (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d1607111s := Conv2D @fant(160) (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d1923311v := Conv2D @fant(192) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d1923311s := Conv2D @fant(192) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d1921111s := Conv2D @fant(192) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d1927111s := Conv2D @fant(192) (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d2241311s := Conv2D @fant(224) (1, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d2561111s := Conv2D @fant(256) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d2563311s := Conv2D @fant(256) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d2563111s := Conv2D @fant(256) (3, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d2883322v := Conv2D @fant(288) (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d2883311s:= Conv2D @fant(288) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+
+
+        c2d3203322v := Conv2D @fant(320) (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+
+
+        c2d3843311v := Conv2D @fant(384) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d3843311s := Conv2D @fant(384) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+        c2d3841111v := Conv2D @fant(384) (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+        c2d3841111slin := Conv2D @fant(384) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
+
+
+        c2d3843322v := Conv2D @fant(384) (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+
+
+        c2d11541111slin := Conv2D @fant(1154) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
+
+
+        c2d20481111slin := Conv2D @fant(2048) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
+
+
+        m2d3311v := MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
+        m2d3322s := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='same' dim_ordering ='tf'
+        m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
+        m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
+
+
+        # Input layer
+
+        x : assign @inputs
+
+        # Layer stem di entrata dell input
+
+        stem1 :
+            | c2d323311v + c2d323311v + c2d643311s
+
+        x : stem1 x
+
+        stem2 :
+            | m2d3311v
+            | c2d963311v
+            | concat
+            | c2d641111s + c2d963311v
+            | c2d641111s + c2d647111s + c2d641711s + c2d963311v
+            | concat
+            | c2d1923311v
+            | m2d3311v
+            | concat
+            | relu
+
+        x : stem2 x
+
+        # layer A
+
+        shortcut : assign x
+
+        incA :
+            | c2d321111s
+            | c2d321111s + c2d323311s
+            | c2d321111s + c2d483311s + c2d643311s
+            | concat
+            | assign shortcut
+            | c2d3841111slin
+            | sum
+            | relu
+
+        x : incA x
+
+        incA_red :
+            | m2d3322v
+            | c2d3843322v
+            | c2d2561111s + c2d2563311s + c2d3843322v
+            | concat
+
+        x : incA_red x
+
+        #layer B
+
+        shortcut : assign x
+
+        incB : 
+            | c2d1921111s
+            | c2d1281111s + c2d1601711s + c2d1927111s
+            | concat
+            | assign shortcut
+            | c2d11541111slin
+            | sum
+            | relu
+
+        x : incB x
+
+        incB_red :
+            | m2d3322v
+            | c2d2561111s + c2d2883322v
+            | c2d2561111s + c2d2883322v
+            | c2d2561111s + c2d2883311s + c2d3203322v
+            | concat
+
+        x : incB_red x
+
+        shortcut : assign x
+
+        incC : 
+            | c2d1921111s
+            | c2d1921111s + c2d2241311s + c2d2563111s
+            | concat
+            | assign shortcut
+            | c2d20481111slin
+            | sum
+            | relu
+
+        x : incC x
+
+        """
+
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+        x = self.mll.last_model()
+
+        x = AveragePooling2D(pool_size=(4, 4), strides=(1, 1), border_mode='valid', dim_ordering='tf')(x)
+        x = Dropout(0.5)(x)
+        x = Flatten()(x)
+
+        predictions = Dense(nb_classes, activation='softmax')(x)
+
+        model = Model(input=inputs, output=predictions)
+
+        # In[10]:
+
+        model.summary()
+
+        with open('my-inception-report.txt', 'w') as fh:
+            # Pass the file handle in as a lambda function to make it callable
+            model.summary(print_fn=lambda x: fh.write(x + '\n'))
+
+        # In[11]:
+
+        model.compile(optimizer='adam',
+                      loss='categorical_crossentropy',
+                      metrics=['accuracy'])
+
+        # In[12]:
+
+        batch_size = 128
+        nb_epoch = 10
+        data_augmentation = True
+
+        # Model saving callback
+        # checkpointer = ModelCheckpoint(filepath='stochastic_depth_cifar10.hdf5', verbose=1, save_best_only=True)
+
+        if not data_augmentation:
+            print('Not using data augmentation.')
+            history = model.fit(x_train, y_train,
+                                batch_size=batch_size, nb_epoch=nb_epoch, verbose=1,
+                                validation_data=(x_test, y_test), shuffle=True,
+                                callbacks=[])
+        else:
+            print('Using real-time data augmentation.')
+
+            # realtime data augmentation
+            datagen_train = ImageDataGenerator(
+                featurewise_center=False,
+                samplewise_center=False,
+                featurewise_std_normalization=False,
+                samplewise_std_normalization=False,
+                zca_whitening=False,
+                rotation_range=0,
+                width_shift_range=0.125,
+                height_shift_range=0.125,
+                horizontal_flip=True,
+                vertical_flip=False)
+            datagen_train.fit(x_train)
+
+            # fit the model on the batches generated by datagen.flow()
+            history = model.fit_generator(datagen_train.flow(x_train, y_train, batch_size=batch_size, shuffle=True),
+                                          samples_per_epoch=x_train.shape[0],
+                                          nb_epoch=nb_epoch, verbose=1,
+                                          validation_data=(x_test, y_test),
+                                          callbacks=[])
