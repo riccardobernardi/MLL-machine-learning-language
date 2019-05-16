@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/mll/mlltranspiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/mlltranspiler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mll/test_MLL.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/test_MLL.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mll/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-inception-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/my-inception-report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/true-inception-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/true-inception-report.txt" afterDir="false" />
-    </list>
+    <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +17,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="4455">
@@ -47,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mll/test_MLL.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="455">
-              <caret line="1817" column="8" selection-start-line="1817" selection-start-column="8" selection-end-line="1817" selection-end-column="8" />
+            <state relative-caret-position="288">
+              <caret line="1794" column="37" lean-forward="true" selection-start-line="1794" selection-start-column="37" selection-end-line="1794" selection-end-column="37" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
                 <element signature="e#384#598#0" />
@@ -102,20 +96,6 @@
                 <element signature="e#108107#120713#0" />
                 <element signature="e#119144#119857#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tree-before.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -225,10 +205,10 @@
         <option value="$PROJECT_DIR$/mll/new_grammar.py" />
         <option value="$PROJECT_DIR$/test_net.py" />
         <option value="$PROJECT_DIR$/inception-resnet-v2.py" />
-        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/mll/test_MLL.py" />
         <option value="$PROJECT_DIR$/mll/utils.py" />
         <option value="$PROJECT_DIR$/mll/mlltranspiler.py" />
+        <option value="$PROJECT_DIR$/setup.py" />
       </list>
     </option>
   </component>
@@ -639,14 +619,11 @@
       <workItem from="1557818015368" duration="668000" />
       <workItem from="1557844726413" duration="4002000" />
       <workItem from="1557854818487" duration="4029000" />
-      <workItem from="1557942568884" duration="11751000" />
+      <workItem from="1557942568884" duration="11918000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.16 at 12h 28m 26s.xml">
-      <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.16 at 12h 29m 17s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
@@ -674,9 +651,12 @@
     <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.16 at 12h 43m 22s.xml">
       <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_for_mll_test_MLL_TestMLL - 2019.05.16 at 12h 45m 55s.xml">
+      <configuration name="Unittests for mll.test_MLL.TestMLL" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="368417000" />
+    <option name="totallyTimeSpent" value="368584000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -689,21 +669,20 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.21163167" />
       <window_info id="Structure" order="1" sideWeight="0.5068493" side_tool="true" weight="0.17285945" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
-      <window_info active="true" anchor="bottom" x="0" y="22" width="1280" height="778" id="Run" maximized="true" order="2" type="WINDOWED" visible="true" weight="0.60958904" />
+      <window_info anchor="bottom" x="0" y="45" width="1280" height="702" id="Run" maximized="true" order="2" type="WINDOWED" weight="0.60958904" />
       <window_info anchor="bottom" x="0" y="45" width="1280" height="362" id="Debug" order="3" weight="0.5205479" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32876712" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Tool Output" order="8" weight="0.32876712" />
-      <window_info anchor="bottom" x="0" y="22" width="1280" height="778" id="Terminal" maximized="true" order="9" sideWeight="0.49919224" weight="0.14657535" />
+      <window_info active="true" anchor="bottom" x="0" y="22" width="1280" height="778" id="Terminal" maximized="true" order="9" sideWeight="0.49919224" visible="true" weight="0.14657535" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.38356164" />
       <window_info anchor="bottom" id="ANTLR Preview" order="11" weight="0.32876712" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32876712" />
@@ -1032,13 +1011,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mll/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="151" column="28" selection-start-line="151" selection-start-column="28" selection-end-line="151" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4455">
+          <caret line="297" column="84" selection-start-line="297" selection-start-column="84" selection-end-line="297" selection-end-column="84" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="1" lean-forward="true" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tree-before.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/mll/test_MLL.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="1817" column="8" selection-start-line="1817" selection-start-column="8" selection-end-line="1817" selection-end-column="8" />
+        <state relative-caret-position="288">
+          <caret line="1794" column="37" lean-forward="true" selection-start-line="1794" selection-start-column="37" selection-end-line="1794" selection-end-column="37" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
             <element signature="e#384#598#0" />
@@ -1088,33 +1094,6 @@
             <element signature="e#93339#107655#0" />
             <element signature="e#108107#120713#0" />
             <element signature="e#119144#119857#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mll/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="151" column="28" selection-start-line="151" selection-start-column="28" selection-end-line="151" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4455">
-          <caret line="297" column="84" selection-start-line="297" selection-start-column="84" selection-end-line="297" selection-end-column="84" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
