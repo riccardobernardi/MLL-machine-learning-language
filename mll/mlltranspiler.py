@@ -191,11 +191,13 @@ class MLL:
     def put_macros(self,t: list) -> list:
 
         for i in range(0, len(t)):
+            # t = self.put_macros(t)
 
             ok=False
 
             if istok(t[i]):
                 for j in self.macros.keys():
+
                     if clean_tok(t[i].value) == j :
                         ok = True
                         break
@@ -215,6 +217,9 @@ class MLL:
                     #metto la macro
                     t[i:i] = self.macros[s]
                     i += self.macros[s].__len__()
+            else:
+                if isTree(t[i]):
+                    t[i].children = self.put_macros(t[i].children)
 
         return t
 
@@ -281,7 +286,28 @@ class MLL:
 
         return arr
 
+    def insert_parmac(self,t:list):
+        i = 0
+        while True:
+            if i == len(t):
+                break
+            else:
+                if istok(t[i]) and clean_tok(t[i].value) in self.param_values:
+                    m = clean_tok(t[i].value)
+                    t[i].value = self.param_values[clean_tok(t[i].value)]
+                    t[i].type = "e"  # così gli viene messa correttamente la virgola
+                else:
+                    if isTree(t[i]) and t[i].data != "n":
+                        t[i] = Tree(t[i].data, self.insert_parmac(t[i].children))
+
+            i+=1
+
+        return t
+
     def dag(self,t:list) -> list:
+
+        # for hh in self.macros.values():
+        #     hh = self.insert_parmac(hh)
 
         t = self.put_macros(t)
         t = clean_arr(t)
@@ -338,18 +364,28 @@ class MLL:
             if i == len(t):
                 break
             else:
+
                 t = self.put_macros(t)
 
-                if istok(t[i]) and clean_tok(t[i].value) in self.param_values:
-                    t[i].value = self.param_values[clean_tok(t[i].value)]
-                    t[i].type = "e" #così gli viene messa correttamente la virgola
-                else:
-                    if not istok(t[i]):
-                        tr = t[i].children
-                        for j in tr:
-                            if istok(j) and clean_tok(j.value) in self.param_values:
-                                j.value = self.param_values[clean_tok(j.value)]
-                                j.type = "e"  # così gli viene messa correttamente la virgola
+                # if istok(t[i]) and clean_tok(t[i].value) in self.param_values:
+                #     t[i].value = self.param_values[clean_tok(t[i].value)]
+                #     t[i].type = "e" #così gli viene messa correttamente la virgola
+                # else:
+                #     if not istok(t[i]):
+                #         tr = t[i].children
+                #         for j in tr:
+                #             if istok(j) and clean_tok(j.value) in self.param_values:
+                #                 j.value = self.param_values[clean_tok(j.value)]
+                #                 j.type = "e"  # così gli viene messa correttamente la virgola
+                #             else:
+                #                 if istok(j):
+                #                     cprint("non sono stato accettato e sono : ["+clean_tok(j.value)+"]","red")
+                #                 else:
+                #                     cprint("non sono stato accettato e sono un tree [one]", "red")
+                #     else:
+                #         cprint("non sono stato accettato e sono un tree [two]","red")
+
+                t = self.insert_parmac(t)
 
                 if istok(t[i]) and ("->" in clean_tok(t[i].value)):
                     c = clean_tok(t[i-2].value)
