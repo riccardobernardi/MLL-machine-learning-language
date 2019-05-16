@@ -1,5 +1,6 @@
 from keras import layers, backend
 from lark import Tree, Token
+from termcolor import cprint
 
 
 def stampa(t: object) -> None:
@@ -145,9 +146,9 @@ def escape(m:str, t:object) -> object:
                 if istok(t[i]) and clean_tok(t[i].value) == m:
                     t[i].value = "'"+clean_tok(t[i].value)+"'"
                     if i+1< len(t) and istok(t[i+1]) and t[i+1].type == "SQ":
-                        t.remove(t[i + 1])
+                        t.pop(i + 1)
                     if i-1>= 0 and istok(t[i-1]) and t[i-1].type == "SQ":
-                        t.remove(t[i - 1])
+                        t.pop(i - 1)
                         i-=1
                 i+=1
         return [escape(m,i) for i in t]
