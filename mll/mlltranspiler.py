@@ -338,27 +338,18 @@ class MLL:
             if i == len(t):
                 break
             else:
-                # TODO: substitute this below
-                # if isTree(t[i]) and t[i].data=="parmac":
-                #     t[i] = self.save_parmac(t[i].children)
-
                 t = self.put_macros(t)
 
                 if istok(t[i]) and clean_tok(t[i].value) in self.param_values:
                     t[i].value = self.param_values[clean_tok(t[i].value)]
                     t[i].type = "e" #così gli viene messa correttamente la virgola
                 else:
-                    if istok(t[i]):
-                        print("non sono stato accettato: ["+clean_tok(t[i].value)+"]")
-                    else:
-                        #print("non sono stato accettato e sono un albero")
+                    if not istok(t[i]):
                         tr = t[i].children
                         for j in tr:
                             if istok(j) and clean_tok(j.value) in self.param_values:
                                 j.value = self.param_values[clean_tok(j.value)]
                                 j.type = "e"  # così gli viene messa correttamente la virgola
-
-                #list_types(t)
 
                 if istok(t[i]) and ("->" in clean_tok(t[i].value)):
                     c = clean_tok(t[i-2].value)
