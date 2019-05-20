@@ -14,9 +14,10 @@ warnings.filterwarnings("ignore")
 
 class MLL:
 
-    def __init__(self,program: str,loc = {}) -> None:
+    def __init__(self,program: str,loc = {},glob = {}) -> None:
         presentation()
         self.loc = loc
+        self.glob = glob
         self.param_values = {}
         self.models = {}
         self.macros={}
@@ -102,11 +103,11 @@ class MLL:
             if (t.type == "ID" or t.type == "FEXTNAME") and "@" in t.value:
                 locals().update(self.loc)
                 try:
-                    self.import_from_glob[str(clean_tok(t.value)).replace("@","")] = locals()[
+                    self.import_from_glob[str(clean_tok(t.value)).replace("@","")] = self.loc[
                         str(clean_tok(t.value)).replace("@","")]
                 except:
                     try:
-                        self.import_from_glob[str(clean_tok(t.value)).replace("@", "")] = globals()[
+                        self.import_from_glob[str(clean_tok(t.value)).replace("@", "")] = self.glob[
                             str(clean_tok(t.value)).replace("@", "")]
                     except:
                         print("la variabile "+ str(clean_tok(t.value)).replace("@", "") +" non è disponibile")
