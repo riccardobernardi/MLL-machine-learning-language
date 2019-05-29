@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="" />
+    <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +83,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inception-resnet-v2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
+            <state relative-caret-position="1380">
               <caret line="92" column="70" selection-start-line="92" selection-end-line="93" />
             </state>
           </provider>
@@ -90,8 +92,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-460">
-              <caret line="122" selection-start-line="122" selection-end-line="122" />
+            <state relative-caret-position="423">
+              <caret line="679" column="19" selection-start-line="679" selection-start-column="19" selection-end-line="679" selection-end-column="49" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#576#1149#0" />
@@ -108,6 +110,15 @@
                 <element signature="e#9346#9748#0" />
                 <element signature="e#9794#10369#0" />
                 <element signature="e#10414#20084#0" />
+                <element signature="e#23223#23882#0" />
+                <element signature="e#23925#23943#0" />
+                <element signature="e#23989#24056#0" />
+                <element signature="e#24089#24212#0" />
+                <element signature="e#24249#24275#0" />
+                <element signature="e#24311#24334#0" />
+                <element signature="e#24385#24687#0" />
+                <element signature="e#24728#24751#0" />
+                <element signature="e#24791#24813#0" />
               </folding>
             </state>
           </provider>
@@ -665,6 +676,9 @@
       <workItem from="1558449908217" duration="511000" />
       <workItem from="1558558817888" duration="141000" />
       <workItem from="1558693529277" duration="147000" />
+      <workItem from="1559063551883" duration="453000" />
+      <workItem from="1559070113549" duration="244000" />
+      <workItem from="1559129234048" duration="358000" />
     </task>
     <servers />
   </component>
@@ -701,7 +715,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="385383000" />
+    <option name="totallyTimeSpent" value="386438000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -714,8 +728,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.25686592" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.26898223" />
       <window_info id="Structure" order="1" sideWeight="0.5068493" side_tool="true" weight="0.17285945" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -727,7 +742,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32876712" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Tool Output" order="8" weight="0.32876712" />
-      <window_info anchor="bottom" x="0" y="22" width="1280" height="778" id="Terminal" maximized="true" order="9" sideWeight="0.49919224" visible="true" weight="0.09452055" />
+      <window_info active="true" anchor="bottom" x="0" y="22" width="1280" height="778" id="Terminal" maximized="true" order="9" sideWeight="0.49919224" visible="true" weight="0.08493151" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.38356164" />
       <window_info anchor="bottom" id="ANTLR Preview" order="11" weight="0.32876712" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32876712" />
@@ -1119,6 +1134,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/inception-resnet-v2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1380">
+          <caret line="92" column="70" selection-start-line="92" selection-end-line="93" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1133,17 +1155,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inception-resnet-v2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="92" column="70" selection-start-line="92" selection-end-line="93" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-460">
-          <caret line="122" selection-start-line="122" selection-end-line="122" />
+        <state relative-caret-position="423">
+          <caret line="679" column="19" selection-start-line="679" selection-start-column="19" selection-end-line="679" selection-end-column="49" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#576#1149#0" />
@@ -1160,6 +1175,15 @@
             <element signature="e#9346#9748#0" />
             <element signature="e#9794#10369#0" />
             <element signature="e#10414#20084#0" />
+            <element signature="e#23223#23882#0" />
+            <element signature="e#23925#23943#0" />
+            <element signature="e#23989#24056#0" />
+            <element signature="e#24089#24212#0" />
+            <element signature="e#24249#24275#0" />
+            <element signature="e#24311#24334#0" />
+            <element signature="e#24385#24687#0" />
+            <element signature="e#24728#24751#0" />
+            <element signature="e#24791#24813#0" />
           </folding>
         </state>
       </provider>
