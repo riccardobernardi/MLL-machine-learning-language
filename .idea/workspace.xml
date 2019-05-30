@@ -90,7 +90,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1670">
+            <state relative-caret-position="285">
               <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
@@ -263,23 +263,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="MLL-LARK" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MLL-LARK" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MLL-LARK" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MLL-LARK" type="462c0819:PsiDirectoryNode" />
-              <item name="mll" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -507,10 +492,10 @@
       <item itemvalue="Python.test_liste" />
       <item itemvalue="Python.test_net" />
       <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL" />
-      <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_inception_mod_double_fork_for_thesis" />
       <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_entire_inception_with_function_bigger_aug" />
-      <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_entire_inception_with_function_bigger_aug_shortened_no_locals" />
       <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_entire_inception_with_function_bigger_aug_shortened_external_fant" />
+      <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_entire_inception_with_function_bigger_aug_shortened_no_locals" />
+      <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_inception_mod_double_fork_for_thesis" />
     </list>
     <recent_temporary>
       <list>
@@ -726,7 +711,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.273021" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.27705976" />
       <window_info id="Structure" order="1" sideWeight="0.5068493" side_tool="true" weight="0.17285945" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1071,58 +1056,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inception-resnet-v2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="92" column="70" selection-start-line="92" selection-end-line="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mll/new_grammar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="29" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1670">
-          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-            <element signature="e#1296#1776#0" />
-            <element signature="e#1830#2574#0" />
-            <element signature="e#2635#2896#0" />
-            <element signature="e#2955#4410#0" />
-            <element signature="e#4466#5207#0" />
-            <element signature="e#5268#6665#0" />
-            <element signature="e#6718#7803#0" />
-            <element signature="e#7857#8737#0" />
-            <element signature="e#8793#9293#0" />
-            <element signature="e#9346#9748#0" />
-            <element signature="e#9794#10369#0" />
-            <element signature="e#10414#20084#0" />
-            <element signature="e#23223#23882#0" />
-            <element signature="e#23925#23943#0" />
-            <element signature="e#23989#24056#0" />
-            <element signature="e#24089#24212#0" />
-            <element signature="e#24249#24275#0" />
-            <element signature="e#24311#24334#0" />
-            <element signature="e#24385#24687#0" />
-            <element signature="e#24728#24751#0" />
-            <element signature="e#24791#24813#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mll/test_MLL.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
@@ -1179,6 +1112,58 @@
             <element signature="e#114357#125386#0" />
             <element signature="e#140151#152760#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inception-resnet-v2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1380">
+          <caret line="92" column="70" selection-start-line="92" selection-end-line="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#1296#1776#0" />
+            <element signature="e#1830#2574#0" />
+            <element signature="e#2635#2896#0" />
+            <element signature="e#2955#4410#0" />
+            <element signature="e#4466#5207#0" />
+            <element signature="e#5268#6665#0" />
+            <element signature="e#6718#7803#0" />
+            <element signature="e#7857#8737#0" />
+            <element signature="e#8793#9293#0" />
+            <element signature="e#9346#9748#0" />
+            <element signature="e#9794#10369#0" />
+            <element signature="e#10414#20084#0" />
+            <element signature="e#23223#23882#0" />
+            <element signature="e#23925#23943#0" />
+            <element signature="e#23989#24056#0" />
+            <element signature="e#24089#24212#0" />
+            <element signature="e#24249#24275#0" />
+            <element signature="e#24311#24334#0" />
+            <element signature="e#24385#24687#0" />
+            <element signature="e#24728#24751#0" />
+            <element signature="e#24791#24813#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mll/new_grammar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="29" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="29" />
         </state>
       </provider>
     </entry>
