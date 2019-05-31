@@ -368,24 +368,6 @@ class MLL:
 
                 t = self.put_macros(t)
 
-                # if istok(t[i]) and clean_tok(t[i].value) in self.param_values:
-                #     t[i].value = self.param_values[clean_tok(t[i].value)]
-                #     t[i].type = "e" #così gli viene messa correttamente la virgola
-                # else:
-                #     if not istok(t[i]):
-                #         tr = t[i].children
-                #         for j in tr:
-                #             if istok(j) and clean_tok(j.value) in self.param_values:
-                #                 j.value = self.param_values[clean_tok(j.value)]
-                #                 j.type = "e"  # così gli viene messa correttamente la virgola
-                #             else:
-                #                 if istok(j):
-                #                     cprint("non sono stato accettato e sono : ["+clean_tok(j.value)+"]","red")
-                #                 else:
-                #                     cprint("non sono stato accettato e sono un tree [one]", "red")
-                #     else:
-                #         cprint("non sono stato accettato e sono un tree [two]","red")
-
                 t = self.insert_parmac(t)
 
                 if istok(t[i]) and ("->" in clean_tok(t[i].value)):
