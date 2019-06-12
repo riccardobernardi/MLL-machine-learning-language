@@ -90,7 +90,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="521">
+            <state relative-caret-position="780">
               <caret line="697" column="20" selection-start-line="697" selection-start-column="20" selection-end-line="697" selection-end-column="20" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
@@ -693,6 +693,7 @@
       <workItem from="1559156429014" duration="439000" />
       <workItem from="1559286942207" duration="1112000" />
       <workItem from="1559643186456" duration="459000" />
+      <workItem from="1560326313361" duration="44000" />
     </task>
     <servers />
   </component>
@@ -729,7 +730,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="388448000" />
+    <option name="totallyTimeSpent" value="388492000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -743,7 +744,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.28513733" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.28917608" />
       <window_info id="Structure" order="1" sideWeight="0.5068493" side_tool="true" weight="0.17285945" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1170,7 +1171,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mll/mlltranspiler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
+        <state relative-caret-position="780">
           <caret line="697" column="20" selection-start-line="697" selection-start-column="20" selection-end-line="697" selection-end-column="20" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
