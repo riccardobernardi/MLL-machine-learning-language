@@ -64,29 +64,70 @@ def fant(x):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import keras
 import sklearn
 import mlxtend
 from keras.backend import conv2d
 from keras.layers import Conv2D
 from keras.models import Sequential
-from keras.backend import relu
-from keras.layers import Activation
 from keras.layers import Dropout
 from keras.layers import Dense
 from keras.backend import flatten
 from keras.layers import Flatten
+from keras.layers import Activation
 from keras.layers import MaxPooling2D
+from keras.backend import relu
 from keras.backend import sum
 from keras.layers import merge
+from keras.layers import concatenate
 from keras.layers import merge
+from keras.layers import concatenate
 from keras.layers import merge
+from keras.layers import concatenate
 from keras.layers import merge
+from keras.layers import concatenate
 from keras.layers import merge
+from keras.layers import concatenate
 from keras.layers import merge
+from keras.layers import concatenate
 from keras.layers import merge
+from keras.layers import concatenate
 from keras.layers import merge
+from keras.layers import concatenate
 from keras.layers import merge
+from keras.layers import concatenate
+from keras.layers import merge
+from keras.layers import concatenate
+from keras.layers import merge
+from keras.layers import concatenate
 
 
 def assign(x):
@@ -95,174 +136,242 @@ def assign(x):
 
 # macro: Conv2D
 # macro: Sequential
-# macro: Activation relu
 # macro: Dropout
 # macro: Dense
 # macro: Flatten
 # macro: Activation 'softmax'
-# macro: Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 32 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 32 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 48 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 64 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 64 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 64 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 64 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 96 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 128 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 160 (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 160 (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 192 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 224 (1, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 256 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 256 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 256 (3, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 288 (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 288 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 320 (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
-# macro: Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
-# macro: Conv2D 384 (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
-# macro: Conv2D 1154 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
-# macro: Conv2D 2048 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
+# macro: Conv2D @fant(32) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(32) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(32) (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(32) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(48) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(48) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(64) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(64) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(64) (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(64) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(64) (1, 7) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(64) (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(64) (7, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(64) (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(96) (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(96) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(96) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(96) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(128) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(160) (1, 7) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(160) (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(192) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(192) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(192) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(192) (7, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(224) (1, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(256) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(256) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(256) (3, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(288) (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(288) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(320) (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(384) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(384) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(384) (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(384) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
+# macro: Conv2D @fant(384) (3, 3) with subsample=(2,2) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+# macro: Conv2D @fant(1154) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
+# macro: Conv2D @fant(2048) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear'
 # macro: MaxPooling2D (3, 3) with strides=(1, 1) border_mode='valid' dim_ordering ='tf'
 # macro: MaxPooling2D (3, 3) with strides=(2, 2) border_mode='same' dim_ordering ='tf'
 # macro: MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 # macro: MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 #  Input layer
-models['x']=assign(inputs)
+models['x'] = assign(inputs)
+
+
 #  Layer stem di entrata dell input
 
 def stem1(x):
-	a=(Conv2D(fant(32),(3,3),subsample=(1,1),init='he_normal',border_mode='valid',dim_ordering='tf',activation='relu'))(x)
-	a=(Conv2D(fant(32),(3,3),subsample=(1,1),init='he_normal',border_mode='valid',dim_ordering='tf',activation='relu'))(a)
-	a=(Conv2D(fant(64),(3,3),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(a)
+	a = (Conv2D(fant(32), (3, 3), subsample=(1, 1), init='he_normal', border_mode='valid', dim_ordering='tf',
+				activation='relu'))(x)
+	a = (Conv2D(fant(32), (3, 3), subsample=(1, 1), init='he_normal', border_mode='valid', dim_ordering='tf',
+				activation='relu'))(a)
+	a = (Conv2D(fant(64), (3, 3), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(a)
 	return a
 
-models['x']=stem1(models['x'])
+
+models['x'] = stem1(models['x'])
+
 
 def stem2(x):
-	a=(MaxPooling2D((3,3),strides=(1,1),border_mode='valid',dim_ordering='tf'))(x)
-	b=(Conv2D(fant(96),(3,3),subsample=(1,1),init='he_normal',border_mode='valid',dim_ordering='tf',activation='relu'))(x)
-	b=merge([a,b],'concat')
-	c=(Conv2D(fant(64),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(b)
-	c=(Conv2D(fant(96),(3,3),subsample=(1,1),init='he_normal',border_mode='valid',dim_ordering='tf',activation='relu'))(c)
-	d=(Conv2D(fant(64),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(b)
-	d=(Conv2D(fant(64),(7,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(d)
-	d=(Conv2D(fant(64),(1,7),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(d)
-	d=(Conv2D(fant(96),(3,3),subsample=(1,1),init='he_normal',border_mode='valid',dim_ordering='tf',activation='relu'))(d)
-	d=merge([c,d],'concat')
-	e=(Conv2D(fant(192),(3,3),subsample=(1,1),init='he_normal',border_mode='valid',dim_ordering='tf',activation='relu'))(d)
-	f=(MaxPooling2D((3,3),strides=(1,1),border_mode='valid',dim_ordering='tf'))(d)
-	f=merge([e,f],'concat')
-	g=(Activation('relu'))(f)
-	return g
+	a = (MaxPooling2D((3, 3), strides=(1, 1), border_mode='valid', dim_ordering='tf'))(x)
+	b = (Conv2D(fant(96), (3, 3), subsample=(1, 1), init='he_normal', border_mode='valid', dim_ordering='tf',
+				activation='relu'))(x)
+	b = concatenate([a, b])
+	c = (Conv2D(fant(64), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(b)
+	c = (Conv2D(fant(96), (3, 3), subsample=(1, 1), init='he_normal', border_mode='valid', dim_ordering='tf',
+				activation='relu'))(c)
+	d = (Conv2D(fant(64), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(b)
+	d = (Conv2D(fant(64), (7, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(d)
+	d = (Conv2D(fant(64), (1, 7), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(d)
+	d = (Conv2D(fant(96), (3, 3), subsample=(1, 1), init='he_normal', border_mode='valid', dim_ordering='tf',
+				activation='relu'))(d)
+	d = concatenate([c, d])
+	e = (Conv2D(fant(192), (3, 3), subsample=(1, 1), init='he_normal', border_mode='valid', dim_ordering='tf',
+				activation='relu'))(d)
+	f = (MaxPooling2D((3, 3), strides=(1, 1), border_mode='valid', dim_ordering='tf'))(d)
+	f = concatenate([e, f])
 
-models['x']=stem2(models['x'])
-#  layer A
-models['shortcut']=assign(models['x'])
-
-def incA(x):
-	a=(Conv2D(fant(32),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(x)
-	b=(Conv2D(fant(32),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(x)
-	b=(Conv2D(fant(32),(3,3),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(b)
-	c=(Conv2D(fant(32),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(x)
-	c=(Conv2D(fant(48),(3,3),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(c)
-	c=(Conv2D(fant(64),(3,3),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(c)
-	c=merge([a,b,c],'concat')
-	d=(assign(models['shortcut']))
-	e=(Conv2D(fant(384),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='linear'))(c)
-	e=merge([d,e],'concat')
-	f=(Activation('relu'))(e)
 	return f
 
-models['x']=incA(models['x'])
+
+models['x'] = stem2(models['x'])
+#  layer A
+models['shortcut'] = assign(models['x'])
+
+
+def incA(x):
+	a = (Conv2D(fant(32), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(x)
+	b = (Conv2D(fant(32), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(x)
+	b = (Conv2D(fant(32), (3, 3), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(b)
+	c = (Conv2D(fant(32), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(x)
+	c = (Conv2D(fant(48), (3, 3), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(c)
+	c = (Conv2D(fant(64), (3, 3), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(c)
+	c = concatenate([a, b, c])
+	d = (assign(models['shortcut']))
+	e = (Conv2D(fant(384), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='linear'))(c)
+	e = sum([d, e])
+
+	return e
+
+
+models['x'] = incA(models['x'])
+
 
 def incA_red(x):
-	a=(MaxPooling2D((3,3),strides=(2,2),border_mode='valid',dim_ordering='tf'))(x)
-	b=(Conv2D(fant(384),(3,3),subsample=(2,2),init='he_normal',border_mode='valid',dim_ordering='tf',activation='relu'))(x)
-	c=(Conv2D(fant(256),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(x)
-	c=(Conv2D(fant(256),(3,3),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(c)
-	c=(Conv2D(fant(384),(3,3),subsample=(2,2),init='he_normal',border_mode='valid',dim_ordering='tf',activation='relu'))(c)
-	c=merge([a,b,c],'concat')
+	a = (MaxPooling2D((3, 3), strides=(2, 2), border_mode='valid', dim_ordering='tf'))(x)
+	b = (Conv2D(fant(384), (3, 3), subsample=(2, 2), init='he_normal', border_mode='valid', dim_ordering='tf',
+				activation='relu'))(x)
+	c = (Conv2D(fant(256), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(x)
+	c = (Conv2D(fant(256), (3, 3), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(c)
+	c = (Conv2D(fant(384), (3, 3), subsample=(2, 2), init='he_normal', border_mode='valid', dim_ordering='tf',
+				activation='relu'))(c)
+	c = concatenate([a, b, c])
 	return c
 
-models['x']=incA_red(models['x'])
+
+models['x'] = incA_red(models['x'])
 # layer B
-models['shortcut']=assign(models['x'])
+models['shortcut'] = assign(models['x'])
+
 
 def incB(x):
-	a=(Conv2D(fant(192),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(x)
-	b=(Conv2D(fant(128),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(x)
-	b=(Conv2D(fant(160),(1,7),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(b)
-	b=(Conv2D(fant(192),(7,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(b)
-	b=merge([a,b],'concat')
-	c=(assign(models['shortcut']))
-	d=(Conv2D(fant(1154),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='linear'))(b)
-	d=merge([c,d],'sum')
-	e=(Activation('relu'))(d)
-	return e
+	a = (Conv2D(fant(192), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(x)
+	b = (Conv2D(fant(128), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(x)
+	b = (Conv2D(fant(160), (1, 7), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(b)
+	b = (Conv2D(fant(192), (7, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(b)
+	b = concatenate([a, b])
+	c = (assign(models['shortcut']))
+	d = (Conv2D(fant(1154), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='linear'))(b)
+	d = sum([c, d])
 
-models['x']=incB(models['x'])
-
-def incB_red(x):
-	a=(MaxPooling2D((3,3),strides=(2,2),border_mode='valid',dim_ordering='tf'))(x)
-	b=(Conv2D(fant(256),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(x)
-	b=(Conv2D(fant(288),(3,3),subsample=(2,2),init='he_normal',border_mode='valid',dim_ordering='tf',activation='relu'))(b)
-	c=(Conv2D(fant(256),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(x)
-	c=(Conv2D(fant(288),(3,3),subsample=(2,2),init='he_normal',border_mode='valid',dim_ordering='tf',activation='relu'))(c)
-	d=(Conv2D(fant(256),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(x)
-	d=(Conv2D(fant(288),(3,3),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(d)
-	d=(Conv2D(fant(320),(3,3),subsample=(2,2),init='he_normal',border_mode='valid',dim_ordering='tf',activation='relu'))(d)
-	d=merge([a,b,c,d],'concat')
 	return d
 
-models['x']=incB_red(models['x'])
-models['shortcut']=assign(models['x'])
+
+models['x'] = incB(models['x'])
+
+
+def incB_red(x):
+	a = (MaxPooling2D((3, 3), strides=(2, 2), border_mode='valid', dim_ordering='tf'))(x)
+	b = (Conv2D(fant(256), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(x)
+	b = (Conv2D(fant(288), (3, 3), subsample=(2, 2), init='he_normal', border_mode='valid', dim_ordering='tf',
+				activation='relu'))(b)
+	c = (Conv2D(fant(256), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(x)
+	c = (Conv2D(fant(288), (3, 3), subsample=(2, 2), init='he_normal', border_mode='valid', dim_ordering='tf',
+				activation='relu'))(c)
+	d = (Conv2D(fant(256), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(x)
+	d = (Conv2D(fant(288), (3, 3), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(d)
+	d = (Conv2D(fant(320), (3, 3), subsample=(2, 2), init='he_normal', border_mode='valid', dim_ordering='tf',
+				activation='relu'))(d)
+	d = concatenate([a, b, c, d])
+	return d
+
+
+models['x'] = incB_red(models['x'])
+models['shortcut'] = assign(models['x'])
+
 
 def incC(x):
-	a=(Conv2D(fant(192),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(x)
-	b=(Conv2D(fant(192),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(x)
-	b=(Conv2D(fant(224),(1,3),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(b)
-	b=(Conv2D(fant(256),(3,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='relu'))(b)
-	b=merge([a,b],'concat')
-	c=(assign(models['shortcut']))
-	d=(Conv2D(fant(2048),(1,1),subsample=(1,1),init='he_normal',border_mode='same',dim_ordering='tf',activation='linear'))(b)
-	d=merge([c,d],'sum')
-	e=(Activation('relu'))(d)
-	return e
+	a = (Conv2D(fant(192), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(x)
+	b = (Conv2D(fant(192), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(x)
+	b = (Conv2D(fant(224), (1, 3), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(b)
+	b = (Conv2D(fant(256), (3, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='relu'))(b)
+	b = concatenate([a, b])
+	c = (assign(models['shortcut']))
+	d = (Conv2D(fant(2048), (1, 1), subsample=(1, 1), init='he_normal', border_mode='same', dim_ordering='tf',
+				activation='linear'))(b)
+	d = sum([c, d])
 
-models['x']=incC(models['x'])
+	return d
+
+
+models['x'] = incC(models['x'])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 x= models['x']
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 x = AveragePooling2D(pool_size=(4, 4), strides=(1, 1), border_mode='valid', dim_ordering='tf')(x)
 x = Dropout(0.5)(x)
