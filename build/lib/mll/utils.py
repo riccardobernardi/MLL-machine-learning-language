@@ -160,6 +160,9 @@ def get_base_imports() -> str:
     return """import keras
 import sklearn
 import mlxtend
+from keras.layers import Concatenate as concat
+from keras.layers import Concatenate
+from keras.layers import Add as sum
 """
 
 from keras import models

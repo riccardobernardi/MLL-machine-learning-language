@@ -14,9 +14,10 @@ warnings.filterwarnings("ignore")
 
 class MLL:
 
-    def __init__(self,program: str,loc = {}) -> None:
+    def __init__(self,program: str,loc = {},glob = {}) -> None:
         presentation()
         self.loc = loc
+        self.glob = glob
         self.param_values = {}
         self.models = {}
         self.macros={}
@@ -91,22 +92,22 @@ class MLL:
     def recon_class_ids(self, t:object) -> None:
         if isinstance(t, Token):
             if t.type == "ID":
-                if clean_tok(t.value) not in self.actual_imports_set and self.is_in_possible_imports(clean_tok(t.value)) != "":
+                if clean_tok(t.value) not in self.actual_imports_set and clean_tok(t.value)!="sum" and self.is_in_possible_imports(clean_tok(t.value)) != "":
                     self.actual_imports += self.is_in_possible_imports(clean_tok(t.value))
                     self.actual_imports_set.add(clean_tok(t.value))
 
-            if t.type == "CONCAT":
-                self.actual_imports += self.is_in_possible_imports(clean_tok("merge"))
-                self.actual_imports_set.add(clean_tok("merge"))
+            # if t.type == "CONCAT":
+            #     self.actual_imports += self.is_in_possible_imports(clean_tok("merge"))
+            #     self.actual_imports_set.add(clean_tok("merge"))
 
             if (t.type == "ID" or t.type == "FEXTNAME") and "@" in t.value:
                 locals().update(self.loc)
                 try:
-                    self.import_from_glob[str(clean_tok(t.value)).replace("@","")] = locals()[
+                    self.import_from_glob[str(clean_tok(t.value)).replace("@","")] = self.loc[
                         str(clean_tok(t.value)).replace("@","")]
                 except:
                     try:
-                        self.import_from_glob[str(clean_tok(t.value)).replace("@", "")] = globals()[
+                        self.import_from_glob[str(clean_tok(t.value)).replace("@", "")] = self.glob[
                             str(clean_tok(t.value)).replace("@", "")]
                     except:
                         print("la variabile "+ str(clean_tok(t.value)).replace("@", "") +" non è disponibile")
@@ -367,24 +368,6 @@ class MLL:
 
                 t = self.put_macros(t)
 
-                # if istok(t[i]) and clean_tok(t[i].value) in self.param_values:
-                #     t[i].value = self.param_values[clean_tok(t[i].value)]
-                #     t[i].type = "e" #così gli viene messa correttamente la virgola
-                # else:
-                #     if not istok(t[i]):
-                #         tr = t[i].children
-                #         for j in tr:
-                #             if istok(j) and clean_tok(j.value) in self.param_values:
-                #                 j.value = self.param_values[clean_tok(j.value)]
-                #                 j.type = "e"  # così gli viene messa correttamente la virgola
-                #             else:
-                #                 if istok(j):
-                #                     cprint("non sono stato accettato e sono : ["+clean_tok(j.value)+"]","red")
-                #                 else:
-                #                     cprint("non sono stato accettato e sono un tree [one]", "red")
-                #     else:
-                #         cprint("non sono stato accettato e sono un tree [two]","red")
-
                 t = self.insert_parmac(t)
 
                 if istok(t[i]) and ("->" in clean_tok(t[i].value)):
@@ -434,7 +417,8 @@ class MLL:
                     t.pop(i - 1)
 
                     if len(forks) > 1:
-                        t.insert(i, Token("CONCAT", forks[0] + " = merge (["))
+                        # t.insert(i, Token("CONCAT", forks[0] + " = merge (["))
+                        t.insert(i, Token("CONCAT", forks[0] + " = " + value + "()(["))
 
                         return_me = forks[0]
 
@@ -443,7 +427,8 @@ class MLL:
                         s = ""
 
                         t.insert(i + 1, Token("MODELS", str(model_dx+ "," +model_sx)))
-                        t.insert(i + 2, Token("PP", "]," + str("'" + value + "'") + ")"))
+                        # t.insert(i + 2, Token("PP", "]," + str("'" + value + "'") + ")"))
+                        t.insert(i + 2, Token("PP", "])"))
 
                         forks = []
 
@@ -474,9 +459,11 @@ class MLL:
                     if len(to_concat_and_free) >1:
 
                         if found_ar!=None:
-                            t.insert(i, Token("CONCAT", found_ar + " = merge (["))
+                            # t.insert(i, Token("CONCAT", found_ar + " = merge (["))
+                            t.insert(i, Token("CONCAT", found_ar + " = " + value + "()(["))
                         else:
-                            t.insert(i,Token("CONCAT",models[0] + " = merge (["))
+                            # t.insert(i,Token("CONCAT",models[0] + " = merge (["))
+                            t.insert(i, Token("CONCAT", models[0] + " = " + value + "()(["))
                             found_ar = None
 
                         model_x = models[0]
@@ -491,7 +478,8 @@ class MLL:
                                 s += str(j)
 
                         t.insert(i+1, Token("MODELS", s))
-                        t.insert(i+2, Token("PP","],"+ str("'"+value+"'") +")"))
+                        # t.insert(i+2, Token("PP","],"+ str("'"+value+"'") +")"))
+                        t.insert(i + 2, Token("PP", "])"))
 
                         to_concat_and_free = []
 
@@ -577,10 +565,12 @@ class MLL:
                 else:
                     s += [i]
 
-            t.append(Token("CONCAT", "x = merge(["))
+            # t.append(Token("CONCAT", "x = merge(["))
+            t.append(Token("CONCAT", "x = Concatenate()(["))
             models.insert(0,"x")
             t.append( [Token("MODELS", i) for i in s ])
-            t.append( Token("PP","],'concat')\n\t") )
+            # t.append( Token("PP","],'concat')\n\t") )
+            t.append(Token("PP", "])\n\t"))
 
         if return_me == None:
             t.append( Token("RETURN", "return " + models[0] + "\n\n"))
