@@ -429,7 +429,7 @@ class TestMLL(TestCase):
     def test_sk_1(self):
         skmodel4 = """
 
-        criterion have 'gini' or 'entropy'
+        criterion IS 'gini' or 'entropy'
 
         rf_clf  : @RandomForestClassifier 10 entropy
         knn_clf : @KNeighborsClassifier 2
@@ -467,9 +467,9 @@ class TestMLL(TestCase):
         soft := Activation 'softmax'
         ANN := seq
 
-        padding have 'same' or 'valid'
+        padding IS 'same' or 'valid'
 
-        criterion have 'gini' or 'entropy'
+        criterion IS 'gini' or 'entropy'
 
         classifier rf_clf  : @RandomForestClassifier 10 entropy
         knn_clf : @KNeighborsClassifier 2
@@ -769,7 +769,7 @@ class TestMLL(TestCase):
     def test_simpler_auto_import(self):
         skmodel4 = """
 
-        criterion have 'gini' or 'entropy'
+        criterion IS 'gini' or 'entropy'
 
         rf_clf  : RandomForestClassifier 10 entropy
         knn_clf : KNeighborsClassifier 2
@@ -1742,7 +1742,7 @@ class TestMLL(TestCase):
         flatten := Flatten
         soft := Activation 'softmax'
 
-        dim_ordering have 'tf'
+        dim_ordering IS 'tf'
 
         m2d := MaxPooling2D (3, 3) tf with strides=(1, 1) border_mode='valid'
         c2d96 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
@@ -2195,10 +2195,10 @@ class TestMLL(TestCase):
         flatten := Flatten
         soft := Activation 'softmax'
         
-        init have 'he_normal'
-        border_mode have 'valid' or 'same'
-        dim_ordering have 'tf' or 'th'
-        activation have 'relu' or 'linear'
+        init IS 'he_normal'
+        border_mode IS 'valid' or 'same'
+        dim_ordering IS 'tf' or 'th'
+        activation IS 'relu' or 'linear'
         
         kkk := he_normal, valid, tf, relu
 
@@ -2442,10 +2442,10 @@ class TestMLL(TestCase):
         flatten := Flatten
         soft := Activation 'softmax'
 
-        init have 'he_normal'
-        border_mode have 'valid' or 'same'
-        dim_ordering have 'tf' or 'th'
-        activation have 'relu' or 'linear'
+        init IS 'he_normal'
+        border_mode IS 'valid' or 'same'
+        dim_ordering IS 'tf' or 'th'
+        activation IS 'relu' or 'linear'
 
         mmm := he_normal, valid, tf, relu
 
@@ -2557,10 +2557,10 @@ class TestMLL(TestCase):
         soft := Activation 'softmax'
         re := Activation 'relu'
 
-        init have 'he_normal'
-        border_mode have 'valid' or 'same'
-        dim_ordering have 'tf'
-        activation have 'relu' or 'linear'
+        init IS 'he_normal'
+        border_mode IS 'valid' or 'same'
+        dim_ordering IS 'tf'
+        activation IS 'relu' or 'linear'
 
         val_rel := he_normal, valid, tf, relu
         val_rel := he_normal, valid, tf, linear
@@ -2881,10 +2881,10 @@ class TestMLL(TestCase):
         soft := Activation 'softmax'
         re := Activation 'relu'
 
-        init have 'he_normal'
-        border_mode have 'valid' or 'same'
-        dim_ordering have 'tf'
-        activation have 'relu' or 'linear'
+        init IS 'he_normal'
+        border_mode IS 'valid' or 'same'
+        dim_ordering IS 'tf'
+        activation IS 'relu' or 'linear'
 
         val_rel := he_normal, valid, tf, relu
         val_rel := he_normal, valid, tf, linear
@@ -3199,10 +3199,10 @@ class TestMLL(TestCase):
         soft := Activation 'softmax'
         re := Activation 'relu'
 
-        init have 'he_normal'
-        border_mode have 'valid' or 'same'
-        dim_ordering have 'tf'
-        activation have 'relu' or 'linear'
+        init IS 'he_normal'
+        border_mode IS 'valid' or 'same'
+        dim_ordering IS 'tf'
+        activation IS 'relu' or 'linear'
 
         val_rel := he_normal, valid, tf, relu
         val_rel := he_normal, valid, tf, linear

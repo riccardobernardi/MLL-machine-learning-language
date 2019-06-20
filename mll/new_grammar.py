@@ -23,7 +23,7 @@ mt.2 : RR | CC //model type
 comment : HASH (FF | CO | " ")* WSP
 
 //macro per i parametri
-parmac.2 : ID HAVE n (OR n)*
+parmac.2 : ID IS n (OR n)*
 
 comp : ID EQ e
         | ID EQ LSP e [CO] (CO e)* RSP
@@ -70,7 +70,7 @@ RR : ("REGRESSOR" | "regressor") WS
 
 CC : ("CLASSIFIER" | "classifier") WS
 
-HAVE : "have" WS
+IS : ("IS" | "is") WS
 
 OR : "or" WS
 
@@ -132,8 +132,8 @@ def get_new_grammar():
 
 
 #se invece di avere macro sfruttassi a palla il dict?
-# criterion have 'gini' 'entropy'
-#foreach val after have:
-#   create dict entry with "before have" + "=" + "val"
+# criterion IS 'gini' 'entropy'
+#foreach val after IS:
+#   create dict entry with "before IS" + "=" + "val"
 
 #l' assegnamento di layers ad un layer non necessita di un nuovo tipo di assegnamento!!!
