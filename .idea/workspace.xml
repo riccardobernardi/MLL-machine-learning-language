@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/mll/new_grammar.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/new_grammar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mll/test_MLL.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/test_MLL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/mll/new_grammar.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/mll/new_grammar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/mll/test_MLL.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/mll/test_MLL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,6 +101,15 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/setup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resnetv2-fastai.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -112,7 +122,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mll/new_grammar.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="401">
@@ -229,12 +239,12 @@
         <option value="$PROJECT_DIR$/test_liste.py" />
         <option value="$PROJECT_DIR$/test_net.py" />
         <option value="$PROJECT_DIR$/mll/utils.py" />
-        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/mll/mlltranspiler.py" />
         <option value="$PROJECT_DIR$/resnet-fastai.py" />
         <option value="$PROJECT_DIR$/resnetv2-fastai.py" />
         <option value="$PROJECT_DIR$/mll/test_MLL.py" />
         <option value="$PROJECT_DIR$/mll/new_grammar.py" />
+        <option value="$PROJECT_DIR$/setup.py" />
       </list>
     </option>
   </component>
@@ -684,7 +694,7 @@
       <workItem from="1560849469030" duration="308000" />
       <workItem from="1560859624259" duration="49000" />
       <workItem from="1560859709561" duration="9643000" />
-      <workItem from="1561013052604" duration="3825000" />
+      <workItem from="1561013052604" duration="3988000" />
     </task>
     <servers />
   </component>
@@ -721,7 +731,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="402510000" />
+    <option name="totallyTimeSpent" value="402673000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -734,21 +744,20 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.31340873" />
       <window_info id="Structure" order="1" sideWeight="0.5068493" side_tool="true" weight="0.17285945" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
-      <window_info active="true" anchor="bottom" x="0" y="22" width="1280" height="778" id="Run" maximized="true" order="2" type="WINDOWED" visible="true" weight="0.60958904" />
+      <window_info anchor="bottom" x="0" y="22" width="1280" height="778" id="Run" maximized="true" order="2" type="WINDOWED" weight="0.60958904" />
       <window_info anchor="bottom" x="0" y="45" width="1280" height="362" id="Debug" order="3" weight="0.5205479" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32876712" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Tool Output" order="8" weight="0.32876712" />
-      <window_info anchor="bottom" x="0" y="22" width="1280" height="778" id="Terminal" maximized="true" order="9" sideWeight="0.49919224" weight="0.18219177" />
+      <window_info active="true" anchor="bottom" x="0" y="22" width="1280" height="778" id="Terminal" maximized="true" order="9" sideWeight="0.49919224" visible="true" weight="0.18219177" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.38356164" />
       <window_info anchor="bottom" id="ANTLR Preview" order="11" weight="0.32876712" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32876712" />
@@ -1078,13 +1087,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mll/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1183,6 +1185,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="401">
           <caret line="66" column="18" lean-forward="true" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
         </state>
       </provider>
     </entry>
