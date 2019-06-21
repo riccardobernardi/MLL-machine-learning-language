@@ -7,6 +7,10 @@ mll : ( model | macro | parmac | dag | comment )*
 model : [mt] ID COLON ID [e*] [WITH comp*] (PLUS (ID [e*] [WITH comp*]) )*
         
 macro : ID EQC (_msid | _mse | dotname)
+
+c2d: C2D FILTER KERNEL SUBSAMPLE BORDER [ACTIVATION]
+
+m2d: M2D KERNEL STRIDES BORDER [ACTIVATION]
         
 dotname.3 : ID DO ID (DO ID)* 
 
@@ -55,6 +59,22 @@ n   : SQ W SQ
 //////////////LEXER TERMINALS
 
 FEXTNAME : ["@"] FF
+
+FILTER : (NUM)+
+
+KERNEL : NUM NUM
+
+SUBSAMPLE : NUM NUM
+
+STRIDES : NUM NUM
+
+BORDER : "v" | "s"
+
+ACTIVATION : "l" | "r" //linear or relu
+
+C2D : "c2d"
+
+M2D : "m2d"
 
 AR : "->" WS
 
@@ -122,7 +142,9 @@ INTEGER  :   ("0".."9")+
 
 DECIMAL  :   INTEGER ("." INTEGER)?
 
-NUMBER   :   (DECIMAL | INTEGER) WS
+NUMBER   :   NUM WS
+
+NUM : (DECIMAL | INTEGER)
 
 """
 

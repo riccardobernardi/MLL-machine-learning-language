@@ -646,6 +646,16 @@ class MLL:
             if t.data == "parmac":
                 return self.save_parmac(t.children)
 
+            if t.data == "c2d":
+                print("crea una macro ad hoc --c2d")
+                # è sufficiente che la macro venga inserita nel dizionario delle macro non serve nemmeno inserirla nell' albero
+                # inoltre bisogna lanciare la ricerca degli ID da importare dalle librerie sulle macro create
+
+            if t.data == "m2d":
+                print("crea una macro ad hoc --m2d")
+                # è sufficiente che la macro venga inserita nel dizionario delle macro non serve nemmeno inserirla nell' albero
+                # inoltre bisogna lanciare la ricerca degli ID da importare dalle librerie sulle macro create
+
             return Tree(t.data, self.transform(t.children))
 
         elif isinstance(t, list):
