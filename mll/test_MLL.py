@@ -70,13 +70,13 @@ class TestMLL(TestCase):
         stem2 :
             | m2d3311
             | c2d9633
-            | concat
+            | Concatenate
             | c2d6411 + c2d9633
             | c2d6411 + c2d6471 + c2d6417 + c2d9633
-            | concat
+            | Concatenate
             | c2d19233
             | m2d3311
-            | concat
+            | Concatenate
             | relu
             
         x : stem2 x
@@ -385,17 +385,17 @@ class TestMLL(TestCase):
         biforcazione1 : stem + m2d
         biforcazione2 : stem + c2d96
 
-        stem : concatenate biforcazione1 biforcazione2
+        stem : Concatenate biforcazione1 biforcazione2
 
         biforcazione1 : stem + c2d64 + c2d96
         biforcazione2 : stem + c2d64 + c2d64 + c2d64 + c2d96
 
-        stem : concatenate biforcazione1 biforcazione2
+        stem : Concatenate biforcazione1 biforcazione2
 
         biforcazione1 : stem + c2d192
         biforcazione2 : stem + m2d
 
-        stem : concatenate biforcazione1 biforcazione2
+        stem : Concatenate biforcazione1 biforcazione2
 
         stem : stem + re
 
@@ -403,10 +403,10 @@ class TestMLL(TestCase):
         biforcazione2 : stem + c2d32 + c2d32
         biforcazione3 : stem + c2d32 + c2d48 + c2d64
 
-        A : concatenate biforcazione1 biforcazione2 biforcazione3
+        A : Concatenate biforcazione1 biforcazione2 biforcazione3
 
         A : A + c2d384
-        A : concatenate A stem
+        A : Concatenate A stem
         A : A + re
 
         m2d := MaxPooling2D 3, 3 with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
@@ -418,7 +418,7 @@ class TestMLL(TestCase):
         biforcazione2 : A + c2d384
         biforcazione3 : A + c2d256 + c2d256 + c2d3822
 
-        redA : concatenate biforcazione1 biforcazione2 biforcazione3 
+        redA : Concatenate biforcazione1 biforcazione2 biforcazione3 
 
         """
         self.mll = MLL(inception_uncomm)
@@ -538,17 +538,17 @@ class TestMLL(TestCase):
         biforcazione1 : stem + m2d
         biforcazione2 : stem + c2d96
 
-        stem : concatenate biforcazione1 biforcazione2
+        stem : Concatenate biforcazione1 biforcazione2
 
         biforcazione1 : stem + c2d64 + c2d96
         biforcazione2 : stem + c2d64 + c2d64 + c2d64 + c2d96
 
-        stem : concatenate biforcazione1 biforcazione2
+        stem : Concatenate biforcazione1 biforcazione2
 
         biforcazione1 : stem + c2d192
         biforcazione2 : stem + m2d
 
-        stem : concatenate biforcazione1 biforcazione2
+        stem : Concatenate biforcazione1 biforcazione2
 
         stem : stem + re
 
@@ -558,10 +558,10 @@ class TestMLL(TestCase):
         biforcazione2 : x + c2d32 + c2d32
         biforcazione3 : x + c2d32 + c2d48 + c2d64
 
-        A : concatenate biforcazione1 biforcazione2 biforcazione3
+        A : Concatenate biforcazione1 biforcazione2 biforcazione3
 
         A : A + c2d384
-        A : concatenate A x
+        A : Concatenate A x
         A : A + re
 
         #layer redA riceve in input x
@@ -575,7 +575,7 @@ class TestMLL(TestCase):
         biforcazione2 : x + c2d384
         biforcazione3 : x + c2d256 + c2d256 + c2d28422
 
-        redA : concatenate biforcazione1 biforcazione2 biforcazione3 
+        redA : Concatenate biforcazione1 biforcazione2 biforcazione3 
 
         #layer B riceve in input x
 
@@ -628,13 +628,13 @@ class TestMLL(TestCase):
         stem :
             | m2d3311
             | c2d9633
-            | concat
+            | Concatenate
             | c2d6411 + c2d9633
             | c2d6411 + c2d6471 + c2d6417 + c2d9633
-            | concat
+            | Concatenate
             | c2d19233
             | m2d3311
-            | concat
+            | Concatenate
             | relu + densem
             
         x : stem x
@@ -696,7 +696,7 @@ class TestMLL(TestCase):
             | c2d3211s
             | c2d3211s + c2d3211s
             | c2d3211s + c2d4811s + c2d6411s
-            | concat
+            | Concatenate
             | c2d38411s
         
         """
@@ -756,7 +756,7 @@ class TestMLL(TestCase):
             | c2d3211s
             | c2d3211s + c2d3211s
             | c2d3211s + c2d4811s + c2d6411s
-            | concat
+            | Concatenate
             | c2d38411s
 
         """
@@ -820,14 +820,14 @@ class TestMLL(TestCase):
         x : stem x
 
         stem2 : 
-            | right -> | c2d96 | m2d | concat
-            | left -> | c2d96 | m2d | concat
+            | right -> | c2d96 | m2d | Concatenate
+            | left -> | c2d96 | m2d | Concatenate
             | loo -> | m2d
-            | concat | right | left
+            | Concatenate | right | left
             
         x : stem2 x
             
-        #non puo diventare x l ultima concat
+        #non puo diventare x l ultima Concatenate
 
         """
         self.mll = MLL(inception_uncomm)
@@ -861,14 +861,14 @@ class TestMLL(TestCase):
         x : stem x
 
         stem2 : 
-            | right -> | m2d | c2d96 | concat
-            | left -> | m2d | c2d96 | concat
-            | concat | right | left
+            | right -> | m2d | c2d96 | Concatenate
+            | left -> | m2d | c2d96 | Concatenate
+            | Concatenate | right | left
             
         x : stem2 x
 
-        #le concat nested senza parametri producono le lettere prima della freccia
-        #l ultima concat con paramteri produce x
+        #le Concatenate nested senza parametri producono le lettere prima della freccia
+        #l ultima Concatenate con paramteri produce x
 
         """
         self.mll = MLL(inception_uncomm)
@@ -902,15 +902,15 @@ class TestMLL(TestCase):
         x : stem x
 
         stem2 : 
-            | right -> | m2d | c2d96 | concat
-            | left -> | m2d | c2d96 | concat
+            | right -> | m2d | c2d96 | Concatenate
+            | left -> | m2d | c2d96 | Concatenate
             | loo -> | m2d + c2d96 + c2d96
-            | concat | right | left
+            | Concatenate | right | left
 
         x : stem2 x
 
-        #le concat nested senza parametri producono le lettere prima della freccia
-        #l ultima concat con paramteri produce x
+        #le Concatenate nested senza parametri producono le lettere prima della freccia
+        #l ultima Concatenate con paramteri produce x
 
         """
         self.mll = MLL(inception_uncomm)
@@ -944,14 +944,14 @@ class TestMLL(TestCase):
         x : stem x
 
         stem2 : 
-            | right -> | m2d | c2d96 | concat
-            | left -> | m2d | c2d96 | concat
-            | concat | right | left
+            | right -> | m2d | c2d96 | Concatenate
+            | left -> | m2d | c2d96 | Concatenate
+            | Concatenate | right | left
 
         x : stem2 x
 
-        #le concat nested senza parametri producono le lettere prima della freccia
-        #l ultima concat con paramteri produce x
+        #le Concatenate nested senza parametri producono le lettere prima della freccia
+        #l ultima Concatenate con paramteri produce x
 
         """
         self.mll = MLL(inception_uncomm)
@@ -986,17 +986,17 @@ class TestMLL(TestCase):
         biforcazione1 : stem + m2d
         biforcazione2 : stem + c2d96
 
-        stem : concatenate biforcazione1 biforcazione2
+        stem : Concatenate biforcazione1 biforcazione2
 
         biforcazione1 : stem + c2d64 + c2d96
         biforcazione2 : stem + c2d64 + c2d64 + c2d64 + c2d96
 
-        stem : concatenate biforcazione1 biforcazione2
+        stem : Concatenate biforcazione1 biforcazione2
 
         biforcazione1 : stem + c2d192
         biforcazione2 : stem + m2d
 
-        stem : concatenate biforcazione1 biforcazione2
+        stem : Concatenate biforcazione1 biforcazione2
 
         stem : stem + re
 
@@ -1006,10 +1006,10 @@ class TestMLL(TestCase):
         biforcazione2 : x + c2d32 + c2d32
         biforcazione3 : x + c2d32 + c2d48 + c2d64
 
-        A : concatenate biforcazione1 biforcazione2 biforcazione3
+        A : Concatenate biforcazione1 biforcazione2 biforcazione3
 
         A : A + c2d384
-        A : concatenate A x
+        A : Concatenate A x
         A : A + re
 
         #layer redA, riceve in input x
@@ -1023,7 +1023,7 @@ class TestMLL(TestCase):
         biforcazione2 : x + c2d384
         biforcazione3 : x + c2d256 + c2d256 + c2d28422
 
-        redA : concatenate biforcazione1 biforcazione2 biforcazione3 
+        redA : Concatenate biforcazione1 biforcazione2 biforcazione3 
 
         #layer B, riceve in input x
 
@@ -1127,7 +1127,7 @@ class TestMLL(TestCase):
 
         x : incA2 x
         
-        # la parte del concat o sum non e presente nei precedenti tests
+        # la parte del Concatenate o sum non e presente nei precedenti tests
         # dovremmo fare una versione di questo test piu corto
 
         incA3 : 
@@ -1197,13 +1197,13 @@ class TestMLL(TestCase):
         stem2 :
             | m2d3311v
             | c2d9633v
-            | concat
+            | Concatenate
             | c2d6411s + c2d9633v
             | c2d6411s + c2d6471s + c2d6417s + c2d9633v
-            | concat
+            | Concatenate
             | c2d19233v
             | m2d3311v
-            | concat
+            | Concatenate
 
         x : stem2 x
 
@@ -1220,17 +1220,17 @@ class TestMLL(TestCase):
             | c2d3211s
             | c2d3211s + c2d3233s
             | c2d3211s + c2d4833s + c2d6433s
-            | concat
+            | Concatenate
             | c2d38411s
             | assign shortcut
             | sum
 
-        #l ultima concat qui sopra sarebbe una sum
+        #l ultima Concatenate qui sopra sarebbe una sum
         #bisogna definire sum
 
         x : incA1 x
 
-        # la parte del concat o sum non e presente nei precedenti tests
+        # la parte del Concatenate o sum non e presente nei precedenti tests
         # dovremmo fare una versione di questo test piu corto
 
         incA2 : 
@@ -1304,13 +1304,13 @@ class TestMLL(TestCase):
         stem2 :
             | m2d3311v
             | c2d9633v
-            | concat
+            | Concatenate
             | c2d6411s + c2d9633v
             | c2d6411s + c2d6471s + c2d6417s + c2d9633v
-            | concat
+            | Concatenate
             | c2d19233v
             | m2d3311v
-            | concat
+            | Concatenate
 
         x : stem2 x
 
@@ -1327,17 +1327,17 @@ class TestMLL(TestCase):
             | c2d3211s
             | c2d3211s + c2d3233s
             | c2d3211s + c2d4833s + c2d6433s
-            |concat
+            |Concatenate
             | c2d38411s_ext
             | assign shortcut
-            | concat
+            | Concatenate
 
-        #l ultima concat qui sopra sarebbe una sum
+        #l ultima Concatenate qui sopra sarebbe una sum
         #bisogna definire sum
 
         x : incA1 x
 
-        # la parte del concat o sum non e presente nei precedenti tests
+        # la parte del Concatenate o sum non e presente nei precedenti tests
         # dovremmo fare una versione di questo test piu corto
 
         incA2 : 
@@ -1373,7 +1373,7 @@ class TestMLL(TestCase):
         incA1 :
             | c2d38411s_ext
             | assign shortcut
-            | concat
+            | Concatenate
             
         x : incA1 x
 
@@ -1403,7 +1403,7 @@ class TestMLL(TestCase):
         incA1 :
             | c2d38411s_ext
             | assign shortcut
-            | concat
+            | Concatenate
 
         x : incA1 x
 
@@ -1445,7 +1445,7 @@ class TestMLL(TestCase):
         incA1 :
             | c2d38411s_ext
             | assign shortcut
-            | concat
+            | Concatenate
 
         x : incA1 x
 
@@ -1478,7 +1478,7 @@ class TestMLL(TestCase):
         incA1 :
             | c2d38411s_ext
             | assign shortcut
-            | concat
+            | Concatenate
 
         x : incA1 x
 
@@ -1511,7 +1511,7 @@ class TestMLL(TestCase):
         incA1 :
             | c2d38411s_ext
             | assign shortcut
-            | concat
+            | Concatenate
 
         x : incA1 x
 
@@ -1544,7 +1544,7 @@ class TestMLL(TestCase):
         incA1 :
             | c2d38411s_ext
             | assign shortcut
-            | concat
+            | Concatenate
 
         x : incA1 x
 
@@ -1577,7 +1577,7 @@ class TestMLL(TestCase):
         incA1 :
             | c2d38411s_ext
             | assign shortcut
-            | concat
+            | Concatenate
 
         x : incA1 x
 
@@ -1611,7 +1611,7 @@ class TestMLL(TestCase):
         incA1 :
             | c2d38411s_ext
             | assign shortcut
-            | concat
+            | Concatenate
 
         x : incA1 x
 
@@ -1638,11 +1638,11 @@ class TestMLL(TestCase):
         c2d96 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
 
         stem : 
-            | right -> | m2d | c2d96 | concat
-            | left -> | m2d | c2d96 | concat
+            | right -> | m2d | c2d96 | Concatenate
+            | left -> | m2d | c2d96 | Concatenate
 
-        #le concat nested senza parametri producono le lettere prima della freccia
-        #l ultima concat con paramteri produce x
+        #le Concatenate nested senza parametri producono le lettere prima della freccia
+        #l ultima Concatenate con paramteri produce x
 
         """
         self.mll = MLL(inception_uncomm)
@@ -1690,10 +1690,10 @@ class TestMLL(TestCase):
         stem2 :
             | m2d3311v
             | c2d9633v
-            | concat
+            | Concatenate
             | c2d6411s + c2d9633v
             | c2d6411s + c2d6471s + c2d6417s + c2d9633v
-            | concat
+            | Concatenate
 
         x : stem2 x
 
@@ -1719,11 +1719,11 @@ class TestMLL(TestCase):
         c2d96 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
 
         stem : 
-            | right -> | m2d | c2d96 | concat
-            | left -> | m2d | c2d96 | concat
+            | right -> | m2d | c2d96 | Concatenate
+            | left -> | m2d | c2d96 | Concatenate
 
-        #le concat nested senza parametri producono le lettere prima della freccia
-        #l ultima concat con paramteri produce x
+        #le Concatenate nested senza parametri producono le lettere prima della freccia
+        #l ultima Concatenate con paramteri produce x
 
         """
         self.mll = MLL(inception_uncomm)
@@ -1748,11 +1748,11 @@ class TestMLL(TestCase):
         c2d96 := Conv2D 96 (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
 
         stem : 
-            | right -> | m2d | c2d96 | concat
-            | left -> | m2d | c2d96 | concat
+            | right -> | m2d | c2d96 | Concatenate
+            | left -> | m2d | c2d96 | Concatenate
 
-        #le concat nested senza parametri producono le lettere prima della freccia
-        #l ultima concat con paramteri produce x
+        #le Concatenate nested senza parametri producono le lettere prima della freccia
+        #l ultima Concatenate con paramteri produce x
 
         """
         self.mll = MLL(inception_uncomm)
@@ -1785,7 +1785,7 @@ class TestMLL(TestCase):
         stem:
             | c2d3233 + c2d3233 + c2d6433
             | c2d3233 + c2d3233 + c2d6433
-            | concat
+            | Concatenate
 
         """
 
@@ -1979,13 +1979,13 @@ class TestMLL(TestCase):
         stem2 :
             | m2d3311v
             | c2d963311v
-            | concat
+            | Concatenate
             | c2d641111s + c2d963311v
             | c2d641111s + c2d647111s + c2d641711s + c2d963311v
-            | concat
+            | Concatenate
             | c2d1923311v
             | m2d3311v
-            | concat
+            | Concatenate
             | relu
 
         x : stem2 x
@@ -1998,7 +1998,7 @@ class TestMLL(TestCase):
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d3841111slin
             | sum
@@ -2010,7 +2010,7 @@ class TestMLL(TestCase):
             | m2d3322v
             | c2d3843322v
             | c2d2561111s + c2d2563311s + c2d3843322v
-            | concat
+            | Concatenate
 
         x : incA_red x
 
@@ -2021,7 +2021,7 @@ class TestMLL(TestCase):
         incB : 
             | c2d1921111s
             | c2d1281111s + c2d1601711s + c2d1927111s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d11541111slin
             | sum
@@ -2034,7 +2034,7 @@ class TestMLL(TestCase):
             | c2d2561111s + c2d2883322v
             | c2d2561111s + c2d2883322v
             | c2d2561111s + c2d2883311s + c2d3203322v
-            | concat
+            | Concatenate
 
         x : incB_red x
 
@@ -2043,7 +2043,7 @@ class TestMLL(TestCase):
         incC : 
             | c2d1921111s
             | c2d1921111s + c2d2241311s + c2d2563111s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d20481111slin
             | sum
@@ -2291,13 +2291,13 @@ class TestMLL(TestCase):
         stem2 :
             | m2d3311v
             | c2d963311v
-            | concat
+            | Concatenate
             | c2d641111s + c2d963311v
             | c2d641111s + c2d647111s + c2d641711s + c2d963311v
-            | concat
+            | Concatenate
             | c2d1923311v
             | m2d3311v
-            | concat
+            | Concatenate
             | re
 
         x : stem2 x
@@ -2310,7 +2310,7 @@ class TestMLL(TestCase):
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d3841111slin
             | sum
@@ -2322,7 +2322,7 @@ class TestMLL(TestCase):
             | m2d3322v
             | c2d3843322v
             | c2d2561111s + c2d2563311s + c2d3843322v
-            | concat
+            | Concatenate
 
         x : incA_red x
 
@@ -2333,7 +2333,7 @@ class TestMLL(TestCase):
         incB : 
             | c2d1921111s
             | c2d1281111s + c2d1601711s + c2d1927111s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d11541111slin
             | sum
@@ -2346,7 +2346,7 @@ class TestMLL(TestCase):
             | c2d2561111s + c2d2883322v
             | c2d2561111s + c2d2883322v
             | c2d2561111s + c2d2883311s + c2d3203322v
-            | concat
+            | Concatenate
 
         x : incB_red x
 
@@ -2355,7 +2355,7 @@ class TestMLL(TestCase):
         incC : 
             | c2d1921111s
             | c2d1921111s + c2d2241311s + c2d2563111s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d20481111slin
             | sum
@@ -2658,13 +2658,13 @@ class TestMLL(TestCase):
         stem2 :
             | m2d3311v
             | c2d963311v
-            | concat
+            | Concatenate
             | c2d641111s + c2d963311v
             | c2d641111s + c2d647111s + c2d641711s + c2d963311v
-            | concat
+            | Concatenate
             | c2d1923311v
             | m2d3311v
-            | concat
+            | Concatenate
             | re
 
         x : stem2 x
@@ -2677,7 +2677,7 @@ class TestMLL(TestCase):
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d3841111slin
             | sum
@@ -2689,7 +2689,7 @@ class TestMLL(TestCase):
             | m2d3322v
             | c2d3843322v
             | c2d2561111s + c2d2563311s + c2d3843322v
-            | concat
+            | Concatenate
 
         x : incA_red x
 
@@ -2700,7 +2700,7 @@ class TestMLL(TestCase):
         incB : 
             | c2d1921111s
             | c2d1281111s + c2d1601711s + c2d1927111s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d11541111slin
             | sum
@@ -2713,7 +2713,7 @@ class TestMLL(TestCase):
             | c2d2561111s + c2d2883322v
             | c2d2561111s + c2d2883322v
             | c2d2561111s + c2d2883311s + c2d3203322v
-            | concat
+            | Concatenate
 
         x : incB_red x
 
@@ -2722,7 +2722,7 @@ class TestMLL(TestCase):
         incC : 
             | c2d1921111s
             | c2d1921111s + c2d2241311s + c2d2563111s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d20481111slin
             | sum
@@ -2980,13 +2980,13 @@ class TestMLL(TestCase):
         stem2 :
             | m2d3311v
             | c2d963311v
-            | concat
+            | Concatenate
             | c2d641111s + c2d963311v
             | c2d641111s + c2d647111s + c2d641711s + c2d963311v
-            | concat
+            | Concatenate
             | c2d1923311v
             | m2d3311v
-            | concat
+            | Concatenate
             | re
 
         x : stem2 x
@@ -2999,7 +2999,7 @@ class TestMLL(TestCase):
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d3841111slin
             | sum
@@ -3011,7 +3011,7 @@ class TestMLL(TestCase):
             | m2d3322v
             | c2d3843322v
             | c2d2561111s + c2d2563311s + c2d3843322v
-            | concat
+            | Concatenate
 
         x : incA_red x
 
@@ -3022,7 +3022,7 @@ class TestMLL(TestCase):
         incB : 
             | c2d1921111s
             | c2d1281111s + c2d1601711s + c2d1927111s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d11541111slin
             | sum
@@ -3035,7 +3035,7 @@ class TestMLL(TestCase):
             | c2d2561111s + c2d2883322v
             | c2d2561111s + c2d2883322v
             | c2d2561111s + c2d2883311s + c2d3203322v
-            | concat
+            | Concatenate
 
         x : incB_red x
 
@@ -3044,7 +3044,7 @@ class TestMLL(TestCase):
         incC : 
             | c2d1921111s
             | c2d1921111s + c2d2241311s + c2d2563111s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d20481111slin
             | sum
@@ -3298,13 +3298,13 @@ class TestMLL(TestCase):
         stem2 :
             | m2d3311v
             | c2d963311v
-            | concat
+            | Concatenate
             | c2d641111s + c2d963311v
             | c2d641111s + c2d647111s + c2d641711s + c2d963311v
-            | concat
+            | Concatenate
             | c2d1923311v
             | m2d3311v
-            | concat
+            | Concatenate
             | re
 
         x : stem2 x
@@ -3317,7 +3317,7 @@ class TestMLL(TestCase):
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d3841111slin
             | sum
@@ -3329,7 +3329,7 @@ class TestMLL(TestCase):
             | m2d3322v
             | c2d3843322v
             | c2d2561111s + c2d2563311s + c2d3843322v
-            | concat
+            | Concatenate
 
         x : incA_red x
 
@@ -3340,7 +3340,7 @@ class TestMLL(TestCase):
         incB : 
             | c2d1921111s
             | c2d1281111s + c2d1601711s + c2d1927111s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d11541111slin
             | sum
@@ -3353,7 +3353,7 @@ class TestMLL(TestCase):
             | c2d2561111s + c2d2883322v
             | c2d2561111s + c2d2883322v
             | c2d2561111s + c2d2883311s + c2d3203322v
-            | concat
+            | Concatenate
 
         x : incB_red x
 
@@ -3362,7 +3362,7 @@ class TestMLL(TestCase):
         incC : 
             | c2d1921111s
             | c2d1921111s + c2d2241311s + c2d2563111s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d20481111slin
             | sum
@@ -3507,7 +3507,7 @@ class TestMLL(TestCase):
             # in original inception-resnet-v2, conv stride is 2
             b = Convolution2D(96 // nb_filters_reduction_factor, 3, 3, subsample=(1, 1), activation='relu',
                               init='he_normal', border_mode='valid', dim_ordering='tf')(x)
-            x = merge([a, b], mode='concat', concat_axis=-1)
+            x = merge([a, b], mode='Concatenate', concat_axis=-1)
 
             a = Convolution2D(64 // nb_filters_reduction_factor, 1, 1, subsample=(1, 1), activation='relu',
                               init='he_normal', border_mode='same', dim_ordering='tf')(x)
@@ -3521,14 +3521,14 @@ class TestMLL(TestCase):
                               init='he_normal', border_mode='same', dim_ordering='tf')(b)
             b = Convolution2D(96 // nb_filters_reduction_factor, 3, 3, subsample=(1, 1), activation='relu',
                               init='he_normal', border_mode='valid', dim_ordering='tf')(b)
-            x = merge([a, b], mode='concat', concat_axis=-1)
+            x = merge([a, b], mode='Concatenate', concat_axis=-1)
 
             # in original inception-resnet-v2, conv stride should be 2
             a = Convolution2D(192 // nb_filters_reduction_factor, 3, 3, subsample=(1, 1), activation='relu',
                               init='he_normal', border_mode='valid', dim_ordering='tf')(x)
             # in original inception-resnet-v2, stride is 2
             b = MaxPooling2D((3, 3), strides=(1, 1), border_mode='valid', dim_ordering='tf')(x)
-            x = merge([a, b], mode='concat', concat_axis=-1)
+            x = merge([a, b], mode='Concatenate', concat_axis=-1)
 
             x = Activation('relu')(x)
 
@@ -3552,7 +3552,7 @@ class TestMLL(TestCase):
             c = Convolution2D(64 // nb_filters_reduction_factor, 3, 3, subsample=(1, 1), activation='relu',
                               init='he_normal', border_mode='same', dim_ordering='tf')(c)
 
-            x = merge([a, b, c], mode='concat', concat_axis=-1)
+            x = merge([a, b, c], mode='Concatenate', concat_axis=-1)
             x = Convolution2D(384 // nb_filters_reduction_factor, 1, 1, subsample=(1, 1), activation='linear',
                               init='he_normal', border_mode='same', dim_ordering='tf')(x)
 
@@ -3572,7 +3572,7 @@ class TestMLL(TestCase):
             c = Convolution2D(384 // nb_filters_reduction_factor, 3, 3, subsample=(2, 2), activation='relu',
                               init='he_normal', border_mode='valid', dim_ordering='tf')(c)
 
-            x = merge([a, b, c], mode='concat', concat_axis=-1)
+            x = merge([a, b, c], mode='Concatenate', concat_axis=-1)
 
             return x
 
@@ -3589,7 +3589,7 @@ class TestMLL(TestCase):
             b = Convolution2D(192 // nb_filters_reduction_factor, 7, 1, subsample=(1, 1), activation='relu',
                               init='he_normal', border_mode='same', dim_ordering='tf')(b)
 
-            x = merge([a, b], mode='concat', concat_axis=-1)
+            x = merge([a, b], mode='Concatenate', concat_axis=-1)
             x = Convolution2D(1154 // nb_filters_reduction_factor, 1, 1, subsample=(1, 1), activation='linear',
                               init='he_normal', border_mode='same', dim_ordering='tf')(x)
 
@@ -3615,7 +3615,7 @@ class TestMLL(TestCase):
             d = Convolution2D(320 // nb_filters_reduction_factor, 3, 3, subsample=(2, 2), activation='relu',
                               init='he_normal', border_mode='valid', dim_ordering='tf')(d)
 
-            x = merge([a, b, c, d], mode='concat', concat_axis=-1)
+            x = merge([a, b, c, d], mode='Concatenate', concat_axis=-1)
 
             return x
 
@@ -3632,7 +3632,7 @@ class TestMLL(TestCase):
             b = Convolution2D(256 // nb_filters_reduction_factor, 3, 1, subsample=(1, 1), activation='relu',
                               init='he_normal', border_mode='same', dim_ordering='tf')(b)
 
-            x = merge([a, b], mode='concat', concat_axis=-1)
+            x = merge([a, b], mode='Concatenate', concat_axis=-1)
             x = Convolution2D(2048 // nb_filters_reduction_factor, 1, 1, subsample=(1, 1), activation='linear',
                               init='he_normal', border_mode='same', dim_ordering='tf')(x)
 
@@ -3890,13 +3890,13 @@ class TestMLL(TestCase):
         stem2 :
             | m2d3311v
             | c2d963311v
-            | concat
+            | Concatenate
             | c2d641111s + c2d963311v
             | c2d641111s + c2d647111s + c2d641711s + c2d963311v
-            | concat
+            | Concatenate
             | c2d1923311v
             | m2d3311v
-            | concat
+            | Concatenate
             | relu
 
         x : stem2 x
@@ -3909,7 +3909,7 @@ class TestMLL(TestCase):
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d3841111slin
             | sum
@@ -3921,7 +3921,7 @@ class TestMLL(TestCase):
             | m2d3322v
             | c2d3843322v
             | c2d2561111s + c2d2563311s + c2d3843322v
-            | concat
+            | Concatenate
 
         x : incA_red x
 
@@ -3932,7 +3932,7 @@ class TestMLL(TestCase):
         incB : 
             | c2d1921111s
             | c2d1281111s + c2d1601711s + c2d1927111s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d11541111slin
             | sum
@@ -3945,7 +3945,7 @@ class TestMLL(TestCase):
             | c2d2561111s + c2d2883322v
             | c2d2561111s + c2d2883322v
             | c2d2561111s + c2d2883311s + c2d3203322v
-            | concat
+            | Concatenate
 
         x : incB_red x
 
@@ -3954,7 +3954,7 @@ class TestMLL(TestCase):
         incC : 
             | c2d1921111s
             | c2d1921111s + c2d2241311s + c2d2563111s
-            | concat
+            | Concatenate
             | assign shortcut
             | c2d20481111slin
             | sum

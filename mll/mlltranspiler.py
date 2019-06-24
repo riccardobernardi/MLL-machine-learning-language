@@ -337,6 +337,7 @@ class MLL:
         t.append(Token("PIPE","|"))
 
         keras_meth = ['concat']
+        keras_meth = ['Concatenate']
         for j in keras.layers.__dict__.keys():
             if str(j).islower():
                 keras_meth += [j]
