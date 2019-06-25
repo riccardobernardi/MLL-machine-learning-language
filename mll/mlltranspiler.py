@@ -61,7 +61,7 @@ class MLL:
             if i == len(t):
                 break
             else:
-                if istok(t[i]) and clean_tok(t[i].value) == "concatenate":
+                if istok(t[i]) and clean_tok(t[i].value) == "Concatenate":
                     ok = True
 
                 if ok and istok(t[i]) and clean_tok(t[i].value) == "(" and i+1 < len(t) and (not istok(t[i + 1]) or not clean_tok(t[i + 1].value) == "["):

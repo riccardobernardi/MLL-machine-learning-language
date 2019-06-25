@@ -61,7 +61,7 @@ class MLL:
             if i == len(t):
                 break
             else:
-                if istok(t[i]) and clean_tok(t[i].value) == "concatenate":
+                if istok(t[i]) and clean_tok(t[i].value) == "Concatenate":
                     ok = True
 
                 if ok and istok(t[i]) and clean_tok(t[i].value) == "(" and i+1 < len(t) and (not istok(t[i + 1]) or not clean_tok(t[i + 1].value) == "["):
@@ -337,6 +337,7 @@ class MLL:
         t.append(Token("PIPE","|"))
 
         keras_meth = ['concat']
+        keras_meth = ['Concatenate']
         for j in keras.layers.__dict__.keys():
             if str(j).islower():
                 keras_meth += [j]
@@ -645,6 +646,16 @@ class MLL:
 
             if t.data == "parmac":
                 return self.save_parmac(t.children)
+
+            if t.data == "c2d":
+                print("crea una macro ad hoc --c2d")
+                # è sufficiente che la macro venga inserita nel dizionario delle macro non serve nemmeno inserirla nell' albero
+                # inoltre bisogna lanciare la ricerca degli ID da importare dalle librerie sulle macro create
+
+            if t.data == "m2d":
+                print("crea una macro ad hoc --m2d")
+                # è sufficiente che la macro venga inserita nel dizionario delle macro non serve nemmeno inserirla nell' albero
+                # inoltre bisogna lanciare la ricerca degli ID da importare dalle librerie sulle macro create
 
             return Tree(t.data, self.transform(t.children))
 
