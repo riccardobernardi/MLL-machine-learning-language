@@ -87,7 +87,7 @@ class SimpleModel:
         if match(t.children, [0], ["WITH"]) and len(t.children) > 1:
             return Tree(t.data, map(self.transform_simple, t.children[1:len(t.children)], "", ","))
         if match(t.children, [0], ["AT"]):
-            return Tree(t.data, [t.children[1:]])
+            return Tree(t.data, [t.children[1:],Token("LP","("),Token("RP",")")])
 
         if match(t.children, [0, 1], ["ID", "AR"]) and len(t.children) == 2:
             self.mll.set_current_branch(t.children[0])
@@ -120,13 +120,13 @@ class SimpleModel:
 
 
 
-        if isTree(t.children[2:][0]) and len(t.children[2:][0].children) == 1:
-            return Tree(t.data,
-                        [Token("ID", "models"), Token("LSP", "["), Token("SQ", "'"), clean_tok(t.children[0]),
-                         Token("SQ", "'"), Token("LSP", "]"), Token("EQ", "=")]
-                        +
-                        t.children[2:]
-                        + [Token("LP", "("), Token("RP", ")"), Token("WS", "\n")])
+        # if isTree(t.children[2:][0]) and len(t.children[2:][0].children) == 1:
+        #     return Tree(t.data,
+        #                 [Token("ID", "models"), Token("LSP", "["), Token("SQ", "'"), clean_tok(t.children[0]),
+        #                  Token("SQ", "'"), Token("LSP", "]"), Token("EQ", "=")]
+        #                 +
+        #                 t.children[2:]
+        #                 + [Token("LP", "("), Token("RP", ")"), Token("WS", "\n")])
 
 
         return Tree(t.data,

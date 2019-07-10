@@ -242,7 +242,7 @@ class ForkedModel:
                             ])
             # pass
 
-        if match(t.children, [0], ["ID"]) and len(t.children) == 1 and self.mll.current_binding_name is not None:
+        if match(t.children, [0], ["ID"]) and len(t.children) == 1 and self.mll.current_binding_name is not None and clean_tok(t.children[0]).value not in self.mll.models:
             a = str(self.mll.current_bindings[:len(self.mll.current_bindings) - 1]).replace("'", "").replace("x,", "")
             # è sempre x il branch corente perchè vogliamo che il branch bindato sia stealth
             self.mll.current_bindings = ["x"]
@@ -258,6 +258,32 @@ class ForkedModel:
                             Token("RP", ")"),
                             Token("WS", "\n\t")
                         ])
+
+        print("entro nel lock")
+
+        if match(t.children, [0], ["ID"]) and len(t.children) == 1 and self.mll.current_binding_name is not None and clean_tok(t.children[0]).value in self.mll.models:
+            # a = str(self.mll.current_bindings[:len(self.mll.current_bindings) - 1]).replace("'", "").replace("x,", "")
+            # è sempre x il branch corente perchè vogliamo che il branch bindato sia stealth
+            self.mll.current_bindings = ["x"]
+
+            return Tree(t.data,
+                        [
+                            Token("ID", clean_tok(self.mll.current_binding_name)),
+                            Token("EQ", "="), t.children[0]
+                        ])
+
+        if match(t.children, [0], ["ID"]) and len(t.children) == 1 and self.mll.current_binding_name is None and clean_tok(t.children[0]).value in self.mll.models:
+            # a = str(self.mll.current_bindings[:len(self.mll.current_bindings) - 1]).replace("'", "").replace("x,", "")
+            # è sempre x il branch corente perchè vogliamo che il branch bindato sia stealth
+            self.mll.current_bindings = ["x"]
+
+            return Tree(t.data,
+                        [
+                            Token("ID", "x"),
+                            Token("EQ", "="), t.children[0]
+                        ])
+
+        print("esco dal lock, qualcosa è andato male")
 
         if match(t.children, [0], ["ID"]) and len(t.children) == 1 and self.mll.current_binding_name is None:
             a = str(self.mll.current_bindings[:len(self.mll.current_bindings) - 1]).replace("'", "").replace("x,", "")
