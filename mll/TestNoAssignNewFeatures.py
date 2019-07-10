@@ -168,6 +168,38 @@ class TestNoAssignNewFeatures(unittest.TestCase):
         #print(self.mll.import_from_glob)
         self.mll.execute()
 
+    def test_func_app_summa(self):
+        ext = 384
+
+        def f():
+            return (1,1)
+
+        #print(locals())
+
+        inc = """
+        conv2d := Conv2D
+
+        c2d38411s_ext := Conv2D 32 (1,1) subsample=(1,1)
+
+        x : Input with shape = (32,32,3)
+
+        shortcut : x
+
+        incA1 :
+            | c2d38411s_ext
+            | shortcut
+            | Concatenate
+
+        x +: incA1
+
+        """
+
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        #print(self.mll.import_from_glob)
+        self.mll.execute()
+
 
 
 

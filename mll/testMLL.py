@@ -63,11 +63,11 @@ class TestMLL(TestCase):
         c2d38433 := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
         c2d38411 := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
 
-        # Input layer
+        # Input layer;
 
         x : Input with shape = (32,32,3)
 
-        # Layer stem di entrata dell input
+        # Layer stem di entrata dell input;
         
         stem :
             | c2d3233 + c2d3233 + c2d6433
@@ -1523,7 +1523,7 @@ class TestMLL(TestCase):
         self.mll.execute()
         print(self.mll.image_tree("before"))
 
-    def get_imports(self):
+    def test_get_imports(self):
 
         ext = 384
 
@@ -1533,15 +1533,15 @@ class TestMLL(TestCase):
         #print(locals())
 
         inc = """
-        c2d38411s_ext := Conv2D (@ext) (@f()) with subsample=(1,1)
+        c2d38411s_ext := Conv2D (ext) (@f) with subsample=(1,1)
 
         x : Input with shape = (32,32,3)
 
-        shortcut : assign x
+        shortcut : x
 
         incA1 :
             | c2d38411s_ext
-            | assign shortcut
+            | shortcut
             | Concatenate
 
         x : incA1 x
@@ -1969,7 +1969,7 @@ class TestMLL(TestCase):
 
         # Input layer
 
-        x : assign @inputs
+        x : assign inputs
 
         # Layer stem di entrata dell input
 
@@ -2284,7 +2284,7 @@ class TestMLL(TestCase):
 
         # Input layer
 
-        x : assign @inputs
+        x : assign inputs
 
         # Layer stem di entrata dell input
 
@@ -2648,7 +2648,7 @@ class TestMLL(TestCase):
 
         # Input layer
 
-        x : assign @inputs
+        x : assign inputs
 
         # Layer stem di entrata dell input
 
@@ -2972,7 +2972,7 @@ class TestMLL(TestCase):
 
         # Input layer
 
-        x : assign @inputs
+        x : assign inputs
 
         # Layer stem di entrata dell input
 
@@ -3614,11 +3614,11 @@ class TestMLL(TestCase):
         m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 
 
-        # Input layer
+        # Input layer;
 
-        x : assign @inputs
+        x : assign inputs
 
-        # Layer stem di entrata dell input
+        # Layer stem di entrata dell input;
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
@@ -3639,7 +3639,7 @@ class TestMLL(TestCase):
 
         x : stem2 x
 
-        # layer A
+        # layer A; 
 
         shortcut : assign x
 
@@ -3663,7 +3663,7 @@ class TestMLL(TestCase):
 
         x : incA_red x
 
-        #layer B
+        #layer B; 
 
         shortcut : assign x
 
@@ -4204,11 +4204,11 @@ class TestMLL(TestCase):
         m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 
 
-        # Input layer
+        # Input layer;
 
-        x : assign @inputs
+        x : assign inputs
 
-        # Layer stem di entrata dell input
+        # Layer stem di entrata dell input;
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
@@ -4229,7 +4229,7 @@ class TestMLL(TestCase):
 
         x : stem2 x
 
-        # layer A
+        # layer A;
 
         shortcut : assign x
 
@@ -4253,7 +4253,7 @@ class TestMLL(TestCase):
 
         x : incA_red x
 
-        #layer B
+        #layer B;
 
         shortcut : assign x
 

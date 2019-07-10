@@ -4,7 +4,7 @@ new_grammar = """
 
 // | macro_exp | macro_mod | macro_pip
 
-mll : ( model | macro | parmac | comment )+
+mll : ( model | macro | parmac | comment | summa )+
 
 model : ID COLON [_rc] [PI] e (_nn)*
 
@@ -18,9 +18,11 @@ _nn : ( PI e )
 // _mm.2 : ( PI ID AR )
 //     | ( PI ID AR ID ID )
 
-comment : HASH (W | NUM | CO | " ")* WSP
+comment : HASH (W | NUM | CO | " ")* ";" WSP
 
 parmac : ID DOLLAR ID (OR ID)*
+
+summa : ID SCO ID
 
 macro : ID EQC [ID] e (_nn)*
 // macro_exp : ID ME e (_nn)*
@@ -74,6 +76,8 @@ comp: ID EQ LSP (e
 //////////////LEXER TERMINALS
 
 DOLLAR : "$"
+
+SCO : "+:"
 
 MP : "p:"
 

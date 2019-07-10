@@ -163,8 +163,11 @@ class ForkedModel:
 
         # cprint("before", "blue")
         # print(t.children)
-        # print(len(t.children))
         # print(list_types_list(t.children))
+        # print(len(t.children))
+
+        #####################################################################
+        #####################################################################
 
         if match(t.children, [1], ["PLUS"]) and len(t.children) == 3:
             if opt == "first":
@@ -178,12 +181,18 @@ class ForkedModel:
                 return Tree(t.data, [Tree(t.children[0].data, [self.traduce_layers(t.children[0])]),
                                      Tree(t.children[2].data, [self.traduce_layers(t.children[2])])])
 
+        #####################################################################
+        #####################################################################
+
         # e ::= LP e RP
         if match(t.children, [0, len(t.children) - 1], ["LP", "RP"]):
             return Tree(t.data, [Token("ID", alphabet[self.mll.current_branch - 1]), Token("EQ", "="),
                                  Token("LP", "(")] +
                         [self.transform_forked(t.children[1])] +[Token("RP", ")"), Token("LP", "("), Token("ID", alphabet[self.mll.current_branch - 1]), Token("RP", ")"),
                             Token("WS", "\n\t")])
+
+        #####################################################################
+        #####################################################################
 
         if match(t.children, [0,1], ["ID","AR"]) and len(t.children) == 2:
             # preparati per dare 2 bindings
@@ -192,6 +201,9 @@ class ForkedModel:
             self.mll.current_bindings = self.mll.current_bindings[:len(self.mll.current_bindings)-1]
             self.mll.current_binding_name = t.children[0]
             return None
+
+        #####################################################################
+        #####################################################################
 
         if match(t.children, [0,1,2,3], ["ID","AR","ID","ID"]) and len(t.children) == 4:
             # concatena 2 concatenazioni che sono state bindate
@@ -212,7 +224,13 @@ class ForkedModel:
                             Token("WS", "\n\t")
                         ])
 
+        #####################################################################
+        #####################################################################
+
         t.children[1:] = map(self.transform_forked, t.children[1:], "CO", ",")
+
+        #####################################################################
+        #####################################################################
 
         if match(t.children, [0], ["ID"]) and len(t.children) > 1 and not match(t.children, [], ["PLUS"]) and not match(t.children, [], ["AR"]):
             if clean_tok(t.children[0]).value == "assign":
@@ -240,7 +258,9 @@ class ForkedModel:
                                 Token("RP", ")"),
                                 Token("WS", "\n\t")
                             ])
-            # pass
+
+        #####################################################################
+        #####################################################################
 
         if match(t.children, [0], ["ID"]) and len(t.children) == 1 and self.mll.current_binding_name is not None and clean_tok(t.children[0]).value not in self.mll.models:
             a = str(self.mll.current_bindings[:len(self.mll.current_bindings) - 1]).replace("'", "").replace("x,", "")
@@ -259,31 +279,42 @@ class ForkedModel:
                             Token("WS", "\n\t")
                         ])
 
-        print("entro nel lock")
+        #####################################################################
+        #####################################################################
 
-        if match(t.children, [0], ["ID"]) and len(t.children) == 1 and self.mll.current_binding_name is not None and clean_tok(t.children[0]).value in self.mll.models:
+        # print(match(t.children, [0], ["ID"]))
+        # print(len(t.children) == 1)
+        # print(self.mll.current_binding_name is not None)
+        # print(clean_tok(t.children[0]).value in self.mll.models if isinstance(t.children[0],Token) else "Tree")
+
+        if match(t.children, [0], ["ID"]) and len(t.children) == 1 and self.mll.current_binding_name is not None and clean_tok(t.children[0]).value.replace("models['","").replace("']","") in self.mll.models.keys():
             # a = str(self.mll.current_bindings[:len(self.mll.current_bindings) - 1]).replace("'", "").replace("x,", "")
             # è sempre x il branch corente perchè vogliamo che il branch bindato sia stealth
-            self.mll.current_bindings = ["x"]
 
             return Tree(t.data,
                         [
-                            Token("ID", clean_tok(self.mll.current_binding_name)),
+                            Token("ID", clean_tok(alphabet[self.mll.current_branch - 1])),
                             Token("EQ", "="), t.children[0]
                         ])
 
-        if match(t.children, [0], ["ID"]) and len(t.children) == 1 and self.mll.current_binding_name is None and clean_tok(t.children[0]).value in self.mll.models:
+        # print("entro nel secondo lock", t.children)
+        # print(match(t.children, [0], ["ID"]))
+        # print(len(t.children) == 1)
+        # print(self.mll.current_binding_name is None)
+        # print(clean_tok(t.children[0]).value in self.mll.models if isinstance(t.children[0], Token) else "Tree")
+
+        if match(t.children, [0], ["ID"]) and len(t.children) == 1 and self.mll.current_binding_name is None and clean_tok(t.children[0]).value.replace("models['","").replace("']","") in self.mll.models.keys():
             # a = str(self.mll.current_bindings[:len(self.mll.current_bindings) - 1]).replace("'", "").replace("x,", "")
             # è sempre x il branch corente perchè vogliamo che il branch bindato sia stealth
-            self.mll.current_bindings = ["x"]
 
             return Tree(t.data,
                         [
-                            Token("ID", "x"),
+                            Token("ID", alphabet[self.mll.current_branch - 1]),
                             Token("EQ", "="), t.children[0]
                         ])
 
-        print("esco dal lock, qualcosa è andato male")
+        #####################################################################
+        #####################################################################
 
         if match(t.children, [0], ["ID"]) and len(t.children) == 1 and self.mll.current_binding_name is None:
             a = str(self.mll.current_bindings[:len(self.mll.current_bindings) - 1]).replace("'", "").replace("x,", "")

@@ -494,7 +494,7 @@ class TestTranspiler(unittest.TestCase):
 
         # Input layer
 
-        x : assign @inputs
+        x : assign inputs
 
         # Layer stem di entrata dell input
 
@@ -701,7 +701,7 @@ class TestTranspiler(unittest.TestCase):
 
         # Input layer
 
-        x : assign @inputs
+        x : assign inputs
 
         # Layer stem di entrata dell input
 
@@ -951,7 +951,7 @@ class TestTranspiler(unittest.TestCase):
 
         # Input layer
 
-        x : assign @inputs
+        x : assign inputs
 
         # Layer stem di entrata dell input
 
