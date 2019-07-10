@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="" />
+    <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/mll/TestTranspiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/TestTranspiler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mll/my-inception-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/mll/my-inception-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +21,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mll/testMLL.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="332">
@@ -29,20 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/setup.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="15" lean-forward="true" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mll/TestTranspiler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="40" column="25" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
+            <state relative-caret-position="272">
+              <caret line="180" column="64" selection-start-line="180" selection-start-column="64" selection-end-line="180" selection-end-column="64" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -165,10 +160,11 @@
         <option value="$PROJECT_DIR$/resnetv2-fastai.py" />
         <option value="$PROJECT_DIR$/mll/new_grammar.py" />
         <option value="$PROJECT_DIR$/mll/mlltranspiler.py" />
-        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/mll/test_MLL.py" />
         <option value="$PROJECT_DIR$/mll-1.0.8/test_MLL.py" />
         <option value="$PROJECT_DIR$/mll/testMLL.py" />
+        <option value="$PROJECT_DIR$/mll/TestTranspiler.py" />
+        <option value="$PROJECT_DIR$/setup.py" />
       </list>
     </option>
   </component>
@@ -234,7 +230,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for testMLL.TestMLL">
+  <component name="RunManager" selected="Python tests.Unittests for TestTranspiler.TestTranspiler">
     <configuration name="inception-resnet-v2" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="MLL-LARK" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -345,6 +341,21 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Unittests for TestTranspiler.TestTranspiler" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="MLL-LARK" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mll" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;TestTranspiler.TestTranspiler&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Unittests for mll.test_MLL.TestMLL" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="MLL-LARK" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -358,22 +369,6 @@
       <option name="_new_pattern" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;mll.test_MLL.TestMLL&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests for mll.test_MLL.TestMLL.test_entire_inception_with_function_bigger_aug_shortened_no_locals_with_reg_and_class" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="MLL-LARK" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_pattern" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;mll.test_MLL.TestMLL.test_entire_inception_with_function_bigger_aug_shortened_no_locals_with_reg_and_class&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -429,18 +424,18 @@
       <item itemvalue="Python.test_liste" />
       <item itemvalue="Python.test_net" />
       <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL" />
-      <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL.test_entire_inception_with_function_bigger_aug_shortened_no_locals_with_reg_and_class" />
       <item itemvalue="Python tests.Unittests for testMLL.TestMLL" />
       <item itemvalue="Python tests.Unittests for testMLL.TestMLL.test_simpler_auto_import" />
       <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_simpler_auto_import" />
+      <item itemvalue="Python tests.Unittests for TestTranspiler.TestTranspiler" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests for TestTranspiler.TestTranspiler" />
         <item itemvalue="Python tests.Unittests for testMLL.TestMLL" />
         <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL" />
         <item itemvalue="Python tests.Unittests for test_MLL.TestMLL.test_simpler_auto_import" />
         <item itemvalue="Python tests.Unittests for testMLL.TestMLL.test_simpler_auto_import" />
-        <item itemvalue="Python tests.Unittests for mll.test_MLL.TestMLL.test_entire_inception_with_function_bigger_aug_shortened_no_locals_with_reg_and_class" />
       </list>
     </recent_temporary>
   </component>
@@ -623,20 +618,11 @@
       <workItem from="1562247541616" duration="43000" />
       <workItem from="1562247816219" duration="84000" />
       <workItem from="1562255562406" duration="280000" />
-      <workItem from="1562749743977" duration="2009000" />
+      <workItem from="1562749743977" duration="2346000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_testMLL_TestMLL_test_simpler_auto_import - 2019.07.10 at 11h 17m 15s.xml">
-      <configuration name="Unittests for testMLL.TestMLL.test_simpler_auto_import" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_testMLL_TestMLL_test_simpler_auto_import - 2019.07.10 at 11h 17m 45s.xml">
-      <configuration name="Unittests for testMLL.TestMLL.test_simpler_auto_import" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_testMLL_TestMLL_test_simpler_auto_import - 2019.07.10 at 11h 26m 06s.xml">
-      <configuration name="Unittests for testMLL.TestMLL.test_simpler_auto_import" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_test_MLL_TestMLL_test_simpler_auto_import - 2019.07.10 at 11h 27m 05s.xml">
       <configuration name="Unittests for test_MLL.TestMLL.test_simpler_auto_import" configurationId="tests" />
     </history-entry>
@@ -658,9 +644,18 @@
     <history-entry file="Unittests_for_testMLL_TestMLL - 2019.07.10 at 11h 43m 58s.xml">
       <configuration name="Unittests for testMLL.TestMLL" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_for_TestTranspiler_TestTranspiler - 2019.07.10 at 11h 54m 10s.xml">
+      <configuration name="Unittests for TestTranspiler.TestTranspiler" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_testMLL_TestMLL - 2019.07.10 at 11h 55m 26s.xml">
+      <configuration name="Unittests for testMLL.TestMLL" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_TestTranspiler_TestTranspiler - 2019.07.10 at 11h 57m 35s.xml">
+      <configuration name="Unittests for TestTranspiler.TestTranspiler" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="420906000" />
+    <option name="totallyTimeSpent" value="421243000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -679,14 +674,14 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
-      <window_info active="true" anchor="bottom" x="0" y="22" width="1280" height="778" id="Run" maximized="true" order="2" type="WINDOWED" visible="true" weight="0.60958904" />
+      <window_info anchor="bottom" x="0" y="22" width="1280" height="778" id="Run" maximized="true" order="2" type="WINDOWED" weight="0.60958904" />
       <window_info anchor="bottom" x="0" y="45" width="1280" height="362" id="Debug" order="3" weight="0.5205479" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32876712" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Tool Output" order="8" weight="0.32876712" />
-      <window_info anchor="bottom" x="0" y="22" width="1280" height="778" id="Terminal" maximized="true" order="9" sideWeight="0.49919224" visible="true" weight="0.18219177" />
+      <window_info active="true" anchor="bottom" x="0" y="22" width="1280" height="778" id="Terminal" maximized="true" order="9" sideWeight="0.49919224" visible="true" weight="0.18219177" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.38356164" />
       <window_info anchor="bottom" id="ANTLR Preview" order="11" weight="0.32876712" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32876712" />
@@ -748,7 +743,7 @@
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_test_MLL_TestMLL_test_only_stem.coverage" NAME="Unittests for test_MLL.TestMLL.test_only_stem Coverage Results" MODIFIED="1556032287579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL_test_external_data_simpler.coverage" NAME="Unittests for mll.test_MLL.TestMLL.test_external_data_simpler Coverage Results" MODIFIED="1556639013881" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL_test_func_app.coverage" NAME="Unittests for mll.test_MLL.TestMLL.test_func_app Coverage Results" MODIFIED="1556658401910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_testMLL_TestMLL.coverage" NAME="Unittests for testMLL.TestMLL Coverage Results" MODIFIED="1562751834243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mll" />
+    <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_testMLL_TestMLL.coverage" NAME="Unittests for testMLL.TestMLL Coverage Results" MODIFIED="1562752414144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mll" />
     <SUITE FILE_PATH="coverage/MLL_LARK$resnet_fastai.coverage" NAME="resnet-fastai Coverage Results" MODIFIED="1561019072184" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL_test_entire_inception.coverage" NAME="Unittests for mll.test_MLL.TestMLL.test_entire_inception Coverage Results" MODIFIED="1557579709373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL_test_entire_inception_with_function_bigger.coverage" NAME="Unittests for mll.test_MLL.TestMLL.test_entire_inception_with_function_bigger Coverage Results" MODIFIED="1557845148721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -760,6 +755,7 @@
     <SUITE FILE_PATH="coverage/MLL_LARK$test_liste.coverage" NAME="test_liste Coverage Results" MODIFIED="1555182238720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_mll_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat.coverage" NAME="Unittests for mll.test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat Coverage Results" MODIFIED="1556729776780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MLL_LARK$inception_resnet_v2.coverage" NAME="inception-resnet-v2 Coverage Results" MODIFIED="1557860874363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_TestTranspiler_TestTranspiler.coverage" NAME="Unittests for TestTranspiler.TestTranspiler Coverage Results" MODIFIED="1562752650565" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mll" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_testMLL_TestMLL_test_simpler_auto_import.coverage" NAME="Unittests for testMLL.TestMLL.test_simpler_auto_import Coverage Results" MODIFIED="1562750762990" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mll" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_test_MLL_TestMLL_test_inception_mod_leave_one_out_and_double_fork.coverage" NAME="Unittests for test_MLL.TestMLL.test_inception_mod_leave_one_out_and_double_fork Coverage Results" MODIFIED="1558172990221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mll" />
     <SUITE FILE_PATH="coverage/MLL_LARK$Unittests_for_test_MLL_TestMLL_test_inception_mod_double_fork_without_last_concat.coverage" NAME="Unittests for test_MLL.TestMLL.test_inception_mod_double_fork_without_last_concat Coverage Results" MODIFIED="1556874249659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mll" />
@@ -794,21 +790,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/lark/tree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="74" column="6" selection-start-line="74" selection-start-column="6" selection-end-line="74" selection-end-column="19" />
-          <folding>
-            <element signature="e#581#597#0" />
-            <element signature="e#649#1103#0" />
-            <element signature="e#1152#1195#0" />
-            <element signature="e#1234#1373#0" />
-            <element signature="e#1412#1438#0" />
-            <element signature="e#1472#1518#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/lark/visitors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2850">
@@ -1087,11 +1068,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mll/TestTranspiler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="25" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
+        <state relative-caret-position="272">
+          <caret line="180" column="64" selection-start-line="180" selection-start-column="64" selection-end-line="180" selection-end-column="64" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/twine/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="243" selection-start-line="243" selection-end-line="243" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -1102,13 +1097,6 @@
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="15" lean-forward="true" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
         </state>
       </provider>
     </entry>

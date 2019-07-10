@@ -178,8 +178,9 @@ class TestTranspiler(unittest.TestCase):
             
             m2d3311 := MaxPooling2D (3, 3) strides=(1, 1) border_mode='valid' dim_ordering ='tf'
             c2d9633 := Conv2D 96 (3, 3) subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
+            c2d9633init := Conv2D 96 (3, 3) input_shape=(32,32,3) subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
             
-            stem2 : m2d3311 + c2d9633 + c2d9633
+            stem2 : c2d9633init m2d3311 + c2d9633 + c2d9633
         """
 
         self.mll = MLL(inc)
