@@ -43,8 +43,11 @@ class MLL(superMLL):
 
         print("###############################################################")
         print("                           POSTCONDIZIONI")
+        print("le post-condizioni sono relative solo a alla transpilazione e non all' esecuzione")
+        print("occhio alla +: potrebbe confondersi con una e -> e + e")
         cprint("macros: "+str(self.macros.keys()),"blue")
         cprint("parmacs: " + str(self.parmacs.keys()), "blue")
+        cprint("models: " + str(self.models.keys()), "blue")
         print("###############################################################")
 
         print("                             PROGRAM")
@@ -74,6 +77,15 @@ class MLL(superMLL):
         if t.data == "parmac":
             # cprint("entro in parmac","yellow")
             self.insert_parmac(t)
+
+        if t.data == "summa":
+            # cprint("entro in parmac","yellow")
+            from mll.simple_model import SimpleModel
+            rest = SimpleModel(self).translate_e_simple(Tree("e",[
+                Token("ID", clean_tok(t.children[2]).value ),
+                Tree("e", [Token("ID",clean_tok(t.children[0]).value)])
+                ]))
+            return apply([Token("ID",clean_tok(t.children[0]).value),Token("EQ","=")] + rest.children,lambda x: x, self.substitute_model)
 
         # if t.data == "macro_mod":
         #     create_macro_mod(self,t)
