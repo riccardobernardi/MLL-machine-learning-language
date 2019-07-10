@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/mll/testMLL.py" beforeDir="false" afterPath="$PROJECT_DIR$/mll/testMLL.py" afterDir="false" />
-    </list>
+    <list default="true" id="c7dcb1d7-9c20-4fbe-bda1-2c4be7e799b8" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,14 +17,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mll/testMLL.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="766" column="8" selection-start-line="766" selection-start-column="8" selection-end-line="766" selection-end-column="8" />
+            <state relative-caret-position="332">
+              <caret line="775" column="24" selection-start-line="775" selection-start-column="24" selection-end-line="775" selection-end-column="24" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/setup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="15" lean-forward="true" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -616,7 +623,7 @@
       <workItem from="1562247541616" duration="43000" />
       <workItem from="1562247816219" duration="84000" />
       <workItem from="1562255562406" duration="280000" />
-      <workItem from="1562749743977" duration="1806000" />
+      <workItem from="1562749743977" duration="2009000" />
     </task>
     <servers />
   </component>
@@ -653,7 +660,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="420703000" />
+    <option name="totallyTimeSpent" value="420906000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -666,7 +673,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.22051696" />
       <window_info id="Structure" order="1" sideWeight="0.5068493" side_tool="true" weight="0.17285945" />
@@ -680,7 +686,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32876712" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Tool Output" order="8" weight="0.32876712" />
-      <window_info anchor="bottom" x="0" y="22" width="1280" height="778" id="Terminal" maximized="true" order="9" sideWeight="0.49919224" weight="0.18219177" />
+      <window_info anchor="bottom" x="0" y="22" width="1280" height="778" id="Terminal" maximized="true" order="9" sideWeight="0.49919224" visible="true" weight="0.18219177" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.38356164" />
       <window_info anchor="bottom" id="ANTLR Preview" order="11" weight="0.32876712" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32876712" />
@@ -1015,13 +1021,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mll/new_grammar.py" />
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="17" lean-forward="true" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mll/utils.py" />
     <entry file="file://$PROJECT_DIR$/mll/test_MLL.py" />
     <entry file="file://$PROJECT_DIR$/mll-1.0.8/mlltranspiler.py">
@@ -1098,11 +1097,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mll/testMLL.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="766" column="8" selection-start-line="766" selection-start-column="8" selection-end-line="766" selection-end-column="8" />
+        <state relative-caret-position="332">
+          <caret line="775" column="24" selection-start-line="775" selection-start-column="24" selection-end-line="775" selection-end-column="24" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="15" lean-forward="true" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
         </state>
       </provider>
     </entry>
