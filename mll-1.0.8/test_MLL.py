@@ -11,7 +11,7 @@ from sklearn.preprocessing import LabelEncoder
 
 import warnings
 
-from mll.utils import list_types, get_keras_layers
+from mll.utils import get_keras_layers
 
 warnings.filterwarnings("ignore")
 
@@ -26,6 +26,7 @@ def get_data():
 
     encoder_object = LabelEncoder()
     test = encoder_object.fit_transform(test)
+    print(test)
 
     return train, test
 
@@ -769,7 +770,7 @@ class TestMLL(TestCase):
     def test_simpler_auto_import(self):
         skmodel4 = """
 
-        criterion IS 'gini' or 'entropy'
+        criterion  'gini' or 'entropy'
 
         rf_clf  : RandomForestClassifier 10 entropy
         knn_clf : KNeighborsClassifier 2
