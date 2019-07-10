@@ -3,6 +3,7 @@ from unittest import TestCase
 import mlxtend
 from lark import Tree
 from mlxtend.classifier import StackingClassifier
+from mlxtend.data import iris_data
 from sklearn import model_selection
 from termcolor import cprint
 
@@ -31,6 +32,9 @@ def get_data():
     print(test)
 
     return train, test
+
+X, y = iris_data()
+X = X[:, 1:3]
 
 
 class TestMLL(TestCase):
@@ -781,7 +785,7 @@ class TestMLL(TestCase):
         self.mll.execute()
         sclf = self.mll.last_model()
 
-        train, test = get_data()
+        train, test = X,y
 
         sclf.fit(train, test)
 
