@@ -18,7 +18,7 @@ _nn : ( PI e )
 // _mm.2 : ( PI ID AR )
 //     | ( PI ID AR ID ID )
 
-comment : HASH (W | NUM | CO | " ")* ";" WSP
+comment : HASH (W | NUM | CO | " ")* SC WSP
 
 parmac : ID DOLLAR ID (OR ID)*
 
@@ -74,6 +74,8 @@ comp: ID EQ LSP (e
 // | OR e #
     
 //////////////LEXER TERMINALS
+
+SC : ";"
 
 DOLLAR : "$"
 

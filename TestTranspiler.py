@@ -492,11 +492,11 @@ class TestTranspiler(unittest.TestCase):
 
         c2d643311s := Conv2D ( fant 64 ) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
 
-        # Input layer
+        # Input layer;
 
         x : assign inputs
 
-        # Layer stem di entrata dell input
+        # Layer stem di entrata dell input;
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
@@ -699,11 +699,11 @@ class TestTranspiler(unittest.TestCase):
         m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 
 
-        # Input layer
+        # Input layer;
 
         x : assign inputs
 
-        # Layer stem di entrata dell input
+        # Layer stem di entrata dell input;
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
@@ -949,11 +949,11 @@ class TestTranspiler(unittest.TestCase):
         m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 
 
-        # Input layer
+        # Input layer;
 
         x : assign inputs
 
-        # Layer stem di entrata dell input
+        # Layer stem di entrata dell input;
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
@@ -974,7 +974,7 @@ class TestTranspiler(unittest.TestCase):
 
         x : stem2 x
 
-        # layer A
+        # layer A;
 
         shortcut : assign x
 
@@ -1138,11 +1138,11 @@ class TestTranspiler(unittest.TestCase):
 
         m2d3311v := MaxPooling2D (3, 3) m2dv with strides=(1, 1)
 
-        # Input layer
+        # Input layer;
 
         x : assign inputs
 
-        # Layer stem di entrata dell input
+        # Layer stem di entrata dell input;
 
         stem2 :
             | c2d1923311v

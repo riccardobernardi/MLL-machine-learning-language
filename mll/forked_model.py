@@ -89,7 +89,7 @@ class ForkedModel:
         if match(t.children, [0], ["WITH"]) and len(t.children) > 1:
             return Tree(t.data, map(self.transform_forked, t.children[1:len(t.children)], "", ","))
         if match(t.children, [0], ["AT"]):
-            return Tree(t.data, [t.children[1:]])
+            return Tree(t.data, [t.children[1:],Token("LP","("),Token("RP",")")])
 
         if match(t.children, [0, 1], ["ID", "AR"]) and len(t.children) == 2:
             self.mll.set_current_branch(t.children[0])
@@ -167,6 +167,7 @@ class ForkedModel:
         # print(len(t.children))
 
         #####################################################################
+        #           e + e
         #####################################################################
 
         if match(t.children, [1], ["PLUS"]) and len(t.children) == 3:
@@ -182,6 +183,7 @@ class ForkedModel:
                                      Tree(t.children[2].data, [self.traduce_layers(t.children[2])])])
 
         #####################################################################
+        #           ( [e]+ )
         #####################################################################
 
         # e ::= LP e RP
@@ -192,6 +194,7 @@ class ForkedModel:
                             Token("WS", "\n\t")])
 
         #####################################################################
+        #           ID ->
         #####################################################################
 
         if match(t.children, [0,1], ["ID","AR"]) and len(t.children) == 2:
@@ -203,6 +206,7 @@ class ForkedModel:
             return None
 
         #####################################################################
+        #           ID -> ID ID
         #####################################################################
 
         if match(t.children, [0,1,2,3], ["ID","AR","ID","ID"]) and len(t.children) == 4:
@@ -225,11 +229,13 @@ class ForkedModel:
                         ])
 
         #####################################################################
+        #           e, e, e
         #####################################################################
 
         t.children[1:] = map(self.transform_forked, t.children[1:], "CO", ",")
 
         #####################################################################
+        #           ID e+ w/o "+" and "->"
         #####################################################################
 
         if match(t.children, [0], ["ID"]) and len(t.children) > 1 and not match(t.children, [], ["PLUS"]) and not match(t.children, [], ["AR"]):
@@ -259,8 +265,9 @@ class ForkedModel:
                                 Token("WS", "\n\t")
                             ])
 
-        #####################################################################
-        #####################################################################
+        ###############################################################################
+        #           ID and no binding for forks and name is operations and not alias
+        ###############################################################################
 
         if match(t.children, [0], ["ID"]) and len(t.children) == 1 and self.mll.current_binding_name is not None and clean_tok(t.children[0]).value not in self.mll.models:
             a = str(self.mll.current_bindings[:len(self.mll.current_bindings) - 1]).replace("'", "").replace("x,", "")
@@ -280,6 +287,7 @@ class ForkedModel:
                         ])
 
         #####################################################################
+        #           ID and binding for forks exists and name is alias
         #####################################################################
 
         # print(match(t.children, [0], ["ID"]))
@@ -303,6 +311,10 @@ class ForkedModel:
         # print(self.mll.current_binding_name is None)
         # print(clean_tok(t.children[0]).value in self.mll.models if isinstance(t.children[0], Token) else "Tree")
 
+        #####################################################################
+        #           ID and binding for forks non-exists and name is alias
+        #####################################################################
+
         if match(t.children, [0], ["ID"]) and len(t.children) == 1 and self.mll.current_binding_name is None and clean_tok(t.children[0]).value.replace("models['","").replace("']","") in self.mll.models.keys():
             # a = str(self.mll.current_bindings[:len(self.mll.current_bindings) - 1]).replace("'", "").replace("x,", "")
             # è sempre x il branch corente perchè vogliamo che il branch bindato sia stealth
@@ -314,6 +326,7 @@ class ForkedModel:
                         ])
 
         #####################################################################
+        #           ID and no binding name for forks
         #####################################################################
 
         if match(t.children, [0], ["ID"]) and len(t.children) == 1 and self.mll.current_binding_name is None:
@@ -331,6 +344,10 @@ class ForkedModel:
                             Token("RP", ")"),
                             Token("WS", "\n\t")
                         ])
+
+        #####################################################################
+        #           AT e become a=f()(a)
+        #####################################################################
 
         if match(t.children, [0], ["AT"]):
             return Tree(t.data, [Token("ID", alphabet[self.mll.current_branch - 1]), Token("EQ", "="), t.children[1],
