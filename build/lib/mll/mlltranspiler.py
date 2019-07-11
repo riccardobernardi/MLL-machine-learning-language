@@ -37,7 +37,7 @@ class MLL(superMLL):
         self.before_tree = parser.parse(program)
 
         self.after_tree = Tree(self.before_tree.data, self.transform(self.before_tree.children))
-        # print(self.after_tree)
+        print(self.after_tree)
 
         s = scrivi(self.used_libraries) + "\n" + "def assign(x):\n\treturn x" + "\n\n" + scrivi(self.after_tree)
 
@@ -81,7 +81,8 @@ class MLL(superMLL):
         if t.data == "summa":
             # cprint("entro in parmac","yellow")
             from mll.simple_model import SimpleModel
-            rest = SimpleModel(self).translate_e_simple(Tree("e",[
+            from mll.dispatcher import Dispatcher
+            rest = Dispatcher(self).translate_e(Tree("e",[
                 Token("ID", clean_tok(t.children[2]).value ),
                 Tree("e", [Token("ID",clean_tok(t.children[0]).value)])
                 ]))

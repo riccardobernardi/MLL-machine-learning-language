@@ -5862,3 +5862,40 @@ class TestMLL(TestCase):
         # scores = model_selection.cross_val_score(sclf, train, test, cv=3, scoring='accuracy')
         # print(scores.mean(), scores.std())
 
+
+    ##############################################################################
+    ##############################################################################
+    ##############################################################################
+    ##############################################################################
+    ##############################################################################
+
+
+    def seq_stack_pipe_switch(self):
+        print("l' obiettivo è automatizzare la creazione di stacking,sequential e pipeline")
+        skmodel4 = """
+                c2d1923311v m: Conv2D ( fant 192 ) (3, 3) val_rel with subsample=(1,1) 
+
+                #modello sequenziale kera;
+                model : c2d1923311v + c2d1923311v + c2d1923311v
+
+                #modello pipeline di sklearn, non sono tutti classifiers;                
+                model : StandardScaler() + PCA() + Ridge()
+                
+                rf_clf  : RandomForestClassifier 10 entropy
+                knn_clf : KNeighborsClassifier 2
+                svc_clf : SVC with C=10000.0
+                rg_clf  : RidgeClassifier ( fant 0.1 )
+                dt_clf  : DecisionTreeClassifier gini
+                lr      : LogisticRegression
+                
+                #modello stacking sklearn;
+                sclf : rf_clf + dt_clf + knn_clf + svc_clf + rg_clf + lr
+                """
+
+        self.mll = MLL(skmodel4, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+        sclf = self.mll.last_model()
+
+        print("[", self.mll.macros, "]")

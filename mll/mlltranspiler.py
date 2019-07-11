@@ -7,7 +7,7 @@ from mll.superMLL import superMLL
 from mll.utils import scrivi, map, match, flatten, filter, group, clean_tok, \
     alphabet, \
     OR, visit, istok, apply, isTree, Toggler, list_types_list, escape, create_macro_mod, create_macro_exp, \
-    create_macro_pip
+    create_macro_pip, leaves_before, leaves_after
 
 import warnings
 
@@ -35,9 +35,13 @@ class MLL(superMLL):
         parser = Lark(get_rev_grammar(), start='mll')
 
         self.before_tree = parser.parse(program)
+        # print(tree_depth(self.before_tree))
+        # print(leaves_before(self.before_tree))
 
         self.after_tree = Tree(self.before_tree.data, self.transform(self.before_tree.children))
-        print(self.after_tree)
+        # print(tree_depth(self.before_tree))
+        # print(self.after_tree)
+        # print(leaves_after(self.after_tree))
 
         s = scrivi(self.used_libraries) + "\n" + "def assign(x):\n\treturn x" + "\n\n" + scrivi(self.after_tree)
 
@@ -48,6 +52,7 @@ class MLL(superMLL):
         cprint("macros: "+str(self.macros.keys()),"blue")
         cprint("parmacs: " + str(self.parmacs.keys()), "blue")
         cprint("models: " + str(self.models.keys()), "blue")
+        cprint("rapporto di riduzione MLL -> Python:"+str(leaves_after(self.after_tree)/leaves_before(self.before_tree)),"yellow")
         print("###############################################################")
 
         print("                             PROGRAM")
