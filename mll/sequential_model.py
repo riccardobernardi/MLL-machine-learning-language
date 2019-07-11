@@ -1,6 +1,7 @@
 from lark import Tree, Token
 from termcolor import cprint
 
+from mll.dispatcher import Dispatcher
 from mll.mlltranspiler import MLL
 from mll.utils import clean_tok, apply, match, isTree, istok, escape, filter, map
 
@@ -113,7 +114,7 @@ class SequentialModel:
 
         # cprint(t.children[2:],"green")
 
-        branches = map(self.transform_sequential,t.children[2:])
+        branches = map(Dispatcher(self.mll,"sequential").transform,t.children[2:])
 
         # cprint("branches:"+str(branches),"blue")
 

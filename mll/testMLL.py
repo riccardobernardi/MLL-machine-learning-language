@@ -4655,8 +4655,9 @@ class TestMLL(TestCase):
         print(mll.translate_model(a))
 
     def test_traduce_token_cleansing(self):
+        from mll.dispatcher import Dispatcher
         mll = MLL("")
-        print(SimpleModel(mll).translate_token_simple(Token("ID", "\t\t\t ciao")))
+        print(Dispatcher(mll,"simple").translate_token(Token("ID", "\t\t\t ciao")))
 
     def test_map(self):
         a = [Token("ID", "ciao"), Token("ID", "ciao"), Token("ID", "ciao"), Token("ID", "ciao"), Token("ID", "ciao")]

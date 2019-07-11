@@ -1,6 +1,7 @@
 from lark import Tree, Token
 from termcolor import cprint
 
+from mll.dispatcher import Dispatcher
 from mll.utils import apply, clean_tok, group, match, alphabet, isTree, istok, filter, map, escape, list_types_list
 
 
@@ -13,91 +14,91 @@ class ForkedModel:
     #                        *FORKED* DISPATCHER                      #
     ###################################################################
 
-    def transform_forked(self, t: object):
-        if isinstance(t, Token):
-            return self.translate_token_forked(t)
-        elif isinstance(t, Tree):
-            return self.translate_tree_forked(t)
-        elif isinstance(t, type([])):
-            return self.translate_list_forked(t)
-        else:
-            raise Exception("Non esiste questo caso nella fun transform: ", type(t))
-
-    def translate_tree_forked(self, t: Tree) -> Tree:
-        if t.data == "comp":
-            return Tree(t.data, self.transform_forked(t.children))
-
-        if t.data == "e" or t.data == "macro":
-            return self.translate_e_forked(t)
-
-        return t
-
-    def translate_token_forked(self, t: Token) -> object:
-        t = self.mll.put_macros(t)
-
-        self.mll.select_imported_libraries(t)
-
-        return t
-
-    def translate_list_forked(self, t: list):
-        return filter(lambda x: x is not None, [self.transform_forked(x) for x in t])
-
-    def translate_e_forked(self, t: Tree):
-        # print(list_types_list(t.children))
-
-        # e ::= ID
-        if match(t.children, [0], ["ID"]) and len(t.children) == 1:
-            return Tree(t.data, [self.transform_forked(t.children)])
-        # e ::= ID e+
-        if match(t.children, [0], ["ID"]) and len(t.children) > 1 and not match(t.children, [], ["PLUS"]):
-            return Tree(t.data,
-                        [t.children[0], Token("LP", "(")] +
-                        map(self.transform_forked, t.children[1:len(t.children)], "CO", ",") +
-                        [Token("RP", ")")])
-
-        # e ::= AT ID LP RP
-        if match(t.children, [0, 1, 2, 3], ["AT", "ID", "LP", "RP"]):
-            return Tree(t.data, t.children[1:])
-
-        # e ::= LP e RP
-        if match(t.children, [0, 2], ["LP", "RP"]):
-            return Tree(t.data, [t.children[0]] +
-                        [self.transform_forked(t.children[1])] +
-                        [t.children[2]])
-
-        # e ::= 1234..
-        if match(t.children, [0], ["NUMBER"]) and len(t.children) == 1:
-            return t
-
-        # e ::= 'ciao'
-        if match(t.children, [0, 1, 2], ["SQ", "W", "SQ"]):
-            return Token("W", "'" + t.children[1] + "'")
-
-        # e ::= e + e
-        if match(t.children, [1], ["PLUS"]) and len(t.children) == 3:
-            return Tree(t.data, [self.transform_forked(t.children)])
-        # e ::= e - e
-        if match(t.children, [1], ["SUB"]) and len(t.children) == 3:
-            return Tree(t.data, [self.transform_forked(t.children)])
-        # e ::= e * e
-        if match(t.children, [1], ["MULT"]) and len(t.children) == 3:
-            return Tree(t.data, [self.transform_forked(t.children)])
-        # e ::= e / e
-        if match(t.children, [1], ["DIV"]) and len(t.children) == 3:
-            return Tree(t.data, [self.transform_forked(t.children)])
-
-        if match(t.children, [0], ["WITH"]) and len(t.children) > 1:
-            return Tree(t.data, map(self.transform_forked, t.children[1:len(t.children)], "", ","))
-        if match(t.children, [0], ["AT"]):
-            return Tree(t.data, [t.children[1:],Token("LP","("),Token("RP",")")])
-
-        if match(t.children, [0, 1], ["ID", "AR"]) and len(t.children) == 2:
-            self.mll.set_current_branch(t.children[0])
-            return None
-        if match(t.children, [0, 1], ["ID", "EQ"]) and len(t.children) > 2:
-            return Tree(t.data, [self.transform_forked(t.children)])
-
-        return map(self.transform_forked, t.children, "CO", ",")
+    # def transform_forked(self, t: object):
+    #     if isinstance(t, Token):
+    #         return self.translate_token_forked(t)
+    #     elif isinstance(t, Tree):
+    #         return self.translate_tree_forked(t)
+    #     elif isinstance(t, type([])):
+    #         return self.translate_list_forked(t)
+    #     else:
+    #         raise Exception("Non esiste questo caso nella fun transform: ", type(t))
+    #
+    # def translate_tree_forked(self, t: Tree) -> Tree:
+    #     if t.data == "comp":
+    #         return Tree(t.data, self.transform_forked(t.children))
+    #
+    #     if t.data == "e" or t.data == "macro":
+    #         return self.translate_e_forked(t)
+    #
+    #     return t
+    #
+    # def translate_token_forked(self, t: Token) -> object:
+    #     t = self.mll.put_macros(t)
+    #
+    #     self.mll.select_imported_libraries(t)
+    #
+    #     return t
+    #
+    # def translate_list_forked(self, t: list):
+    #     return filter(lambda x: x is not None, [self.transform_forked(x) for x in t])
+    #
+    # def translate_e_forked(self, t: Tree):
+    #     # print(list_types_list(t.children))
+    #
+    #     # e ::= ID
+    #     if match(t.children, [0], ["ID"]) and len(t.children) == 1:
+    #         return Tree(t.data, [self.transform_forked(t.children)])
+    #     # e ::= ID e+
+    #     if match(t.children, [0], ["ID"]) and len(t.children) > 1 and not match(t.children, [], ["PLUS"]):
+    #         return Tree(t.data,
+    #                     [t.children[0], Token("LP", "(")] +
+    #                     map(self.transform_forked, t.children[1:len(t.children)], "CO", ",") +
+    #                     [Token("RP", ")")])
+    #
+    #     # e ::= AT ID LP RP
+    #     if match(t.children, [0, 1, 2, 3], ["AT", "ID", "LP", "RP"]):
+    #         return Tree(t.data, t.children[1:])
+    #
+    #     # e ::= LP e RP
+    #     if match(t.children, [0, 2], ["LP", "RP"]):
+    #         return Tree(t.data, [t.children[0]] +
+    #                     [self.transform_forked(t.children[1])] +
+    #                     [t.children[2]])
+    #
+    #     # e ::= 1234..
+    #     if match(t.children, [0], ["NUMBER"]) and len(t.children) == 1:
+    #         return t
+    #
+    #     # e ::= 'ciao'
+    #     if match(t.children, [0, 1, 2], ["SQ", "W", "SQ"]):
+    #         return Token("W", "'" + t.children[1] + "'")
+    #
+    #     # e ::= e + e
+    #     if match(t.children, [1], ["PLUS"]) and len(t.children) == 3:
+    #         return Tree(t.data, [self.transform_forked(t.children)])
+    #     # e ::= e - e
+    #     if match(t.children, [1], ["SUB"]) and len(t.children) == 3:
+    #         return Tree(t.data, [self.transform_forked(t.children)])
+    #     # e ::= e * e
+    #     if match(t.children, [1], ["MULT"]) and len(t.children) == 3:
+    #         return Tree(t.data, [self.transform_forked(t.children)])
+    #     # e ::= e / e
+    #     if match(t.children, [1], ["DIV"]) and len(t.children) == 3:
+    #         return Tree(t.data, [self.transform_forked(t.children)])
+    #
+    #     if match(t.children, [0], ["WITH"]) and len(t.children) > 1:
+    #         return Tree(t.data, map(self.transform_forked, t.children[1:len(t.children)], "", ","))
+    #     if match(t.children, [0], ["AT"]):
+    #         return Tree(t.data, [t.children[1:],Token("LP","("),Token("RP",")")])
+    #
+    #     if match(t.children, [0, 1], ["ID", "AR"]) and len(t.children) == 2:
+    #         self.mll.set_current_branch(t.children[0])
+    #         return None
+    #     if match(t.children, [0, 1], ["ID", "EQ"]) and len(t.children) > 2:
+    #         return Tree(t.data, [self.transform_forked(t.children)])
+    #
+    #     return map(self.transform_forked, t.children, "CO", ",")
 
     ###################################################################
     #                           DAG MODEL                             #
@@ -190,7 +191,7 @@ class ForkedModel:
         if match(t.children, [0, len(t.children) - 1], ["LP", "RP"]):
             return Tree(t.data, [Token("ID", alphabet[self.mll.current_branch - 1]), Token("EQ", "="),
                                  Token("LP", "(")] +
-                        [self.transform_forked(t.children[1])] +[Token("RP", ")"), Token("LP", "("), Token("ID", alphabet[self.mll.current_branch - 1]), Token("RP", ")"),
+                        [Dispatcher(self.mll,"forked").transform(t.children[1])] +[Token("RP", ")"), Token("LP", "("), Token("ID", alphabet[self.mll.current_branch - 1]), Token("RP", ")"),
                             Token("WS", "\n\t")])
 
         #####################################################################
@@ -232,7 +233,7 @@ class ForkedModel:
         #           e, e, e
         #####################################################################
 
-        t.children[1:] = map(self.transform_forked, t.children[1:], "CO", ",")
+        t.children[1:] = map(Dispatcher(self.mll,"forked").transform, t.children[1:], "CO", ",")
 
         #####################################################################
         #           ID e+ w/o "+" and "->"
