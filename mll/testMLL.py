@@ -5898,7 +5898,7 @@ class TestMLL(TestCase):
                 svc_clf : SVC with C=10000.0
                 rg_clf  : RidgeClassifier ( fant 0.1 )
                 dt_clf  : DecisionTreeClassifier gini
-                lr      : LogisticRegression
+                lr      : @LogisticRegression
                 
                 #modello stacking sklearn;
                 sclf : rf_clf + dt_clf + knn_clf + svc_clf + rg_clf + lr

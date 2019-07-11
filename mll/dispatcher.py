@@ -49,7 +49,7 @@ class Dispatcher:
 
         # e ::= ID
         if match(t.children, [0], ["ID"]) and len(t.children) == 1:
-            return Tree(t.data, [self.transform(t.children)])
+            return Tree(t.data, self.transform(t.children))
         # e ::= ID e+
         if match(t.children, [0], ["ID"]) and len(t.children) > 1 and not match(t.children, [], ["PLUS"]):
             return Tree(t.data,
@@ -63,9 +63,8 @@ class Dispatcher:
 
         # e ::= LP e RP
         if match(t.children, [0, 2], ["LP", "RP"]):
-            return Tree(t.data, [t.children[0]] +
-                        [self.transform(t.children[1])] +
-                        [t.children[2]])
+            return Tree(t.data,
+                        [self.transform(t.children[1])])
 
         # e ::= 1234..
         if match(t.children, [0], ["NUMBER"]) and len(t.children) == 1:
@@ -73,14 +72,17 @@ class Dispatcher:
 
         # e ::= 'ciao'
         if match(t.children, [0, 1, 2], ["SQ", "W", "SQ"]):
-            return Token("W", "'" + t.children[1] + "'")
+            return Tree(t.data,[Token("W", "'" + t.children[1] + "'")])
+
+
+
 
 
         if self.model_type == "forked" or self.model_type =="simple":
 
             # e ::= e + e
             if match(t.children, [1], ["PLUS"]) and len(t.children) == 3:
-                return Tree(t.data, [self.transform(t.children)])
+                return Tree(t.data, self.transform(t.children))
 
         if self.model_type == "sequential":
 
@@ -91,25 +93,27 @@ class Dispatcher:
 
 
 
+
+
         # e ::= e - e
         if match(t.children, [1], ["SUB"]) and len(t.children) == 3:
-            return Tree(t.data, [self.transform(t.children)])
+            return Tree(t.data, self.transform(t.children))
         # e ::= e * e
         if match(t.children, [1], ["MULT"]) and len(t.children) == 3:
-            return Tree(t.data, [self.transform(t.children)])
+            return Tree(t.data, self.transform(t.children))
         # e ::= e / e
         if match(t.children, [1], ["DIV"]) and len(t.children) == 3:
-            return Tree(t.data, [self.transform(t.children)])
+            return Tree(t.data, self.transform(t.children))
 
         if match(t.children, [0], ["WITH"]) and len(t.children) > 1:
             return Tree(t.data, map(self.transform, t.children[1:len(t.children)], "", ","))
         if match(t.children, [0], ["AT"]):
-            return Tree(t.data, [t.children[1:], Token("LP", "("), Token("RP", ")")])
+            return Tree(t.data, t.children[1:] + [Token("LP", "("), Token("RP", ")")])
 
         if match(t.children, [0, 1], ["ID", "AR"]) and len(t.children) == 2:
             self.mll.set_current_branch(t.children[0])
             return None
         if match(t.children, [0, 1], ["ID", "EQ"]) and len(t.children) > 2:
-            return Tree(t.data, [self.transform(t.children)])
+            return Tree(t.data, self.transform(t.children))
 
-        return map(self.transform, t.children, "CO", ",")
+        return Tree(t.data, map(self.transform, t.children, "CO", ","))

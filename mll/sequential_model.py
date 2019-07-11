@@ -2,7 +2,7 @@ from lark import Tree, Token
 
 from mll.dispatcher import Dispatcher
 from mll.mlltranspiler import MLL
-from mll.utils import clean_tok, apply, map, list_types_list, denest_sums
+from mll.utils import clean_tok, apply, map, descend_left, scrivi
 
 
 class SequentialModel:
@@ -26,18 +26,16 @@ class SequentialModel:
 
         self.mll.ordered_models.append(clean_tok(t.children[0]).value)
 
-        # cprint(t.children[2:],"green")
-
         branches = map(Dispatcher(self.mll,"sequential").transform,t.children[2:])
 
-        # cprint("branches:"+str(branches),"blue")
+        print(branches)
+        print(descend_left(Tree("e",branches)))
+        # print(self.mll.env.keys())
+        # print("Conv2D" in self.mll.env.keys())
 
-        # print(len(t.children[2:]))
-        # print(list_types_list(t.children[2:][0].children))
-        # print(t)
-        # a = denest_sums(Tree("e", t.children[2:][0].children))
-        # print(a)
-        # print(len(a))
+        #va in self loop, fixare
+        if self.inner==False:
+            print(MLL("model:"+clean_tok(descend_left(branches[0])).value.replace("models['","").replace("']","")+"\n\n",MLL(self.mll.program).start().execute().models).start().execute().last_model())
 
         return Tree(t.data,
                     [Token("ID", "models"), Token("LSP", "["), Token("SQ", "'"), clean_tok(t.children[0]),

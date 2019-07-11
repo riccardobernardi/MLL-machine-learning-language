@@ -106,45 +106,6 @@ class superMLL:
     def set_current_branch(self, param):
         self.current_branch = param
 
-    # def put_macros(self,t: list) -> list:
-    #
-    #     t = escape(t)
-    #
-    #     for i in range(0, len(t)):
-    #
-    #         ok=False
-    #
-    #         if istok(t[i]):
-    #             t[i] = self.solve_parmac(clean_tok(t[i]))
-    #
-    #         if istok(t[i]):
-    #             for j in self.macros.keys():
-    #
-    #                 if clean_tok(t[i]).value == j :
-    #                     ok = True
-    #                     break
-    #
-    #             if ok:
-    #                 s = clean_tok(t[i]).value
-    #                 t.pop(i)
-    #
-    #                 if isinstance(self.macros[s],type([])):
-    #                     t = escape(t)
-    #                     self.macros[s] = self.put_macros(self.macros[s])
-    #                 if isinstance(self.macros[s],Tree):
-    #                     self.macros[s].children = self.put_macros(self.macros[s].children)
-    #
-    #                 t.insert(i,self.macros[s])
-    #                 if isinstance(self.macros[s], type([])):
-    #                     i += self.macros[s].__len__()
-    #                 else:
-    #                     i+=1
-    #         else:
-    #             if isTree(t[i]):
-    #                 t[i].children = self.put_macros(t[i].children)
-    #
-    #     return t
-
     def put_macros(self, t):
 
         # print(t)
@@ -208,6 +169,8 @@ class superMLL:
 
         # cprint(self.env.keys(), "blue")
         # cprint(self.env["models"], "red")
+
+        return self
 
     def insert_parmac(self, t: Tree):
         id = t.children[0].value

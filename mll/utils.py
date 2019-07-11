@@ -88,6 +88,7 @@ from sklearn import ensemble
 from sklearn import neighbors
 from sklearn import svm
 from sklearn import tree
+from sklearn import preprocessing
 
 
 def get_sklearn_models() -> dict:
@@ -116,6 +117,11 @@ def get_sklearn_models() -> dict:
     for k in neighbors.__dict__.keys():
         if "__" not in k and k != "K":
             keras_layers["neighbors"].add(k)
+
+    keras_layers["preprocessing"] = set()
+    for k in preprocessing.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["preprocessing"].add(k)
 
     keras_layers["svm"] = set()
     for k in svm.__dict__.keys():
@@ -505,19 +511,19 @@ def give_type_agnostically(t) -> str:
         return str(t.type)
 
 
-def denest_sums(t:Tree) -> []:
-    print(list_types_list(t.children))
-
-    if isTree(t) and match(t.children,[],["PLUS"]) and len(t.children)==1:
-        return [t.children]
-
-    if isTree(t) and give_type_agnostically(t.children[0]).islower() and give_type_agnostically(t.children[2]).islower():
-        return denest_sums(t.children[0]) + denest_sums(t.children[2])
-    if isTree(t) and give_type_agnostically(t.children[0]).islower() and give_type_agnostically(t.children[2]).isupper():
-        return denest_sums(t.children[0]) + [[t.children[2]]]
-    if isTree(t) and give_type_agnostically(t.children[0]).isupper() and give_type_agnostically(t.children[2]).islower():
-        return [[t.children[0]]] + denest_sums(t.children[2])
-    if isTree(t) and give_type_agnostically(t.children[0]).isupper() and give_type_agnostically(t.children[2]).isupper():
-        return [[t.children[0]], [t.children[2]]]
-
-    return []
+# def denest_sums(t:Tree) -> []:
+#     print(list_types_list(t.children))
+#
+#     if isTree(t) and match(t.children,[],["PLUS"]) and len(t.children)==1:
+#         return [t.children]
+#
+#     if isTree(t) and give_type_agnostically(t.children[0]).islower() and give_type_agnostically(t.children[2]).islower():
+#         return denest_sums(t.children[0]) + denest_sums(t.children[2])
+#     if isTree(t) and give_type_agnostically(t.children[0]).islower() and give_type_agnostically(t.children[2]).isupper():
+#         return denest_sums(t.children[0]) + [[t.children[2]]]
+#     if isTree(t) and give_type_agnostically(t.children[0]).isupper() and give_type_agnostically(t.children[2]).islower():
+#         return [[t.children[0]]] + denest_sums(t.children[2])
+#     if isTree(t) and give_type_agnostically(t.children[0]).isupper() and give_type_agnostically(t.children[2]).isupper():
+#         return [[t.children[0]], [t.children[2]]]
+#
+#     return []

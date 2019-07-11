@@ -27,6 +27,8 @@ class MLL(superMLL):
         self.create_available_imports()
         self.string = self.transpile(self.program)
 
+        return self
+
     def transpile(self, program: str) -> str:
 
         print("                              DEBUG")
