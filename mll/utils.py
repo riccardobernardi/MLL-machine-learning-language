@@ -478,7 +478,7 @@ def leaves_before(t) -> int:
         return int(leaves_before(t.children))
     if type(t) == Token:
         if t.type == "CO" or t.type == "LP" or t.type == "RP":
-            return 0
+            return 0.5
         return 1
     if isinstance(t, list):
         return reduce(SUM, map(leaves_before, t))
@@ -496,3 +496,28 @@ def leaves_after(t) -> int:
         return reduce(SUM, map(leaves_after, t))
 
     raise Exception("Errorfffffffff")
+
+
+def give_type_agnostically(t) -> str:
+    if isinstance(t,Tree):
+        return str(t.data)
+    if isinstance(t,Token):
+        return str(t.type)
+
+
+def denest_sums(t:Tree) -> []:
+    print(list_types_list(t.children))
+
+    if isTree(t) and match(t.children,[],["PLUS"]) and len(t.children)==1:
+        return [t.children]
+
+    if isTree(t) and give_type_agnostically(t.children[0]).islower() and give_type_agnostically(t.children[2]).islower():
+        return denest_sums(t.children[0]) + denest_sums(t.children[2])
+    if isTree(t) and give_type_agnostically(t.children[0]).islower() and give_type_agnostically(t.children[2]).isupper():
+        return denest_sums(t.children[0]) + [[t.children[2]]]
+    if isTree(t) and give_type_agnostically(t.children[0]).isupper() and give_type_agnostically(t.children[2]).islower():
+        return [[t.children[0]]] + denest_sums(t.children[2])
+    if isTree(t) and give_type_agnostically(t.children[0]).isupper() and give_type_agnostically(t.children[2]).isupper():
+        return [[t.children[0]], [t.children[2]]]
+
+    return []

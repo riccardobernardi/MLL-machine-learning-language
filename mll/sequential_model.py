@@ -1,9 +1,8 @@
 from lark import Tree, Token
-from termcolor import cprint
 
 from mll.dispatcher import Dispatcher
 from mll.mlltranspiler import MLL
-from mll.utils import clean_tok, apply, match, isTree, istok, escape, filter, map
+from mll.utils import clean_tok, apply, map, list_types_list, denest_sums
 
 
 class SequentialModel:
@@ -32,6 +31,13 @@ class SequentialModel:
         branches = map(Dispatcher(self.mll,"sequential").transform,t.children[2:])
 
         # cprint("branches:"+str(branches),"blue")
+
+        # print(len(t.children[2:]))
+        # print(list_types_list(t.children[2:][0].children))
+        # print(t)
+        # a = denest_sums(Tree("e", t.children[2:][0].children))
+        # print(a)
+        # print(len(a))
 
         return Tree(t.data,
                     [Token("ID", "models"), Token("LSP", "["), Token("SQ", "'"), clean_tok(t.children[0]),

@@ -214,7 +214,7 @@ class superMLL:
         a = t.children[2:]
         a = flatten(group(a, "OR"))
 
-        print(a)
+        # print(a)
 
         for i in a:
             self.parmacs[clean_tok(i).value] = Tree("comp", [Token("ID", id), Token("EQ", "="), Token("ID", "'" + i.value + "'")])

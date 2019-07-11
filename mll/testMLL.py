@@ -5870,16 +5870,28 @@ class TestMLL(TestCase):
     ##############################################################################
 
 
-    def seq_stack_pipe_switch(self):
+    def test_seq_stack_pipe_switch(self):
         print("l' obiettivo è automatizzare la creazione di stacking,sequential e pipeline")
-        skmodel4 = """
-                c2d1923311v m: Conv2D ( fant 192 ) (3, 3) val_rel with subsample=(1,1) 
 
-                #modello sequenziale kera;
+        def fant(x):
+            return x
+
+        skmodel4 = """
+                init $ he_normal
+                border_mode $ valid or same
+                dim_ordering $ tf
+                activation $ relu or linear
+                
+                criterion $ gini or entropy
+                
+                val_rel := he_normal valid tf relu
+                c2d1923311v := Conv2D ( fant 192 ) (3, 3) val_rel with subsample=(1,1) 
+
+                #modello sequenziale keras;
                 model : c2d1923311v + c2d1923311v + c2d1923311v
 
                 #modello pipeline di sklearn, non sono tutti classifiers;                
-                model : StandardScaler() + PCA() + Ridge()
+                model : (@StandardScaler) + (@PCA) + @Ridge
                 
                 rf_clf  : RandomForestClassifier 10 entropy
                 knn_clf : KNeighborsClassifier 2

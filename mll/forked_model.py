@@ -110,7 +110,7 @@ class ForkedModel:
 
         if match(t.children, [0,1], ["ID","AR"]) and len(t.children) == 2:
             # preparati per dare 2 bindings
-            print("sono della ID AR len2")
+            # print("sono della ID AR len2")
             self.mll.current_branch -=1
             self.mll.current_bindings = self.mll.current_bindings[:len(self.mll.current_bindings)-1]
             self.mll.current_binding_name = t.children[0]
@@ -122,7 +122,7 @@ class ForkedModel:
 
         if match(t.children, [0,1,2,3], ["ID","AR","ID","ID"]) and len(t.children) == 4:
             # concatena 2 concatenazioni che sono state bindate
-            print("sono della ID AR ID ID len4")
+            # print("sono della ID AR ID ID len4")
             return Tree(t.data,
                         [
                             Token("ID", alphabet[self.mll.current_branch - 1]),

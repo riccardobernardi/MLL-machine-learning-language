@@ -52,7 +52,7 @@ class MLL(superMLL):
         cprint("macros: "+str(self.macros.keys()),"blue")
         cprint("parmacs: " + str(self.parmacs.keys()), "blue")
         cprint("models: " + str(self.models.keys()), "blue")
-        cprint("rapporto di riduzione MLL -> Python:"+str(leaves_after(self.after_tree)/leaves_before(self.before_tree)),"yellow")
+        cprint("MLL : Python = 1 : "+str(leaves_after(self.after_tree)/leaves_before(self.before_tree)),"yellow")
         print("###############################################################")
 
         print("                             PROGRAM")
@@ -134,15 +134,15 @@ class MLL(superMLL):
         if len(branches) == 1:
             plus = lambda x: True if x.type == "PLUS" else False
             if visit(t, plus, OR):
-                cprint("SEQUENTIAL","red")
+                # cprint("SEQUENTIAL","red")
                 from mll.sequential_model import SequentialModel
                 return SequentialModel(self).traduce_sequential(t)
             else:
-                cprint("SIMPLE", "red")
+                # cprint("SIMPLE", "red")
                 from mll.simple_model import SimpleModel
                 return SimpleModel(self).traduce_simple_model(t)
         else:
-            cprint("FORKED", "red")
+            # cprint("FORKED", "red")
             from mll.forked_model import ForkedModel
             return ForkedModel(self).traduce_forks(t)
 
