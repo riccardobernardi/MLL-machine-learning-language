@@ -93,6 +93,11 @@ class MLL(superMLL):
         if t.data == "mll":
             return Tree(t.data, self.transform(t.children))
 
+        if t.data == "pyt":
+            m = apply(t,lambda x:x, clean_tok)
+            m.children = m.children + [Token("WS","\n")]
+            return m
+
         if t.data == "model":
             return self.translate_model(t)
 

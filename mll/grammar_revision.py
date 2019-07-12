@@ -4,7 +4,7 @@ new_grammar = """
 
 // | macro_exp | macro_mod | macro_pip
 
-mll : ( model | macro | parmac | comment | summa )+
+mll : ( model | macro | parmac | comment | summa | pyt )+
 
 model : ID COLON [_rc] [PI] e (_nn)*
 
@@ -13,12 +13,15 @@ _rc.2 : RR | CC
 _nn : ( PI e )
 
 //     | _mm
+
+
+pyt : "!" (W | NUM | "," | " " | ":" | "+" | "=" | "[" | "]"| "(" | ")" | "'" )* WSS+ WSP*
     
     
 // _mm.2 : ( PI ID AR )
 //     | ( PI ID AR ID ID )
 
-comment : HASH (W | NUM | CO | " ")* SC WSP
+comment : HASH (W | NUM | "," | " " | ":" | "+" | "=" | "[" | "]" | "(" | ")" | "'" )* WSS+ WSP*
 
 parmac : ID DOLLAR ID (OR ID)*
 
@@ -151,7 +154,7 @@ WS : (" " | "\\n" | "\\t" | "\\r")*
 
 WSP : (" " | "\\n" | "\\t" | "\\r")+
 
-WSS : (" " | "\\n" | "\\t" | "\\r")
+WSS : ("\\n")
 
 INTEGER  :   ("0".."9")+
 

@@ -67,11 +67,11 @@ class TestMLL(TestCase):
         c2d38433 := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
         c2d38411 := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
 
-        # Input layer;
+        # Input layer
 
         x : Input with shape = (32,32,3)
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
         
         stem :
             | c2d3233 + c2d3233 + c2d6433
@@ -123,11 +123,11 @@ class TestMLL(TestCase):
         c2d38433 := Conv2D 384 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
         c2d38411 := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
 
-        # Input layer;
+        # Input layer
 
         x : Input with shape = (32,32,3)
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem1 :
             | c2d3233 + c2d3233 + c2d6433
@@ -201,11 +201,11 @@ class TestMLL(TestCase):
         c2d38411v := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
         c2d38411s := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
         
-        # Input layer;
+        # Input layer
         
         x : Input with shape = (32,32,3)
         
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
         
         stem1 :
             | c2d3233v + c2d3233v + c2d6433s
@@ -235,7 +235,7 @@ class TestMLL(TestCase):
             
         x : stem5 x
         
-        # layer A;
+        # layer A
         
         shortcut : assign x
         
@@ -258,8 +258,8 @@ class TestMLL(TestCase):
         x : incA3 x
         
         
-        # nn funziona dobbiamo poter fare dag all interno di altri dag;
-        # la merge Add non e permessa;
+        # nn funziona dobbiamo poter fare dag all interno di altri dag
+        # la merge Add non e permessa
 
         """
 
@@ -531,7 +531,7 @@ class TestMLL(TestCase):
         c2d384 := Conv2D 384 3 3 with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
 
 
-        #layer di input riceve in input x;
+        #layer di input riceve in input x
         
         stem : x + c2d32 + c2d32 + c2d64
 
@@ -552,7 +552,7 @@ class TestMLL(TestCase):
 
         stem : stem + re
 
-        #layer A riceve in input x;
+        #layer A riceve in input x
 
         biforcazione1 : x + c2d32
         biforcazione2 : x + c2d32 + c2d32
@@ -564,7 +564,7 @@ class TestMLL(TestCase):
         A : Concatenate A x
         A : A + re
 
-        #layer redA riceve in input x;
+        #layer redA riceve in input x
 
         m2d := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
         c2d384 := Conv2D 384 3 3 with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
@@ -577,9 +577,9 @@ class TestMLL(TestCase):
 
         redA : Concatenate biforcazione1 biforcazione2 biforcazione3 
 
-        #layer B riceve in input x;
+        #layer B riceve in input x
 
-        #da finire;
+        #da finire
 
         """
 
@@ -616,11 +616,11 @@ class TestMLL(TestCase):
         dense := keras.layers.Dense 10
         densem := dense 384
 
-        # Input layer;
+        # Input layer
 
         x : Input with shape = (32,32,3)
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         m :
             | c2d3233 + c2d3233 + c2d6433
@@ -690,7 +690,7 @@ class TestMLL(TestCase):
         c2d38411s := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
         c2d38411sl := Conv2D 384 (1, 1) with subsample=(1,1) 
         
-        # Input layer;
+        # Input layer
         
         x : Input with shape = (32,32,3)
         
@@ -750,7 +750,7 @@ class TestMLL(TestCase):
         c2d38411s := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
         c2d38411sl := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='linear' 
 
-        # Input layer;
+        # Input layer
 
         x : Input with shape = (32,32,3)
 
@@ -829,7 +829,7 @@ class TestMLL(TestCase):
             
         x : stem2 x
             
-        #non puo diventare x l ultima Concatenate;
+        #non puo diventare x l ultima Concatenate
 
         """
         self.mll = MLL(inception_uncomm)
@@ -869,8 +869,8 @@ class TestMLL(TestCase):
             
         x : stem2 x
 
-        #le Concatenate nested senza parametri producono le lettere prima della freccia;
-        #l ultima Concatenate con paramteri produce x;
+        #le Concatenate nested senza parametri producono le lettere prima della freccia
+        #l ultima Concatenate con paramteri produce x
 
         """
         self.mll = MLL(inception_uncomm)
@@ -911,8 +911,8 @@ class TestMLL(TestCase):
 
         x : stem2 x
 
-        #le Concatenate nested senza parametri producono le lettere prima della freccia;
-        #l ultima Concatenate con paramteri produce x;
+        #le Concatenate nested senza parametri producono le lettere prima della freccia
+        #l ultima Concatenate con paramteri produce x
 
         """
         self.mll = MLL(inception_uncomm)
@@ -952,8 +952,8 @@ class TestMLL(TestCase):
 
         x : stem2 x
 
-        #le Concatenate nested senza parametri producono le lettere prima della freccia;
-        #l ultima Concatenate con paramteri produce x;
+        #le Concatenate nested senza parametri producono le lettere prima della freccia
+        #l ultima Concatenate con paramteri produce x
 
         """
         self.mll = MLL(inception_uncomm)
@@ -981,7 +981,7 @@ class TestMLL(TestCase):
         c2d384 := Conv2D 384 3 3 with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + re
 
 
-        #layer di input riceve in input x;
+        #layer di input riceve in input x
 
         stem : x + c2d32 + c2d32 + c2d64
 
@@ -1002,7 +1002,7 @@ class TestMLL(TestCase):
 
         stem : stem + re
 
-        #layer A, riceve in input x;
+        #layer A, riceve in input x
 
         biforcazione1 : x + c2d32
         biforcazione2 : x + c2d32 + c2d32
@@ -1014,7 +1014,7 @@ class TestMLL(TestCase):
         A : Concatenate A x
         A : A + re
 
-        #layer redA, riceve in input x;
+        #layer redA, riceve in input x
 
         m2d := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
         c2d384 := Conv2D 384 3 3 with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + re
@@ -1027,9 +1027,9 @@ class TestMLL(TestCase):
 
         redA : Concatenate biforcazione1 biforcazione2 biforcazione3 
 
-        #layer B, riceve in input x;
+        #layer B, riceve in input x
 
-        #da finire;
+        #da finire
 
         """
 
@@ -1070,11 +1070,11 @@ class TestMLL(TestCase):
         c2d38411v := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
         c2d38411s := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
 
-        # Input layer;
+        # Input layer
 
         x : Input with shape = (32,32,3)
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem1 :
             | c2d3233v + c2d3233v + c2d6433s
@@ -1107,7 +1107,7 @@ class TestMLL(TestCase):
 
         x : stem5 x
 
-        # layer A;
+        # layer A
 
         shortcut : assign x
 
@@ -1124,12 +1124,12 @@ class TestMLL(TestCase):
             | assign shortcut
             | Add
             
-        #bisogna definire Add;
+        #bisogna definire Add
 
         x : incA2 x
         
-        # la parte del Concatenate o Add non e presente nei precedenti tests;
-        # dovremmo fare una versione di questo test piu corto;
+        # la parte del Concatenate o Add non e presente nei precedenti tests
+        # dovremmo fare una versione di questo test piu corto
 
         incA3 : 
             | relu
@@ -1137,8 +1137,8 @@ class TestMLL(TestCase):
         x : incA3 x
 
 
-        # nn funziona dobbiamo poter fare dag all interno di altri dag;
-        # la merge Add non e permessa;
+        # nn funziona dobbiamo poter fare dag all interno di altri dag
+        # la merge Add non e permessa
 
         """
 
@@ -1184,11 +1184,11 @@ class TestMLL(TestCase):
         c2d38411v := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' + relu
         c2d38411s := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
 
-        # Input layer;
+        # Input layer
 
         x : Input with shape = (32,32,3)
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem1 :
             | c2d3233v + c2d3233v + c2d6433s
@@ -1213,7 +1213,7 @@ class TestMLL(TestCase):
 
         x : stem5 x
 
-        # layer A;
+        # layer A
 
         shortcut : assign x
 
@@ -1226,13 +1226,13 @@ class TestMLL(TestCase):
             | assign shortcut
             | Add
 
-        #l ultima Concatenate qui sopra sarebbe una Add;
-        #bisogna definire Add;
+        #l ultima Concatenate qui sopra sarebbe una Add
+        #bisogna definire Add
 
         x : incA1 x
 
-        # la parte del Concatenate o Add non e presente nei precedenti tests;
-        # dovremmo fare una versione di questo test piu corto;
+        # la parte del Concatenate o Add non e presente nei precedenti tests
+        # dovremmo fare una versione di questo test piu corto
 
         incA2 : 
             | relu
@@ -1240,8 +1240,8 @@ class TestMLL(TestCase):
         x : incA2 x
 
 
-        # nn funziona dobbiamo poter fare dag all interno di altri dag;
-        # la merge Add non e permessa;
+        # nn funziona dobbiamo poter fare dag all interno di altri dag
+        # la merge Add non e permessa
 
         """
 
@@ -1291,11 +1291,11 @@ class TestMLL(TestCase):
         c2d38411s := Conv2D 384 (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
         c2d38411s_ext := Conv2D (ext) (1, 1) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
 
-        # Input layer;
+        # Input layer
 
         x : Input with shape = (32,32,3)
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem1 :
             | c2d3233v + c2d3233v + c2d6433s
@@ -1320,7 +1320,7 @@ class TestMLL(TestCase):
 
         x : stem5 x
 
-        # layer A;
+        # layer A
 
         shortcut : assign x
 
@@ -1333,13 +1333,13 @@ class TestMLL(TestCase):
             | assign shortcut
             | Concatenate
 
-        #l ultima Concatenate qui sopra sarebbe una Add;
-        #bisogna definire Add;
+        #l ultima Concatenate qui sopra sarebbe una Add
+        #bisogna definire Add
 
         x : incA1 x
 
-        # la parte del Concatenate o Add non e presente nei precedenti tests;
-        # dovremmo fare una versione di questo test piu corto;
+        # la parte del Concatenate o Add non e presente nei precedenti tests
+        # dovremmo fare una versione di questo test piu corto
 
         incA2 : 
             | relu
@@ -1347,8 +1347,8 @@ class TestMLL(TestCase):
         x : incA2 x
 
 
-        # nn funziona dobbiamo poter fare dag all interno di altri dag;
-        # la merge Add non e permessa;
+        # nn funziona dobbiamo poter fare dag all interno di altri dag
+        # la merge Add non e permessa
 
         """
 
@@ -1645,8 +1645,8 @@ class TestMLL(TestCase):
             | right -> | m2d | c2d96 | Concatenate
             | left -> | m2d | c2d96 | Concatenate
 
-        #le Concatenate nested senza parametri producono le lettere prima della freccia;
-        #l ultima Concatenate con paramteri produce x;
+        #le Concatenate nested senza parametri producono le lettere prima della freccia
+        #l ultima Concatenate con paramteri produce x
 
         """
         self.mll = MLL(inception_uncomm)
@@ -1680,11 +1680,11 @@ class TestMLL(TestCase):
         
         c2d19233s := Conv2D 192 (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' + relu
 
-        # Input layer;
+        # Input layer
 
         x : Input with shape = (32,32,3)
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem1 :
             | c2d3233v + c2d3233v + c2d6433s
@@ -1726,8 +1726,8 @@ class TestMLL(TestCase):
             | right -> | m2d | c2d96 | Concatenate
             | left -> | m2d | c2d96 | Concatenate
 
-        #le Concatenate nested senza parametri producono le lettere prima della freccia;
-        #l ultima Concatenate con paramteri produce x;
+        #le Concatenate nested senza parametri producono le lettere prima della freccia
+        #l ultima Concatenate con paramteri produce x
 
         """
         self.mll = MLL(inception_uncomm)
@@ -1756,8 +1756,8 @@ class TestMLL(TestCase):
             | left -> | m2d | c2d96 | Concatenate
             | Concatenate -> right left
 
-        #le Concatenate nested senza parametri producono le lettere prima della freccia;
-        #l ultima Concatenate con paramteri produce x;
+        #le Concatenate nested senza parametri producono le lettere prima della freccia
+        #l ultima Concatenate con paramteri produce x
 
         """
         self.mll = MLL(inception_uncomm)
@@ -1971,14 +1971,19 @@ class TestMLL(TestCase):
         m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 
 
-        # Input layer;
+        # Input layer
 
-        x : assign inputs
+        x : inputs
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
+
+        # print(models['x'])
+        
+        
+        
 
         x : stem1 x
 
@@ -1996,7 +2001,7 @@ class TestMLL(TestCase):
 
         x : stem2 x
 
-        # layer A;
+        # layer A
 
         shortcut : assign x
 
@@ -2020,7 +2025,7 @@ class TestMLL(TestCase):
 
         x : incA_red x
 
-        #layer B;
+        #layer B
 
         shortcut : assign x
 
@@ -2286,11 +2291,11 @@ class TestMLL(TestCase):
         m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 
 
-        # Input layer;
+        # Input layer
 
         x : assign inputs
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
@@ -2311,7 +2316,7 @@ class TestMLL(TestCase):
 
         x : stem2 x
 
-        # layer A;
+        # layer A
 
         shortcut : assign x
 
@@ -2335,7 +2340,7 @@ class TestMLL(TestCase):
 
         x : incA_red x
 
-        #layer B;
+        #layer B
 
         shortcut : assign x
 
@@ -2650,11 +2655,11 @@ class TestMLL(TestCase):
         m2d3322v := MaxPooling2D (3, 3) m2dv with strides=(2, 2)
 
 
-        # Input layer;
+        # Input layer
 
         x : assign inputs
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
@@ -2675,7 +2680,7 @@ class TestMLL(TestCase):
 
         x : stem2 x
 
-        # layer A;
+        # layer A
 
         shortcut : assign x
 
@@ -2699,7 +2704,7 @@ class TestMLL(TestCase):
 
         x : incA_red x
 
-        #layer B;
+        #layer B
 
         shortcut : assign x
 
@@ -2974,11 +2979,11 @@ class TestMLL(TestCase):
         m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 
 
-        # Input layer;
+        # Input layer
 
         x : assign inputs
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
@@ -2999,7 +3004,7 @@ class TestMLL(TestCase):
 
         x : stem2 x
 
-        # layer A;
+        # layer A
 
         shortcut : assign x
 
@@ -3023,7 +3028,7 @@ class TestMLL(TestCase):
 
         x : incA_red x
 
-        #layer B;
+        #layer B
 
         shortcut : assign x
 
@@ -3618,11 +3623,11 @@ class TestMLL(TestCase):
         m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 
 
-        # Input layer;
+        # Input layer
 
         x : assign inputs
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
@@ -3643,7 +3648,7 @@ class TestMLL(TestCase):
 
         x : stem2 x
 
-        # layer A; 
+        # layer A 
 
         shortcut : assign x
 
@@ -3667,7 +3672,7 @@ class TestMLL(TestCase):
 
         x : incA_red x
 
-        #layer B; 
+        #layer B 
 
         shortcut : assign x
 
@@ -4208,11 +4213,11 @@ class TestMLL(TestCase):
         m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 
 
-        # Input layer;
+        # Input layer
 
         x : assign inputs
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
@@ -4233,7 +4238,7 @@ class TestMLL(TestCase):
 
         x : stem2 x
 
-        # layer A;
+        # layer A
 
         shortcut : assign x
 
@@ -4257,7 +4262,7 @@ class TestMLL(TestCase):
 
         x : incA_red x
 
-        #layer B;
+        #layer B
 
         shortcut : assign x
 
@@ -5098,11 +5103,11 @@ class TestMLL(TestCase):
 
         c2d643311s := Conv2D ( fant 64 ) (3, 3) with subsample=(1,1) init='he_normal' border_mode='same' dim_ordering='tf' activation='relu'
 
-        # Input layer;
+        # Input layer
 
         x : assign inputs
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
@@ -5305,11 +5310,11 @@ class TestMLL(TestCase):
         m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 
 
-        # Input layer;
+        # Input layer
 
         x : assign inputs
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
@@ -5555,11 +5560,11 @@ class TestMLL(TestCase):
         m2d3322v := MaxPooling2D (3, 3) with strides=(2, 2) border_mode='valid' dim_ordering ='tf'
 
 
-        # Input layer;
+        # Input layer
 
         x : assign inputs
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
@@ -5580,7 +5585,7 @@ class TestMLL(TestCase):
 
         x : stem2 x
 
-        # layer A;
+        # layer A
 
         shortcut : assign x
 
@@ -5744,11 +5749,11 @@ class TestMLL(TestCase):
 
         m2d3311v := MaxPooling2D (3, 3) m2dv with strides=(1, 1)
 
-        # Input layer;
+        # Input layer
 
         x : assign inputs
 
-        # Layer stem di entrata dell input;
+        # Layer stem di entrata dell input
 
         stem2 :
             | c2d1923311v
@@ -5887,10 +5892,10 @@ class TestMLL(TestCase):
                 val_rel := he_normal valid tf relu
                 c2d1923311v := Conv2D ( fant 192 ) (3, 3) val_rel with subsample=(1,1) input_shape=(32,32,3)
 
-                #modello sequenziale keras;
+                #modello sequenziale keras
                 model : c2d1923311v + c2d1923311v + c2d1923311v
 
-                #modello pipeline di sklearn, non sono tutti classifiers;                
+                #modello pipeline di sklearn, non sono tutti classifiers        
                 model : (@StandardScaler) + (@PCA) + @Ridge
                 
                 rf_clf  : RandomForestClassifier 10 entropy
@@ -5900,8 +5905,9 @@ class TestMLL(TestCase):
                 dt_clf  : DecisionTreeClassifier gini
                 lr      : @LogisticRegression
                 
-                #modello stacking sklearn;
+                #modello stacking sklearn
                 sclf : rf_clf + dt_clf + knn_clf + svc_clf + rg_clf + lr
+                # sclf : classifier StackingClassifier with classifiers = [ rf_clf, dt_clf, knn_clf, svc_clf, rg_clf ] meta_classifier = lr
                 """
 
         self.mll = MLL(skmodel4, locals())
@@ -5911,3 +5917,28 @@ class TestMLL(TestCase):
         sclf = self.mll.last_model()
 
         print("[", self.mll.macros, "]")
+
+    def exec_probably_wont_mod_to_functions(self):
+
+        inc = """
+        c2d323311v := Conv2D ( fant 32 ) (3, 3) with subsample=(1,1) init='he_normal' border_mode='valid' dim_ordering='tf' activation='relu'
+
+        x : 
+
+        stem1 :
+            | c2d323311v + c2d323311v
+            
+        ! print(models[''])
+
+        x : stem1 x
+
+        """
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        print(self.mll.models.keys())
+        self.mll.execute()
+        exec("print(type(inputs))",self.mll.env)
+        x = self.mll.last_model()
+
+        print(x)

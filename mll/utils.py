@@ -90,6 +90,7 @@ from sklearn import svm
 from sklearn import tree
 from sklearn import preprocessing
 from sklearn import decomposition
+from sklearn import pipeline
 
 
 def get_sklearn_models() -> dict:
@@ -111,6 +112,11 @@ def get_sklearn_models() -> dict:
     for k in ensemble.__dict__.keys():
         if "__" not in k and k != "K":
             keras_layers["ensemble"].add(k)
+
+    keras_layers["pipeline"] = set()
+    for k in pipeline.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["pipeline"].add(k)
 
     # print("EUREKAAAAAAA","RandomForestClassifier" in keras_layers["ensemble"])
 

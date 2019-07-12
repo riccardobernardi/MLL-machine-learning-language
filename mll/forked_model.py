@@ -16,7 +16,7 @@ class ForkedModel:
 
     def traduce_forks(self, t: Tree):
 
-        self.mll.models[clean_tok(t.children[0]).value] = t
+        # self.mll.models[clean_tok(t.children[0]).value] = t
 
         t.children[2:] = escape(t.children[2:])
         t.children[2:] = self.mll.put_macros(t.children[2:])
