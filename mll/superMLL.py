@@ -46,6 +46,8 @@ class superMLL:
         self.current_branch = 0
         self.current_binding_name = None
 
+        self.function_trees = {}
+
         # MLL program
         self.program = program.replace("with ","")
 

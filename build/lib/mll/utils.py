@@ -88,6 +88,9 @@ from sklearn import ensemble
 from sklearn import neighbors
 from sklearn import svm
 from sklearn import tree
+from sklearn import preprocessing
+from sklearn import decomposition
+from sklearn import pipeline
 
 
 def get_sklearn_models() -> dict:
@@ -110,12 +113,27 @@ def get_sklearn_models() -> dict:
         if "__" not in k and k != "K":
             keras_layers["ensemble"].add(k)
 
+    keras_layers["pipeline"] = set()
+    for k in pipeline.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["pipeline"].add(k)
+
     # print("EUREKAAAAAAA","RandomForestClassifier" in keras_layers["ensemble"])
 
     keras_layers["neighbors"] = set()
     for k in neighbors.__dict__.keys():
         if "__" not in k and k != "K":
             keras_layers["neighbors"].add(k)
+
+    keras_layers["preprocessing"] = set()
+    for k in preprocessing.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["preprocessing"].add(k)
+
+    keras_layers["decomposition"] = set()
+    for k in decomposition.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["decomposition"].add(k)
 
     keras_layers["svm"] = set()
     for k in svm.__dict__.keys():
@@ -206,22 +224,21 @@ def OR(a, b):
 
 
 def match(children, indexes, tok_types):
-
     # print(len(indexes))
 
     try:
-        if len(indexes)>0:
+        if len(indexes) > 0:
             true = [children[indexes[i]].type == tok_types[i] for i in range(0, len(indexes))]
         else:
             true = []
             for i in range(0, len(children)):
-                if isinstance(children[i],Token):
+                if isinstance(children[i], Token):
                     true.append(children[i].type == tok_types[0])
     except:
         # cprint("esco sull except della match","green")
         return False
 
-    return reduce(AND, true) if len(indexes)>0 else reduce(OR,true)
+    return reduce(AND, true) if len(indexes) > 0 else reduce(OR, true)
 
 
 def split(arr: [], split_token: type("")) -> []:
@@ -230,7 +247,7 @@ def split(arr: [], split_token: type("")) -> []:
     last_split = 0
 
     for i in range(0, len(arr)):
-        if isinstance(arr[i],Token) and arr[i].type == split_token and arr[i] is not None:
+        if isinstance(arr[i], Token) and arr[i].type == split_token and arr[i] is not None:
             b = arr[last_split:i]
             a.append(b)
             last_split = i + 1
@@ -301,8 +318,8 @@ def tree_depth(t) -> int:
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'z']
 
 
-def list_types_list(l:[])->[]:
-    return [ x.data if type(x)==Tree else x.type for x in l]
+def list_types_list(l: []) -> []:
+    return [x.data if type(x) == Tree else x.type for x in l]
 
 
 # def escape(t:Token, m: Tree) -> Tree:
@@ -335,13 +352,13 @@ def visit(t: object, match, red):
     if isinstance(t, Token):
         return match(t)
     elif isinstance(t, Tree):
-        return visit(t.children,match,red)
+        return visit(t.children, match, red)
     elif isinstance(t, type([])):
         a = []
         for i in t:
-            b = visit(i,match,red)
+            b = visit(i, match, red)
             a.append(b)
-        return reduce(red,a)
+        return reduce(red, a)
     else:
         # cprint(type(t),"blue")
         raise Exception("Non esiste questo caso nella fun scrivi")
@@ -351,7 +368,7 @@ def apply(t: object, flist, ftok):
     if isinstance(t, Token):
         return ftok(t)
     elif isinstance(t, Tree):
-        return Tree(t.data,apply(t.children, flist, ftok))
+        return Tree(t.data, apply(t.children, flist, ftok))
     elif isinstance(t, type([])):
         a = []
         for i in t:
@@ -365,7 +382,7 @@ def apply(t: object, flist, ftok):
 
 def sub_comp_sq_w_sq(t: list):
     if match(t, [0, 1, 2, 3, 4], ["ID", "EQ", "SQ", "W", "SQ"]) and len(t) == 5:
-        m = [Token("ID", clean_tok(t[0]).value), Token("EQ","="), Token("ID","'" + clean_tok(t[3]).value + "'")]
+        m = [Token("ID", clean_tok(t[0]).value), Token("EQ", "="), Token("ID", "'" + clean_tok(t[3]).value + "'")]
         return m
     else:
         return t
@@ -376,25 +393,25 @@ def substitute_comp_SQ_W_SQ(t):
     return t
 
 
-def escape(t : object):
-    if isinstance(t,Token):
+def escape(t: object):
+    if isinstance(t, Token):
         return t
 
-    if isinstance(t,list):
+    if isinstance(t, list):
 
         if match(t, [0, 1, 2], ["SQ", "W", "SQ"]) and len(t) == 3:
             # print("before:", t)
-            t = [Token("ID","'"+t[1].value+"'")]
+            t = [Token("ID", "'" + t[1].value + "'")]
             # print("after:", t)
-        if match(t, [0, 1, 2, 3, 4], ["ID","EQ","SQ", "W", "SQ"]) and len(t) == 5:
+        if match(t, [0, 1, 2, 3, 4], ["ID", "EQ", "SQ", "W", "SQ"]) and len(t) == 5:
             # print("before:", t)
-            t = [t[0],t[1],Token("ID","'"+t[3].value+"'")]
+            t = [t[0], t[1], Token("ID", "'" + t[3].value + "'")]
             # print("after:", t)
 
         return t
 
     if isinstance(t, Tree):
-        return Tree(t.data,escape(t.children))
+        return Tree(t.data, escape(t.children))
 
     return t
 
@@ -404,7 +421,7 @@ class Toggler:
     def __init__(self):
         self.d = []
 
-    def t(self,w:str):
+    def t(self, w: str):
         if w not in self.d:
             self.d.append(w)
             return True
@@ -413,9 +430,8 @@ class Toggler:
 
 
 def wellformed(t: object) -> bool:
-
-    if isinstance(t,Token):
-        if isinstance(t.value,str):
+    if isinstance(t, Token):
+        if isinstance(t.value, str):
             return True
         else:
             return False
@@ -427,40 +443,99 @@ def wellformed(t: object) -> bool:
         b = reduce(AND, map(lambda x: True if isinstance(x, Token) or isinstance(x, Tree) else False, t))
         return a and b
 
-    if isinstance(t,Tree):
-        a = True if isinstance(t.children,list) else False
+    if isinstance(t, Tree):
+        a = True if isinstance(t.children, list) else False
         b = wellformed(t.children)
         return a and b
 
     return False
 
-def create_macro_mod(mll,t):
+
+def create_macro_mod(mll, t):
     s = clean_tok(t.children[0])
     mll.macros[s] = apply(t.children[2],
-                           lambda x: x,
-                           lambda x: Token("ID", "'" + s + "'") if s == clean_tok(x).value else x)
+                          lambda x: x,
+                          lambda x: Token("ID", "'" + s + "'") if s == clean_tok(x).value else x)
 
-def create_macro_exp(mll,t):
+
+def create_macro_exp(mll, t):
     s = clean_tok(t.children[0])
     mll.macros[s] = apply(t.children[2],
-                           lambda x: x,
-                           lambda x: Token("ID", "'" + s + "'") if s == clean_tok(x).value else x)
+                          lambda x: x,
+                          lambda x: Token("ID", "'" + s + "'") if s == clean_tok(x).value else x)
 
-def create_macro_pip(mll,t):
+
+def create_macro_pip(mll, t):
     s = clean_tok(t.children[0]).value
     mll.macros[s] = Tree(t.data, apply(t.children[2:],
-                           lambda x: x,
-                           lambda x: Token("ID", "'" + s + "'") if s == clean_tok(x).value else x))
+                                       lambda x: x,
+                                       lambda x: Token("ID", "'" + s + "'") if s == clean_tok(x).value else x))
 
 
 def cleanNone(t):
-    if isinstance(t,Token):
+    if isinstance(t, Token):
         return t
 
-    if isinstance(t,list):
+    if isinstance(t, list):
         return filter(lambda x: x is not None, [cleanNone(x) for x in t])
 
-    if isinstance(t,Tree):
+    if isinstance(t, Tree):
         return t
 
     raise Exception("caso non previsto")
+
+
+def SUM(a, b):
+    return a + b
+
+
+def leaves_before(t) -> int:
+    if type(t) == Tree:
+        if t.data=="macro":
+            return 0
+        return int(leaves_before(t.children))
+    if type(t) == Token:
+        if t.type == "CO" or t.type == "LP" or t.type == "RP":
+            return 0.5
+        return 1
+    if isinstance(t, list):
+        return reduce(SUM, map(leaves_before, t))
+
+    raise Exception("Errorfffffffff")
+
+def leaves_after(t) -> int:
+    if type(t) == Tree:
+        return int(leaves_after(t.children))
+    if type(t) == Token:
+        if t.type == "CO" or t.type == "LP" or t.type == "RP":
+            return 0
+        return 1
+    if isinstance(t, list):
+        return reduce(SUM, map(leaves_after, t))
+
+    raise Exception("Errorfffffffff")
+
+
+def give_type_agnostically(t) -> str:
+    if isinstance(t,Tree):
+        return str(t.data)
+    if isinstance(t,Token):
+        return str(t.type)
+
+
+# def denest_sums(t:Tree) -> []:
+#     print(list_types_list(t.children))
+#
+#     if isTree(t) and match(t.children,[],["PLUS"]) and len(t.children)==1:
+#         return [t.children]
+#
+#     if isTree(t) and give_type_agnostically(t.children[0]).islower() and give_type_agnostically(t.children[2]).islower():
+#         return denest_sums(t.children[0]) + denest_sums(t.children[2])
+#     if isTree(t) and give_type_agnostically(t.children[0]).islower() and give_type_agnostically(t.children[2]).isupper():
+#         return denest_sums(t.children[0]) + [[t.children[2]]]
+#     if isTree(t) and give_type_agnostically(t.children[0]).isupper() and give_type_agnostically(t.children[2]).islower():
+#         return [[t.children[0]]] + denest_sums(t.children[2])
+#     if isTree(t) and give_type_agnostically(t.children[0]).isupper() and give_type_agnostically(t.children[2]).isupper():
+#         return [[t.children[0]], [t.children[2]]]
+#
+#     return []

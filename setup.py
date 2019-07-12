@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="mll",
-    version="2.0.3",
+    version="2.0.4",
     author="Bernardi Riccardo",
     author_email="riccardo.bernardi@rocketmail.com",
     description="A machine learning language that have a specific grammar made to simplify large and complex machine learning and deep learning tasks",

@@ -7,7 +7,10 @@ from mll.superMLL import superMLL
 from mll.utils import scrivi, map, match, flatten, filter, group, clean_tok, \
     alphabet, \
     OR, visit, istok, apply, isTree, Toggler, list_types_list, escape, create_macro_mod, create_macro_exp, \
-    create_macro_pip
+    create_macro_pip, leaves_before, leaves_after, presentation
+
+import os
+import sys
 
 import warnings
 
@@ -24,34 +27,59 @@ class MLL(superMLL):
         superMLL.__init__(self,program, env)
 
     def start(self):
+        # presentazione del progetto con un frontespizio
+        presentation()
+
         self.create_available_imports()
         self.string = self.transpile(self.program)
 
+        return self
+
+    def inner(self):
+        self.isInner = True
+
+        # old_stdout = sys.stdout
+        # sys.stdout = open(os.devnull, 'w')
+
+        self.create_available_imports()
+        self.string = self.transpile(self.program)
+
+        return self
+
     def transpile(self, program: str) -> str:
 
-        print("                              DEBUG")
-        print("###############################################################")
+        if self.isInner == False:
+
+            print("                              DEBUG")
+            print("###############################################################")
 
         parser = Lark(get_rev_grammar(), start='mll')
 
         self.before_tree = parser.parse(program)
+        # print(tree_depth(self.before_tree))
+        # print(leaves_before(self.before_tree))
 
         self.after_tree = Tree(self.before_tree.data, self.transform(self.before_tree.children))
-        print(self.after_tree)
+        # print(tree_depth(self.before_tree))
+        # print(self.after_tree)
+        # print(leaves_after(self.after_tree))
 
         s = scrivi(self.used_libraries) + "\n" + "def assign(x):\n\treturn x" + "\n\n" + scrivi(self.after_tree)
 
-        print("###############################################################")
-        print("                           POSTCONDIZIONI")
-        print("le post-condizioni sono relative solo a alla transpilazione e non all' esecuzione")
-        print("occhio alla +: potrebbe confondersi con una e -> e + e")
-        cprint("macros: "+str(self.macros.keys()),"blue")
-        cprint("parmacs: " + str(self.parmacs.keys()), "blue")
-        cprint("models: " + str(self.models.keys()), "blue")
-        print("###############################################################")
+        if self.isInner == False:
 
-        print("                             PROGRAM")
-        print("###############################################################")
+            print("###############################################################")
+            print("                           POSTCONDIZIONI")
+            print("le post-condizioni sono relative solo a alla transpilazione e non all' esecuzione")
+            print("occhio alla +: potrebbe confondersi con una e -> e + e")
+            cprint("macros: "+str(self.macros.keys()),"blue")
+            cprint("parmacs: " + str(self.parmacs.keys()), "blue")
+            cprint("models: " + str(self.models.keys()), "blue")
+            cprint("MLL : Python = 1 : "+str(leaves_after(self.after_tree)/leaves_before(self.before_tree)),"yellow")
+            print("###############################################################")
+
+            print("                             PROGRAM")
+            print("###############################################################")
         return s
 
     ###################################################################
@@ -64,6 +92,11 @@ class MLL(superMLL):
 
         if t.data == "mll":
             return Tree(t.data, self.transform(t.children))
+
+        if t.data == "pyt":
+            m = apply(t,lambda x:x, clean_tok)
+            m.children = m.children + [Token("WS","\n")]
+            return m
 
         if t.data == "model":
             return self.translate_model(t)
@@ -129,15 +162,15 @@ class MLL(superMLL):
         if len(branches) == 1:
             plus = lambda x: True if x.type == "PLUS" else False
             if visit(t, plus, OR):
-                cprint("SEQUENTIAL","red")
+                # cprint("SEQUENTIAL","red")
                 from mll.sequential_model import SequentialModel
                 return SequentialModel(self).traduce_sequential(t)
             else:
-                cprint("SIMPLE", "red")
+                # cprint("SIMPLE", "red")
                 from mll.simple_model import SimpleModel
                 return SimpleModel(self).traduce_simple_model(t)
         else:
-            cprint("FORKED", "red")
+            # cprint("FORKED", "red")
             from mll.forked_model import ForkedModel
             return ForkedModel(self).traduce_forks(t)
 

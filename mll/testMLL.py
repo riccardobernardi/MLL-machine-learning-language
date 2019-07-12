@@ -374,7 +374,7 @@ class TestMLL(TestCase):
         print(self.mll.get_string())
         self.mll.execute()
 
-    def test_inception(self):
+    def inception(self):
         inception_uncomm = """
         conv2d := Conv2D
         seq := Sequential
@@ -512,7 +512,7 @@ class TestMLL(TestCase):
     def test_mll_empty(self):
         MLL("")
 
-    def test_inception_commented(self):
+    def inception_commented(self):
         inception = """
         conv2d := Conv2D
         seq := Sequential
@@ -962,7 +962,7 @@ class TestMLL(TestCase):
         self.mll.execute()
         self.mll.image_tree("before")
 
-    def test_inception_commented_commas(self):
+    def inception_commented_commas(self):
         inception = """
         conv2d := Conv2D
         seq := Sequential
