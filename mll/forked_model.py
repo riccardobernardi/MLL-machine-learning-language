@@ -16,7 +16,9 @@ class ForkedModel:
 
     def traduce_forks(self, t: Tree):
 
+        # non esistono i modelli che sono funzioni quindi non si mette mai la riga sotto, salverò in un altro luogo
         # self.mll.models[clean_tok(t.children[0]).value] = t
+        # esempio self.mll.function_trees[t.children[0]).value] = t
 
         t.children[2:] = escape(t.children[2:])
         t.children[2:] = self.mll.put_macros(t.children[2:])

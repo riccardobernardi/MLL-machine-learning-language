@@ -5942,3 +5942,29 @@ class TestMLL(TestCase):
         x = self.mll.last_model()
 
         print(x)
+
+    def test_behaviour_exec_redef_function_inside(self):
+        def funt(x):
+            return x
+
+        exec("def funt(x):\n\treturn 'fanculo'", locals())
+
+        print(funt(0))
+
+    def test_behaviour_exec_redef_function_inside_nulled(self):
+        def funt(x):
+            return x
+
+        locals()["funt"] = None
+
+        exec("def funt(x):\n\treturn 'fanculo'",locals())
+
+        print(funt(0))
+
+    def test_behaviour_exec_redef_function_inside_newly_created(self):
+
+        models = {}
+
+        exec("def funt(x):\n\treturn 'fanculo' \n\nmodels['funt'] = funt",locals())
+
+        print(models["funt"](0))
