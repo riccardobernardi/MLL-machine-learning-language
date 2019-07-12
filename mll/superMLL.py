@@ -19,9 +19,6 @@ class superMLL:
         # has to be ["from keras.layers import Conv2D"]
         self.used_libraries = []
 
-        # presentazione del progetto con un frontespizio
-        presentation()
-
         # nomi esterni
         self.env = env
 
@@ -51,6 +48,8 @@ class superMLL:
 
         # MLL program
         self.program = program.replace("with ","")
+
+        self.isInner = False
 
         # avviso per programma vuoto
         # if self.program.__len__()==0:

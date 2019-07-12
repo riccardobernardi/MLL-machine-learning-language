@@ -5885,7 +5885,7 @@ class TestMLL(TestCase):
                 criterion $ gini or entropy
                 
                 val_rel := he_normal valid tf relu
-                c2d1923311v := Conv2D ( fant 192 ) (3, 3) val_rel with subsample=(1,1) 
+                c2d1923311v := Conv2D ( fant 192 ) (3, 3) val_rel with subsample=(1,1) input_shape=(32,32,3)
 
                 #modello sequenziale keras;
                 model : c2d1923311v + c2d1923311v + c2d1923311v

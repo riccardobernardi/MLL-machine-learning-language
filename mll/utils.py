@@ -89,6 +89,7 @@ from sklearn import neighbors
 from sklearn import svm
 from sklearn import tree
 from sklearn import preprocessing
+from sklearn import decomposition
 
 
 def get_sklearn_models() -> dict:
@@ -122,6 +123,11 @@ def get_sklearn_models() -> dict:
     for k in preprocessing.__dict__.keys():
         if "__" not in k and k != "K":
             keras_layers["preprocessing"].add(k)
+
+    keras_layers["decomposition"] = set()
+    for k in decomposition.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["decomposition"].add(k)
 
     keras_layers["svm"] = set()
     for k in svm.__dict__.keys():

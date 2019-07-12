@@ -22,7 +22,7 @@ class SimpleModel:
 
         apply(t, lambda x: x, self.mll.select_imported_libraries)
 
-        self.mll.models[clean_tok(t.children[0]).value] = 0
+        self.mll.models[clean_tok(t.children[0]).value] = t
         t.children[2:] = apply(t.children[2:], lambda x: x, self.mll.substitute_model)
 
         self.mll.ordered_models.append(clean_tok(t.children[0]).value)
