@@ -485,7 +485,7 @@ class TestMLL(TestCase):
         lr      : LogisticRegression
         sclf : StackingClassifier with classifiers = [ rf_clf, dt_clf, knn_clf, svc_clf, rg_clf ] meta_classifier = lr
 
-        net : Conv2D 32 (3, 3) with input_shape=(100, 100, 3) + relu + (@Flatten()) + (Dense 256) + relu + (Dropout 0.5) + Dense 10 activation='relu'
+        net : Conv2D 32 (3, 3) with input_shape=(100, 100, 3) + relu + (@Flatten) + (Dense 256) + relu + (Dropout 0.5) + Dense 10 activation='relu'
         """
 
         self.mll = MLL(simple_net)
@@ -5968,3 +5968,31 @@ class TestMLL(TestCase):
         exec("def funt(x):\n\treturn 'fanculo' \n\nmodels['funt'] = funt",locals())
 
         print(models["funt"](0))
+
+    def test_antonioc_hint(self):
+
+        img_rows, img_cols = 32, 32
+        img_channels = 3
+
+        inputs = Input(shape=(img_rows, img_cols, img_channels))
+
+        inc = """
+        border_mode $ valid or same
+        activation $ relu or linear
+        c2d6411 := Conv2D 64 (1, 1) same relu
+        c2d6433 := Conv2D 64 (3, 3) same relu
+
+        x : inputs
+        
+        tower:
+            | c2d6411 + c2d6433
+            
+        tower +: x
+        """
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+        x = self.mll.last_model()
+
+        print(x)
