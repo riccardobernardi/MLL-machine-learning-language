@@ -237,7 +237,7 @@ class TestMLL(TestCase):
         
         # layer A
         
-        shortcut : assign x
+        shortcut : x
         
         incA1 :
             | c2d3211s
@@ -248,7 +248,7 @@ class TestMLL(TestCase):
         
         incA2 :
             | c2d38411s
-            | assign shortcut
+            | shortcut
             
         x : incA2 x
         
@@ -1109,7 +1109,7 @@ class TestMLL(TestCase):
 
         # layer A
 
-        shortcut : assign x
+        shortcut : x
 
         incA1 :
             | c2d3211s
@@ -1121,7 +1121,7 @@ class TestMLL(TestCase):
 
         incA2 :
             | c2d38411s
-            | assign shortcut
+            | shortcut
             | Add
             
         #bisogna definire Add
@@ -1215,7 +1215,7 @@ class TestMLL(TestCase):
 
         # layer A
 
-        shortcut : assign x
+        shortcut : x
 
         incA1 :
             | c2d3211s
@@ -1223,7 +1223,7 @@ class TestMLL(TestCase):
             | c2d3211s + c2d4833s + c2d6433s
             | Concatenate
             | c2d38411s
-            | assign shortcut
+            | shortcut
             | Add
 
         #l ultima Concatenate qui sopra sarebbe una Add
@@ -1322,7 +1322,7 @@ class TestMLL(TestCase):
 
         # layer A
 
-        shortcut : assign x
+        shortcut : x
 
         incA1 :
             | c2d3211s
@@ -1330,7 +1330,7 @@ class TestMLL(TestCase):
             | c2d3211s + c2d4833s + c2d6433s
             | Concatenate
             | c2d38411s_ext
-            | assign shortcut
+            | shortcut
             | Concatenate
 
         #l ultima Concatenate qui sopra sarebbe una Add
@@ -1369,11 +1369,11 @@ class TestMLL(TestCase):
 
         x : Input with shape = (32,32,3)
 
-        shortcut : assign x
+        shortcut : x
 
         incA1 :
             | c2d38411s_ext
-            | assign shortcut
+            | shortcut
             | Concatenate
             
         x : incA1 x
@@ -1400,11 +1400,11 @@ class TestMLL(TestCase):
 
         x : Input with shape = (32,32,3)
 
-        shortcut : assign x
+        shortcut : x
 
         incA1 :
             | c2d38411s_ext
-            | assign shortcut
+            | shortcut
             | Concatenate
 
         x : incA1 x
@@ -1443,11 +1443,11 @@ class TestMLL(TestCase):
 
         x : Input with shape = (32,32,3)
 
-        shortcut : assign x
+        shortcut : x
 
         incA1 :
             | c2d38411s_ext
-            | assign shortcut
+            | shortcut
             | Concatenate
 
         x : incA1 x
@@ -1476,11 +1476,11 @@ class TestMLL(TestCase):
 
         x : Input with shape = (32,32,3)
 
-        shortcut : assign x
+        shortcut : x
 
         incA1 :
             | c2d38411s_ext
-            | assign shortcut
+            | shortcut
             | Concatenate
 
         x : incA1 x
@@ -1509,11 +1509,11 @@ class TestMLL(TestCase):
 
         x : Input with shape = (32,32,3)
 
-        shortcut : assign x
+        shortcut : x
 
         incA1 :
             | c2d38411s_ext
-            | assign shortcut
+            | shortcut
             | Concatenate
 
         x : incA1 x
@@ -1575,11 +1575,11 @@ class TestMLL(TestCase):
 
         x : Input with shape = (32,32,3)
 
-        shortcut : assign x
+        shortcut : x
 
         incA1 :
             | c2d38411s_ext
-            | assign shortcut
+            | shortcut
             | Concatenate
 
         x : incA1 x
@@ -1610,11 +1610,11 @@ class TestMLL(TestCase):
 
         x : Input with shape = (32,32,3)
 
-        shortcut : assign x
+        shortcut : x
 
         incA1 :
             | c2d38411s_ext
-            | assign shortcut
+            | shortcut
             | Concatenate
 
         x : incA1 x
@@ -2003,14 +2003,14 @@ class TestMLL(TestCase):
 
         # layer A
 
-        shortcut : assign x
+        shortcut : x
 
         incA :
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d3841111slin
             | Add
             | relu
@@ -2027,13 +2027,13 @@ class TestMLL(TestCase):
 
         #layer B
 
-        shortcut : assign x
+        shortcut : x
 
         incB : 
             | c2d1921111s
             | c2d1281111s + c2d1601711s + c2d1927111s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d11541111slin
             | Add
             | relu
@@ -2049,13 +2049,13 @@ class TestMLL(TestCase):
 
         x : incB_red x
 
-        shortcut : assign x
+        shortcut : x
 
         incC : 
             | c2d1921111s
             | c2d1921111s + c2d2241311s + c2d2563111s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d20481111slin
             | Add
             | relu
@@ -2293,7 +2293,7 @@ class TestMLL(TestCase):
 
         # Input layer
 
-        x : assign inputs
+        x : inputs
 
         # Layer stem di entrata dell input
 
@@ -2318,14 +2318,14 @@ class TestMLL(TestCase):
 
         # layer A
 
-        shortcut : assign x
+        shortcut : x
 
         incA :
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d3841111slin
             | Add
             | re
@@ -2342,13 +2342,13 @@ class TestMLL(TestCase):
 
         #layer B
 
-        shortcut : assign x
+        shortcut : x
 
         incB : 
             | c2d1921111s
             | c2d1281111s + c2d1601711s + c2d1927111s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d11541111slin
             | Add
             | re
@@ -2364,13 +2364,13 @@ class TestMLL(TestCase):
 
         x : incB_red x
 
-        shortcut : assign x
+        shortcut : x
 
         incC : 
             | c2d1921111s
             | c2d1921111s + c2d2241311s + c2d2563111s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d20481111slin
             | Add
             | re
@@ -2657,14 +2657,14 @@ class TestMLL(TestCase):
 
         # Input layer
 
-        x : assign inputs
+        x : inputs
 
         # Layer stem di entrata dell input
 
         stem1 :
             | c2d323311v + c2d323311v + c2d643311s
 
-        x : stem1 x
+        x +: stem1
 
         stem2 :
             | m2d3311v
@@ -2678,18 +2678,18 @@ class TestMLL(TestCase):
             | Concatenate
             | Activation 'relu'
 
-        x : stem2 x
+        x +: stem2
 
         # layer A
 
-        shortcut : assign x
+        shortcut : x
 
         incA :
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d3841111slin
             | Add
             | Activation 'relu'
@@ -2706,13 +2706,13 @@ class TestMLL(TestCase):
 
         #layer B
 
-        shortcut : assign x
+        shortcut : x
 
         incB : 
             | c2d1921111s
             | c2d1281111s + c2d1601711s + c2d1927111s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d11541111slin
             | Add
             | Activation 'relu'
@@ -2728,13 +2728,13 @@ class TestMLL(TestCase):
 
         x : incB_red x
 
-        shortcut : assign x
+        shortcut : x
 
         incC : 
             | c2d1921111s
             | c2d1921111s + c2d2241311s + c2d2563111s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d20481111slin
             | Add
             | Activation 'relu'
@@ -2981,7 +2981,7 @@ class TestMLL(TestCase):
 
         # Input layer
 
-        x : assign inputs
+        x : inputs
 
         # Layer stem di entrata dell input
 
@@ -3002,18 +3002,18 @@ class TestMLL(TestCase):
             | Concatenate
             | re
 
-        x : stem2 x
+        x +: stem2
 
         # layer A
 
-        shortcut : assign x
+        shortcut : x
 
         incA :
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d3841111slin
             | Add
             | re
@@ -3026,17 +3026,17 @@ class TestMLL(TestCase):
             | c2d2561111s + c2d2563311s + c2d3843322v
             | Concatenate
 
-        x : incA_red x
+        x +: incA_red
 
         #layer B
 
-        shortcut : assign x
+        shortcut : x
 
         incB : 
             | c2d1921111s
             | c2d1281111s + c2d1601711s + c2d1927111s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d11541111slin
             | Add
             | re
@@ -3050,20 +3050,20 @@ class TestMLL(TestCase):
             | c2d2561111s + c2d2883311s + c2d3203322v
             | Concatenate
 
-        x : incB_red x
+        x +: incB_red
 
-        shortcut : assign x
+        shortcut : x
 
         incC : 
             | c2d1921111s
             | c2d1921111s + c2d2241311s + c2d2563111s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d20481111slin
             | Add
             | re
 
-        x : incC x
+        x +: incC
 
         """
 
@@ -3299,7 +3299,7 @@ class TestMLL(TestCase):
 
         # Input layer
 
-        x : assign @inputs
+        x : @inputs
 
         # Layer stem di entrata dell input
 
@@ -3324,14 +3324,14 @@ class TestMLL(TestCase):
 
         # layer A
 
-        shortcut : assign x
+        shortcut : x
 
         incA :
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d3841111slin
             | Add
             | re
@@ -3348,13 +3348,13 @@ class TestMLL(TestCase):
 
         #layer B
 
-        shortcut : assign x
+        shortcut : x
 
         incB : 
             | c2d1921111s
             | c2d1281111s + c2d1601711s + c2d1927111s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d11541111slin
             | Add
             | re
@@ -3370,13 +3370,13 @@ class TestMLL(TestCase):
 
         x : incB_red x
 
-        shortcut : assign x
+        shortcut : x
 
         incC : 
             | c2d1921111s
             | c2d1921111s + c2d2241311s + c2d2563111s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d20481111slin
             | Add
             | re
@@ -3625,7 +3625,7 @@ class TestMLL(TestCase):
 
         # Input layer
 
-        x : assign inputs
+        x : inputs
 
         # Layer stem di entrata dell input
 
@@ -3650,14 +3650,14 @@ class TestMLL(TestCase):
 
         # layer A 
 
-        shortcut : assign x
+        shortcut : x
 
         incA :
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d3841111slin
             | Add
             | re
@@ -3674,13 +3674,13 @@ class TestMLL(TestCase):
 
         #layer B 
 
-        shortcut : assign x
+        shortcut : x
 
         incB : 
             | c2d1921111s
             | c2d1281111s + c2d1601711s + c2d1927111s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d11541111slin
             | Add
             | re
@@ -3696,13 +3696,13 @@ class TestMLL(TestCase):
 
         x : incB_red x
 
-        shortcut : assign x
+        shortcut : x
 
         incC : 
             | c2d1921111s
             | c2d1921111s + c2d2241311s + c2d2563111s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d20481111slin
             | Add
             | re
@@ -4215,7 +4215,7 @@ class TestMLL(TestCase):
 
         # Input layer
 
-        x : assign inputs
+        x : inputs
 
         # Layer stem di entrata dell input
 
@@ -4240,14 +4240,14 @@ class TestMLL(TestCase):
 
         # layer A
 
-        shortcut : assign x
+        shortcut : x
 
         incA :
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d3841111slin
             | Add
             | relu
@@ -4264,13 +4264,13 @@ class TestMLL(TestCase):
 
         #layer B
 
-        shortcut : assign x
+        shortcut : x
 
         incB : 
             | c2d1921111s
             | c2d1281111s + c2d1601711s + c2d1927111s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d11541111slin
             | Add
             | relu
@@ -4286,13 +4286,13 @@ class TestMLL(TestCase):
 
         x : incB_red x
 
-        shortcut : assign x
+        shortcut : x
 
         incC : 
             | c2d1921111s
             | c2d1921111s + c2d2241311s + c2d2563111s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d20481111slin
             | Add
             | relu
@@ -5115,7 +5115,7 @@ class TestMLL(TestCase):
 
         # Input layer
 
-        x : assign inputs
+        x : inputs
 
         # Layer stem di entrata dell input
 
@@ -5162,7 +5162,7 @@ class TestMLL(TestCase):
 
         m = 4
 
-        self.mll = MLL("model: assign inputs", locals())
+        self.mll = MLL("model: inputs", locals())
         self.mll.start()
         print(self.mll.get_string())
         self.mll.execute()
@@ -5322,7 +5322,7 @@ class TestMLL(TestCase):
 
         # Input layer
 
-        x : assign inputs
+        x : inputs
 
         # Layer stem di entrata dell input
 
@@ -5572,7 +5572,7 @@ class TestMLL(TestCase):
 
         # Input layer
 
-        x : assign inputs
+        x : inputs
 
         # Layer stem di entrata dell input
 
@@ -5597,14 +5597,14 @@ class TestMLL(TestCase):
 
         # layer A
 
-        shortcut : assign x
+        shortcut : x
 
         incA :
             | c2d321111s
             | c2d321111s + c2d323311s
             | c2d321111s + c2d483311s + c2d643311s
             | Concatenate
-            | assign shortcut
+            | shortcut
             | c2d3841111slin
             | Add
             | relu
@@ -5663,11 +5663,11 @@ class TestMLL(TestCase):
 
         x : Input with shape = (32,32,3)
 
-        shortcut : assign x
+        shortcut : x
 
         incA1 :
             | c2d38411s_ext
-            | assign shortcut
+            | shortcut
             | Concatenate
 
         x : incA1 x
@@ -5761,7 +5761,7 @@ class TestMLL(TestCase):
 
         # Input layer
 
-        x : assign inputs
+        x : inputs
 
         # Layer stem di entrata dell input
 
