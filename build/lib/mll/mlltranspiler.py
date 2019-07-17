@@ -65,7 +65,7 @@ class MLL(superMLL):
         # print(self.after_tree)
         # print(leaves_after(self.after_tree))
 
-        s = scrivi(self.used_libraries) + "\n" + "def assign(x):\n\treturn x" + "\n\n" + scrivi(self.after_tree)
+        s = scrivi(self.used_libraries) + scrivi(self.after_tree)
 
         if self.isInner == False:
 
@@ -120,7 +120,12 @@ class MLL(superMLL):
                 Token("ID", clean_tok(t.children[2]).value ),
                 Tree("e", [Token("ID",clean_tok(t.children[0]).value)])
                 ]))
-            return apply([Token("ID",clean_tok(t.children[0]).value),Token("EQ","=")] + rest.children,lambda x: x, self.substitute_model)
+            print(rest)
+            m = apply([Token("ID", clean_tok(t.children[0]).value), Token("EQ", "=")] + rest.children, lambda x: x,
+                  self.substitute_model)
+            print(m)
+            m = m + [Token("WS","\n\n")]
+            return m
 
         # if t.data == "macro_mod":
         #     create_macro_mod(self,t)

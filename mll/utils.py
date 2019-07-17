@@ -306,12 +306,15 @@ def tree_depth(t) -> int:
         # print("from TRee of treedepth",t)
         a: int = tree_depth(t.children)
         # print("from tredepth what come from depthiness",a)
+        # print(1+a)
         return 1 + a
     if type(t) == Token:
         return 0
     if isinstance(t, list):
         # print(reduce(MAX, map(tree_depth,t)))
         return reduce(MAX, map(tree_depth, t))
+
+    return 0
 
     raise Exception("Errorfffffffff")
 

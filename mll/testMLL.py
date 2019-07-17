@@ -2083,9 +2083,9 @@ class TestMLL(TestCase):
 
         model.summary()
 
-        with open('my-inception-report.txt', 'w') as fh:
-            # Pass the file handle in as a lambda function to make it callable
-            model.summary(print_fn=lambda x: fh.write(x + '\n'))
+        # with open('my-inception-report.txt', 'w') as fh:
+        #     # Pass the file handle in as a lambda function to make it callable
+        #     model.summary(print_fn=lambda x: fh.write(x + '\n'))
 
         # In[11]:
 
@@ -4669,7 +4669,7 @@ class TestMLL(TestCase):
 
         print(map(lambda x: x.value if type(x) == Token else x, map(lambda x: x.value, a, "CO", ",")))
 
-    def test_tree_depth_complex(self):
+    def tree_depth_complex(self):
         model = "model"
         ID = "ID"
         COLON = "COLON"

@@ -175,7 +175,7 @@ def presentation():
     print("#################################################################################")
     print("#                            STARTING MLL                                       #")
     print("#################################################################################")
-    print("# 1. model = MLL('PROGRAM.MLL')                                                 #")
+    print("# 1. model = MLL(PROGRAM)                                                       #")
     print("# 2. model.start() -> to pass from MLL to python                                #")
     print("# 3. model.get_string() -> to get python code of your program                   #")
     print("# 4. model.execute() -> to run python code of your program                      #")
