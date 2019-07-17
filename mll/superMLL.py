@@ -114,14 +114,27 @@ class superMLL:
         # print(t)
 
         if isinstance(t, Token):
+
+            #########################################################
+            #           caso parmac
+            #########################################################
+
             if clean_tok(t).value in self.parmacs.keys():
                 # print("---before",clean_tok(t).value,"; after",self.parmacs[clean_tok(t).value])
                 return self.parmacs[clean_tok(t).value]
+
+            #########################################################
+            #           caso macro
+            #########################################################
 
             if clean_tok(t).value in self.macros.keys():
                 # print("---before", clean_tok(t).value, "; after", self.macros[clean_tok(t).value])
                 m = escape(self.macros[clean_tok(t).value])
                 return self.put_macros(m)
+
+            #########################################################
+            #           caso pmacro
+            #########################################################
 
             if clean_tok(t).value[:3] in self.macros.keys():
                 m = self.macros[clean_tok(t).value[:3]]
