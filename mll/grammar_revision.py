@@ -4,7 +4,7 @@ new_grammar = """
 
 // | macro_exp | macro_mod | macro_pip
 
-mll : ( model | macro | parmac | comment | summa | pyt )+
+mll : ( model | macro | parmac | comment | summa | pyt | pmacro )+
 
 model : ID COLON [_rc] [PI] e (_nn)*
 
@@ -12,14 +12,7 @@ _rc.2 : RR | CC
 
 _nn : ( PI e )
 
-//     | _mm
-
-
 pyt : "!" (W | NUM | "," | " " | ":" | "+" | "=" | "[" | "]"| "(" | ")" | "'" )* WSS+ WSP*
-    
-    
-// _mm.2 : ( PI ID AR )
-//     | ( PI ID AR ID ID )
 
 comment : HASH (W | NUM | "," | " " | ":" | "+" | "=" | "[" | "]" | "(" | ")" | "'" )* WSS+ WSP*
 
@@ -27,10 +20,9 @@ parmac : ID DOLLAR ID (OR ID)*
 
 summa : ID SCO ID
 
-macro : ID EQC [ID] e (_nn)*
-// macro_exp : ID ME e (_nn)*
-// macro_mod : ID MM e (_nn)*
-// macro_pip : ID MP e (_nn)*
+macro : ID EQC [ID] e
+
+pmacro : ID (W | NUM)+ EQC [ID] e
 
 e   : ID
     | _mm
@@ -60,21 +52,6 @@ comp: ID EQ LSP (e
     | ID EQ ID
     | ID LP ( e CO )+ e RP 
     | LP ( e CO )+ e RP 
-    
-// | e LSP e RSP
-    
-// | e DO e+
-    
-// ID ( e | ID EQ e | ID EQ LSP (e | e COLON)+ RSP | ID EQ BL (e | e COLON)+ BR)+
-    
-// BL (e | e COLON)  BR #
-// | LSP (e | e COLON) RSP #
-// | e CO #
-// | WITH e #
-// | AR #
-// | ID EQ [ID [DO ID]+] #
-// | PI e #
-// | OR e #
     
 //////////////LEXER TERMINALS
 

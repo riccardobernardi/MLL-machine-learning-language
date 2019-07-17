@@ -5987,7 +5987,7 @@ class TestMLL(TestCase):
         tower:
             | c2d6411 + c2d6433
             
-        tower +: x
+        x +: tower
         """
         self.mll = MLL(inc, locals())
         self.mll.start()
