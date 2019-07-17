@@ -65,7 +65,7 @@ class MLL(superMLL):
         # print(self.after_tree)
         # print(leaves_after(self.after_tree))
 
-        s = scrivi(self.used_libraries) + "\n" + "def assign(x):\n\treturn x" + "\n\n" + scrivi(self.after_tree)
+        s = scrivi(self.used_libraries) + scrivi(self.after_tree)
 
         if self.isInner == False:
 

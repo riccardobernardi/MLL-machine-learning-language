@@ -1,3 +1,5 @@
+import copy
+
 from lark import Token, Tree
 from lark.tree import pydot__tree_to_png
 from termcolor import cprint
@@ -119,6 +121,18 @@ class superMLL:
             if clean_tok(t).value in self.macros.keys():
                 # print("---before", clean_tok(t).value, "; after", self.macros[clean_tok(t).value])
                 m = escape(self.macros[clean_tok(t).value])
+                return self.put_macros(m)
+
+            if clean_tok(t).value[:3] in self.macros.keys():
+                m = self.macros[clean_tok(t).value[:3]]
+                m = copy.deepcopy(m)
+                m = escape(m)
+                export:str = clean_tok(t).value[3:]
+
+                # se quindi c'è solo la grandezza del filtro
+                if len(export) == 2:
+                    m.children[0].children[1:1] = [Tree("e",[Token("ID",export)])]
+
                 return self.put_macros(m)
 
             # print("---last return", clean_tok(t).value)

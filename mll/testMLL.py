@@ -4687,6 +4687,16 @@ class TestMLL(TestCase):
                          Tree(e, [Token(ID, 'Concatenate\n            ')])])
         print(tree_depth(a))
 
+    def test_tree_depth_simpler(self):
+        model = "model"
+        ID = "ID"
+        COLON = "COLON"
+        PLUS = "PLUS"
+        e = "e"
+        PI = "PI"
+        a = Tree(model, [Token(ID, 'stem2 '), Token(COLON, ': ')])
+        print(tree_depth(a))
+
     def test_tree_depth_one(self):
         model = "model"
         ID = "ID"
@@ -5622,9 +5632,9 @@ class TestMLL(TestCase):
 
         model.summary()
 
-        with open('my-inception-report.txt', 'w') as fh:
-            # Pass the file handle in as a lambda function to make it callable
-            model.summary(print_fn=lambda x: fh.write(x + '\n'))
+        # with open('my-inception-report.txt', 'w') as fh:
+        #     # Pass the file handle in as a lambda function to make it callable
+        #     model.summary(print_fn=lambda x: fh.write(x + '\n'))
 
         # In[11]:
 
@@ -5989,6 +5999,37 @@ class TestMLL(TestCase):
             
         x +: tower
         """
+        self.mll = MLL(inc, locals())
+        self.mll.start()
+        print(self.mll.get_string())
+        self.mll.execute()
+        x = self.mll.last_model()
+
+        print(x)
+
+    def test_string_cut(self):
+        s = "ciao"
+        print(s[:3])
+        print(s[3:])
+
+    def test_new_pmacro(self):
+        img_rows, img_cols = 32, 32
+        img_channels = 3
+
+        inputs = Input(shape=(img_rows, img_cols, img_channels))
+
+        inc = """
+                border_mode $ valid or same
+                activation $ relu or linear
+                c2d := Conv2D (1, 1) same relu
+
+                x : inputs
+
+                tower:
+                    | c2d64 + c2d64
+
+                x +: tower
+                """
         self.mll = MLL(inc, locals())
         self.mll.start()
         print(self.mll.get_string())

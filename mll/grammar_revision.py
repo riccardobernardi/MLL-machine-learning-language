@@ -4,7 +4,7 @@ new_grammar = """
 
 // | macro_exp | macro_mod | macro_pip
 
-mll : ( model | macro | parmac | comment | summa | pyt | pmacro )+
+mll : ( model | macro | parmac | comment | summa )+
 
 model : ID COLON [_rc] [PI] e (_nn)*
 
@@ -21,8 +21,6 @@ parmac : ID DOLLAR ID (OR ID)*
 summa : ID SCO ID
 
 macro : ID EQC [ID] e
-
-pmacro : ID (W | NUM)+ EQC [ID] e
 
 e   : ID
     | _mm
