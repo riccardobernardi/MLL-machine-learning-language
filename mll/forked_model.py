@@ -240,7 +240,7 @@ class ForkedModel:
             return Tree(t.data,
                         [
                             Token("ID", alphabet[self.mll.current_branch - 1]),
-                            Token("EQ", "="), t.children[0]
+                            Token("EQ", "="), t.children[0], Token("WS", "\n\t")
                         ])
 
         #####################################################################
