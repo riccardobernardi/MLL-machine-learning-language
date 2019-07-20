@@ -2,6 +2,8 @@ from unittest import TestCase
 
 import mlxtend
 from keras import Input
+from keras.datasets import cifar10
+from keras.utils import np_utils
 from lark import Tree, Token
 from mlxtend.classifier import StackingClassifier
 from mlxtend.data import iris_data
@@ -4117,7 +4119,7 @@ class TestMLL(TestCase):
         # In[8]:
 
         # we reduce # filters by factor of 8 compared to original inception-v4
-        nb_filters_reduction_factor = 8
+        nb_filters_reduction_factor = 16
 
         img_rows, img_cols = 32, 32
         img_channels = 3
@@ -4253,6 +4255,10 @@ class TestMLL(TestCase):
             | relu
 
         x : incA x
+        x : incA x
+        x : incA x
+        x : incA x
+        x : incA x
 
         incA_red :
             | m2d3322v
@@ -4275,6 +4281,8 @@ class TestMLL(TestCase):
             | Add
             | relu
 
+        x : incB x
+        x : incB x
         x : incB x
 
         incB_red :
@@ -4341,7 +4349,7 @@ class TestMLL(TestCase):
         # Model saving callback
         # checkpointer = ModelCheckpoint(filepath='stochastic_depth_cifar10.hdf5', verbose=1, save_best_only=True)
 
-        run = False
+        run = True
 
         if run:
             if not data_augmentation:
@@ -4487,7 +4495,6 @@ class TestMLL(TestCase):
         sclf = self.mll.last_model()
 
         print(type(sclf))
-
 
     def test_sk_simple_2_w_AT(self):
 
@@ -6037,3 +6044,23 @@ class TestMLL(TestCase):
         x = self.mll.last_model()
 
         print(x)
+
+    def RF_and_RESNET(self):
+        (x_train, y_train), (x_test, y_test) = cifar10.load_data()
+
+        # reorder dimensions for tensorflow
+        x_train = np.transpose(x_train.astype('float32') / 255., (0, 2, 1, 3))
+        x_test = np.transpose(x_test.astype('float32') / 255., (0, 2, 1, 3))
+        print('x_train shape:', x_train.shape)
+        print(x_train.shape[0], 'train samples')
+        print(x_test.shape[0], 'test samples')
+
+        # convert class vectors to binary class matrices
+        y_train = np_utils.to_categorical(y_train)
+        y_test = np_utils.to_categorical(y_test)
+
+        from sklearn import ensemble
+        clf = ensemble.RandomForestClassifier(verbose=3)
+        clf.fit(x_train,y_train)
+
+        predict = clf.predict(x_test)
