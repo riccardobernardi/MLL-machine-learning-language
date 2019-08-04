@@ -4349,7 +4349,7 @@ class TestMLL(TestCase):
         # Model saving callback
         # checkpointer = ModelCheckpoint(filepath='stochastic_depth_cifar10.hdf5', verbose=1, save_best_only=True)
 
-        run = True
+        run = False
 
         if run:
             if not data_augmentation:
@@ -5913,7 +5913,7 @@ class TestMLL(TestCase):
                 model : c2d1923311v + c2d1923311v + c2d1923311v
 
                 #modello pipeline di sklearn, non sono tutti classifiers        
-                model : (@StandardScaler) + (@PCA) + @Ridge
+                model : @StandardScaler + @PCA + @Ridge
                 
                 rf_clf  : RandomForestClassifier 10 entropy
                 knn_clf : KNeighborsClassifier 2
