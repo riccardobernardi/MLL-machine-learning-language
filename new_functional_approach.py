@@ -61,3 +61,8 @@ class Arr(list):
 a = Arr([1, 2, 3, 4])
 print(a)
 a.map(lambda x: 2 * x).print().print().reduce(lambda x, y: x + y).print()
+
+def eval_print(s: str):
+    print(s.replace(" ","") + " = " + str(eval(s)))
+
+
