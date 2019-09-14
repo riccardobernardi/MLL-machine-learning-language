@@ -50,8 +50,8 @@ class MLL(superMLL):
 
         if self.isInner == False:
 
-            # print("                              DEBUG")
-            # print("###############################################################")
+            print("                              DEBUG")
+            print("#################################################################################")
             pass
 
         parser = Lark(get_rev_grammar(), start='mll')
@@ -69,18 +69,18 @@ class MLL(superMLL):
 
         if self.isInner == False:
 
-            print("###############################################################")
+            print("#################################################################################")
             print("                           POSTCONDIZIONI")
+            print("#################################################################################")
             # print("le post-condizioni sono relative solo a alla transpilazione e non all' esecuzione")
             # print("occhio alla +: potrebbe confondersi con una e -> e + e")
             cprint("macros: "+str(self.macros.keys()),"blue")
             cprint("parmacs: " + str(self.parmacs.keys()), "blue")
             cprint("models: " + str(self.models.keys()), "blue")
             cprint("MLL : Python = 1 : "+str(leaves_after(self.after_tree)/leaves_before(self.before_tree)),"yellow")
-            print("###############################################################")
-
+            print("#################################################################################")
             print("                             PROGRAM")
-            print("###############################################################")
+            print("#################################################################################")
         return s
 
     ###################################################################

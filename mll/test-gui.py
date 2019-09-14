@@ -1,7 +1,7 @@
 from mll.mlltranspiler import MLL
 
 inc = """
-        x : conv2d 
+        x : pool2d
 
         """
 mll = MLL(inc, {})

@@ -369,15 +369,18 @@ def visit(t: object, match, red):
         raise Exception("Non esiste questo caso nella fun scrivi")
 
 
-def apply(t: object, flist, ftok):
+def apply(t: object, flist, ftok, arg = None):
     if isinstance(t, Token):
-        return ftok(t)
+        if arg is not None:
+            return ftok(t, arg)
+        else:
+            return ftok(t)
     elif isinstance(t, Tree):
-        return Tree(t.data, apply(t.children, flist, ftok))
+        return Tree(t.data, apply(t.children, flist, ftok, arg))
     elif isinstance(t, type([])):
         a = []
         for i in t:
-            b = apply(i, flist, ftok)
+            b = apply(i, flist, ftok, arg)
             a.append(b)
         return flist(a)
     else:
@@ -496,7 +499,7 @@ def SUM(a, b):
 
 def leaves_before(t) -> int:
     if type(t) == Tree:
-        if t.data=="macro":
+        if t.data == "macro":
             return 0
         return int(leaves_before(t.children))
     if type(t) == Token:
@@ -507,6 +510,7 @@ def leaves_before(t) -> int:
         return reduce(SUM, map(leaves_before, t))
 
     raise Exception("Errorfffffffff")
+
 
 def leaves_after(t) -> int:
     if type(t) == Tree:
@@ -522,9 +526,9 @@ def leaves_after(t) -> int:
 
 
 def give_type_agnostically(t) -> str:
-    if isinstance(t,Tree):
+    if isinstance(t, Tree):
         return str(t.data)
-    if isinstance(t,Token):
+    if isinstance(t, Token):
         return str(t.type)
 
 
@@ -549,25 +553,28 @@ def get_params_for_function(func_name, mll):
     print("get_params_for_function")
     arr = []
     b = 0
-    # step 1: chiedo i parametri all utente e li metto in una lista, i nomi dei parametri si trovano nella eval di func_name
+    # step 1: chiedo i parametri all utente e li metto in una lista, i nomi dei parametri si trovano nella eval di
+    # func_name
 
     try:
         from mll.mlltranspiler import MLL
         a = MLL("model:" + str(func_name) + "\n\n",
                 mll.env).inner().execute().last_model()
-        b = inspect.getfullargspec(a)
-        print(b)
+        b = inspect.getfullargspec(a)[0]
+        print("inspection result: " + str(b))
     except:
-        pass
+        assert(0 == 1)
 
     for i in b:
-        c = input(i)
+        c = input(str(i)+": ")
         if (len(c) > 0) and (c != "\n"):
-            arr.append(i + "=" + c)
+            arr.append(str(i) + "=" + str(c))
 
     return arr
 
+
 def contained_in_imported_libraries_mod(t: Token, mll) -> bool:
+    print("contained_in_imported_libraries_mod")
     s = clean_tok(t).value
     if s in mll.available_libraries.keys():
         return Token(t.type, t.value + "(" + ",".join(get_params_for_function(t.value, mll)) + ")")

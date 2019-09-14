@@ -58,8 +58,9 @@ class SimpleModel:
         # l = add_params(t.children[2:], g, self.mll)
         # print("modified list", l)
         #print(locals())
-        g = apply(t.children[2:], lambda x: x, contained_in_imported_libraries_mod)
-        print(g)
+        if not self.mll.isInner:
+            g = apply(t.children[2:], lambda x: x, contained_in_imported_libraries_mod, self.mll)
+            print(g)
 
         self.mll.models[clean_tok(t.children[0]).value] = t
         t.children[2:] = apply(t.children[2:], lambda x: x, self.mll.substitute_model)
