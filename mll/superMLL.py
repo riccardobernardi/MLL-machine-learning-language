@@ -65,6 +65,12 @@ class superMLL:
             if self.available_libraries[s] not in self.used_libraries:
                 self.used_libraries.append(self.available_libraries[s])
 
+    def contained_in_imported_libraries(self, t: Token) -> bool:
+        s = clean_tok(t).value
+        if s in self.available_libraries.keys():
+            return True
+        return False
+
     def create_available_imports(self):
         imp = get_keras_layers()
         for i in imp.keys():
@@ -209,3 +215,4 @@ class superMLL:
 
         for i in a:
             self.parmacs[clean_tok(i).value] = Tree("comp", [Token("ID", id), Token("EQ", "="), Token("ID", "'" + i.value + "'")])
+

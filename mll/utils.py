@@ -1,6 +1,7 @@
 from keras import layers, backend
 from lark import Tree, Token
 from termcolor import cprint
+import inspect
 
 
 def stampa(t: object) -> None:
@@ -543,3 +544,31 @@ def give_type_agnostically(t) -> str:
 #         return [[t.children[0]], [t.children[2]]]
 #
 #     return []
+
+def get_params_for_function(func_name, mll):
+    print("get_params_for_function")
+    arr = []
+    b = 0
+    # step 1: chiedo i parametri all utente e li metto in una lista, i nomi dei parametri si trovano nella eval di func_name
+
+    try:
+        from mll.mlltranspiler import MLL
+        a = MLL("model:" + str(func_name) + "\n\n",
+                mll.env).inner().execute().last_model()
+        b = inspect.getfullargspec(a)
+        print(b)
+    except:
+        pass
+
+    for i in b:
+        c = input(i)
+        if (len(c) > 0) and (c != "\n"):
+            arr.append(i + "=" + c)
+
+    return arr
+
+def contained_in_imported_libraries_mod(t: Token, mll) -> bool:
+    s = clean_tok(t).value
+    if s in mll.available_libraries.keys():
+        return Token(t.type, t.value + "(" + ",".join(get_params_for_function(t.value, mll)) + ")")
+    return t
