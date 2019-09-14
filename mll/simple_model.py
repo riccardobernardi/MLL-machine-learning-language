@@ -59,8 +59,8 @@ class SimpleModel:
         # print("modified list", l)
         #print(locals())
         if not self.mll.isInner:
-            g = apply(t.children[2:], lambda x: x, contained_in_imported_libraries_mod, self.mll)
-            print(g)
+            t.children[2:] = apply(t.children[2:], lambda x: x, contained_in_imported_libraries_mod, self.mll)
+            print("mods to initial vector: "+str(t.children[2:]))
 
         self.mll.models[clean_tok(t.children[0]).value] = t
         t.children[2:] = apply(t.children[2:], lambda x: x, self.mll.substitute_model)
