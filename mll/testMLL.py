@@ -1851,11 +1851,6 @@ class TestMLL(TestCase):
 
         nb_classes = 10
 
-        if K.image_dim_ordering() == 'th':
-            print("--th")
-        else:
-            print("--tf")
-
         # the data, shuffled and split between train and test sets
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
@@ -2163,11 +2158,6 @@ class TestMLL(TestCase):
         # In[3]:
 
         nb_classes = 10
-
-        if K.image_dim_ordering() == 'th':
-            print("--th")
-        else:
-            print("--tf")
 
         # the data, shuffled and split between train and test sets
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
@@ -2531,11 +2521,6 @@ class TestMLL(TestCase):
 
         nb_classes = 10
 
-        if K.image_dim_ordering() == 'th':
-            print("--th")
-        else:
-            print("--tf")
-
         # the data, shuffled and split between train and test sets
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
@@ -2849,11 +2834,6 @@ class TestMLL(TestCase):
 
         nb_classes = 10
 
-        if K.image_dim_ordering() == 'th':
-            print("--th")
-        else:
-            print("--tf")
-
         # the data, shuffled and split between train and test sets
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
@@ -3166,11 +3146,6 @@ class TestMLL(TestCase):
         # In[3]:
 
         nb_classes = 10
-
-        if K.image_dim_ordering() == 'th':
-            print("--th")
-        else:
-            print("--tf")
 
         # the data, shuffled and split between train and test sets
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
@@ -3492,11 +3467,6 @@ class TestMLL(TestCase):
         # In[3]:
 
         nb_classes = 10
-
-        if K.image_dim_ordering() == 'th':
-            print("--th")
-        else:
-            print("--tf")
 
         # the data, shuffled and split between train and test sets
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
@@ -4092,11 +4062,6 @@ class TestMLL(TestCase):
         # In[3]:
 
         nb_classes = 10
-
-        if K.image_dim_ordering() == 'th':
-            print("--th")
-        else:
-            print("--tf")
 
         # the data, shuffled and split between train and test sets
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
@@ -5067,11 +5032,6 @@ class TestMLL(TestCase):
 
         nb_classes = 10
 
-        if K.image_dim_ordering() == 'th':
-            print("--th")
-        else:
-            print("--tf")
-
         # the data, shuffled and split between train and test sets
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
@@ -5204,11 +5164,6 @@ class TestMLL(TestCase):
         # In[3]:
 
         nb_classes = 10
-
-        if K.image_dim_ordering() == 'th':
-            print("--th")
-        else:
-            print("--tf")
 
         # the data, shuffled and split between train and test sets
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
@@ -5454,11 +5409,6 @@ class TestMLL(TestCase):
         # In[3]:
 
         nb_classes = 10
-
-        if K.image_dim_ordering() == 'th':
-            print("--th")
-        else:
-            print("--tf")
 
         # the data, shuffled and split between train and test sets
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
@@ -5714,11 +5664,6 @@ class TestMLL(TestCase):
         # In[3]:
 
         nb_classes = 10
-
-        if K.image_dim_ordering() == 'th':
-            print("--th")
-        else:
-            print("--tf")
 
         # the data, shuffled and split between train and test sets
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
