@@ -116,4 +116,10 @@ class Dispatcher:
         if match(t.children, [0, 1], ["ID", "EQ"]) and len(t.children) > 2:
             return Tree(t.data, self.transform(t.children))
 
+        # print(list_types_list(t.children))
+        if match(t.children, [0, len(t.children)-1], ["LSP", "RSP"]):
+            return Tree(t.data, [t.children[0]] + map(self.transform, t.children[1:len(t.children)-2], "CO", ",") + [t.children[len(t.children)-1]])
+
+
+        # print("arrivo fino a qui")
         return Tree(t.data, map(self.transform, t.children, "CO", ","))

@@ -34,6 +34,7 @@ e   : ID
     | AT ID LP RP
     | AT e
     | ID (e | comp )+
+    | LSP (e | e CO)+ RSP
     
 _mm.2 : ( ID AR )
     | ( ID AR ID ID )
@@ -44,7 +45,8 @@ comp: ID EQ LSP (e
     | ID EQ LP (e 
             | e CO)+ RP 
     | ID EQ BL (e 
-            | e COLON)+ BR 
+            | e COLON
+            | CO )+ BR 
     | ID EQ SQ W SQ
     | ID EQ NUMBER
     | ID EQ ID
@@ -131,7 +133,7 @@ WSP : (" " | "\\n" | "\\t" | "\\r")+
 
 WSS : ("\\n")
 
-INTEGER  :   ("0".."9")+
+INTEGER  :   ["-"]("0".."9")+ ["e" ["-"] ("0".."9")+]
 
 DECIMAL  :   INTEGER ["." INTEGER]
 

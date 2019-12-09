@@ -45,7 +45,8 @@ comp: ID EQ LSP (e
     | ID EQ LP (e 
             | e CO)+ RP 
     | ID EQ BL (e 
-            | e COLON)+ BR 
+            | e COLON
+            | e COLON LSP (e | e CO)+ RSP)+ BR 
     | ID EQ SQ W SQ
     | ID EQ NUMBER
     | ID EQ ID

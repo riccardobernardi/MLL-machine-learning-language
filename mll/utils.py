@@ -91,6 +91,8 @@ from sklearn import tree
 from sklearn import preprocessing
 from sklearn import decomposition
 from sklearn import pipeline
+from sklearn import model_selection
+from sklearn import kernel_ridge
 
 
 def get_sklearn_models() -> dict:
@@ -102,6 +104,16 @@ def get_sklearn_models() -> dict:
     for k in linear_model.__dict__.keys():
         if "__" not in k and k != "K":
             keras_layers["linear_model"].add(k)
+
+    keras_layers["kernel_ridge"] = set()
+    for k in kernel_ridge.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["kernel_ridge"].add(k)
+
+    keras_layers["model_selection"] = set()
+    for k in model_selection.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["model_selection"].add(k)
 
     keras_layers["cluster"] = set()
     for k in cluster.__dict__.keys():

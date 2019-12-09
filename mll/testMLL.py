@@ -6009,3 +6009,33 @@ class TestMLL(TestCase):
         clf.fit(x_train,y_train)
 
         predict = clf.predict(x_test)
+        
+        
+    def test_ridge_vs_lasso(self):
+        import numpy as np
+
+
+        rng = np.random.RandomState(0)
+        # Generate sample data
+        X = 5 * rng.rand(10000, 1)
+        y = np.sin(X).ravel()
+
+        # Add noise to targets
+        y[::5] += 3 * (0.5 - rng.rand(X.shape[0] // 5))
+
+        X_plot = np.linspace(0, 5, 100000)[:, None]
+        train_size = 100
+
+        code = """
+        svr : GridSearchCV 
+            (SVR kernel='rbf' gamma=0.1) 
+            param_grid={'C': [1e0 1e1 1e2 1e3], 'gamma': (np.logspace -2 2 5)}
+
+        kr : GridSearchCV 
+            (KernelRidge kernel='rbf' gamma=0.1 ) 
+            param_grid={'alpha': [1e0 0.1 1e-2 1e-3], 'gamma': (np.logspace -2 2 5)}
+        """
+
+        mll = MLL(code, globals()).start()
+        print(mll.get_string())
+        model = mll.execute().last_model()

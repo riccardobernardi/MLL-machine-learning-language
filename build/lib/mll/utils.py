@@ -91,6 +91,8 @@ from sklearn import tree
 from sklearn import preprocessing
 from sklearn import decomposition
 from sklearn import pipeline
+from sklearn import model_selection
+from sklearn import kernel_ridge
 
 
 def get_sklearn_models() -> dict:
@@ -102,6 +104,16 @@ def get_sklearn_models() -> dict:
     for k in linear_model.__dict__.keys():
         if "__" not in k and k != "K":
             keras_layers["linear_model"].add(k)
+
+    keras_layers["kernel_ridge"] = set()
+    for k in kernel_ridge.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["kernel_ridge"].add(k)
+
+    keras_layers["model_selection"] = set()
+    for k in model_selection.__dict__.keys():
+        if "__" not in k and k != "K":
+            keras_layers["model_selection"].add(k)
 
     keras_layers["cluster"] = set()
     for k in cluster.__dict__.keys():
@@ -306,12 +318,15 @@ def tree_depth(t) -> int:
         # print("from TRee of treedepth",t)
         a: int = tree_depth(t.children)
         # print("from tredepth what come from depthiness",a)
+        # print(1+a)
         return 1 + a
     if type(t) == Token:
         return 0
     if isinstance(t, list):
         # print(reduce(MAX, map(tree_depth,t)))
         return reduce(MAX, map(tree_depth, t))
+
+    return 0
 
     raise Exception("Errorfffffffff")
 
