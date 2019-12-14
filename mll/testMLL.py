@@ -6088,3 +6088,19 @@ class TestMLL(TestCase):
         print("Confusion matrix:\n%s" % disp.confusion_matrix)
 
         plt.show()
+
+    def test_tuples(self):
+        code = """
+
+        kernel $ linear
+
+        anova_filter : SelectKBest f_regression k=5
+        clf : svm.SVC linear
+        anova_svm : Pipeline [('anova', anova_filter) ('svc', clf)]
+
+
+        """
+
+        mll = MLL(code).start().execute()
+        print(mll.get_string())
+        classifier = mll.last_model()

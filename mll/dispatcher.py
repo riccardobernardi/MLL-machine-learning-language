@@ -44,12 +44,16 @@ class Dispatcher:
     def translate_list(self, t: list):
         return filter(lambda x: x is not None, [self.transform(x) for x in t])
 
+    def translate_tuple(self, t: Tree):
+        return Tree("tuple",map(self.transform, t.children, "CO", ",") )
+
     def translate_e(self, t: Tree):
         # print(list_types_list(t.children))
 
         # e ::= ID
         if match(t.children, [0], ["ID"]) and len(t.children) == 1:
             return Tree(t.data, self.transform(t.children))
+
         # e ::= ID e+
         if match(t.children, [0], ["ID"]) and len(t.children) > 1 and not match(t.children, [], ["PLUS"]):
             return Tree(t.data,

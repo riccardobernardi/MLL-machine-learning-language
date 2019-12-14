@@ -35,6 +35,9 @@ e   : ID
     | AT e
     | ID (e | comp )+
     | LSP (e | e CO)+ RSP
+//    | tuple
+    
+tuple: LP( e | e CO ) RP
     
 _mm.2 : ( ID AR )
     | ( ID AR ID ID )
